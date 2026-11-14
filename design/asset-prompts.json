@@ -1,0 +1,33 @@
+{
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "name": "cabin",
+      "prompt": "Use case: illustration-story. Asset type: landscape web learning adventure background and homepage hero, wide 3:2 composition. Primary request: an original editorial storybook illustration of a small timber explorer's cabin and an open field journal with a compass in a tranquil forest, winding path in foreground, distant rolling hills. Style: sophisticated hand-painted gouache with fine ink lines, subtle visible cream paper grain, restrained mid-century travel-book illustration, geometric organic shapes, no photorealism, no 3D. Palette: warm ivory #f4eee3, terracotta #ad553a, dark ink #253c36, sage #929b72, muted ochre. Daylight, inviting and calm, generous light sky and quiet negative space at upper left. No text, no letters, no logos, no watermark. This is a background illustration, not a UI mockup. Landscape, crisp fine details."
+    },
+    {
+      "name": "cave",
+      "prompt": "Use case: illustration-story. Asset: wide web learning adventure background, 3:2. Original hand-painted gouache and fine ink lines on warm cream paper, editorial travel journal illustration matching an elegant muted mid-century field guide. A vast ice cave opening onto daylight, pale teal crystalline formations, a small winding path and an explorer's lantern, no people. Palette warm ivory, muted dusty teal, dark ink green, small ochre and terracotta accents. Luminous daytime, calm inviting educational atmosphere, nuanced paper grain. No text, no logos, no watermark, no UI, no photorealism, no 3D."
+    },
+    {
+      "name": "grove",
+      "prompt": "Use case: illustration-story. Asset: wide 3:2 web learning adventure forest background. An original sophisticated editorial field journal illustration, hand-painted gouache and fine ink lines on warm ivory paper: a sunlit harvest forest, winding path beneath tall sage green trees, ochre leaves, tiny terracotta mushrooms, distant radiant archway made of intertwined branches. Gentle daylight, calm adventurous mood, restrained organic shapes, subtle grain. Palette warm ivory #f4eee3, sage #929b72, ink #253c36, ochre, terracotta #ad553a. No text, logos, watermark, UI, photorealism or 3D."
+    },
+    {
+      "name": "hero",
+      "prompt": "Use case: illustration-story. Asset: single full-body character cutout for an educational adventure, transparent background. Original editorial storybook gouache with precise ink outlines and delicate paper texture. A young adult Korean explorer with short dark hair, sage green field jacket over cream shirt, terracotta neck scarf, ochre satchel, dark trousers and walking boots, holding a small open field journal. Friendly thoughtful neutral expression, three-quarter standing view facing slightly left, whole body fully visible, no cropped feet, centered with empty transparent space around silhouette. Restrained sophisticated mid-century travel book illustration, no fantasy armour or weapons. No text, logos, watermark, ground rectangle, shadow background, extra characters."
+    },
+    {
+      "name": "fairy",
+      "prompt": "Use case: illustration-story. Asset: single small fairy guide mascot cutout, transparent background. Original sophisticated gouache and ink editorial storybook illustration, gentle cream paper textures within character. A tiny magical moth-like fairy with four delicate translucent ochre and sage leaf-shaped wings, small friendly warm terracotta face and cream glowing round body, fine ink details, hovering facing left, entire wings in frame, centered with space around silhouette. Charming but refined field journal visual style, not childish cartoon, not anime, no photorealism or 3D. No text, no logo, no watermark, no background."
+    },
+    {
+      "name": "boss",
+      "prompt": "Use case: illustration-story. Asset: single full body whimsical adversary character cutout for a learning adventure, transparent background. Original sophisticated editorial gouache and ink storybook illustration: a sly owl-like forest bureaucrat called Mr Plausible, wearing an ochre waistcoat and terracotta coat, holding a stack of blank cream papers, ink-blue feathers and raised eyebrow, charismatic mischievous expression. Refined mid-century field journal style, fine ink outlines, muted sage and terracotta palette. Whole character fully in frame, centered with transparent space around silhouette. No text, no lettering, no logo, no watermark, no 3D, no photorealism."
+    },
+    {
+      "name": "doctor",
+      "prompt": "Use case: illustration-story. Asset: single full body second adversary character cutout for an educational adventure, transparent background. Original sophisticated gouache and fine ink editorial storybook illustration: a stern fox-like forest clerk with round reading glasses, cream labcoat over sage waistcoat, terracotta fur, carrying a small closed notebook and a ruler, neat upright pose, comically literal meticulous personality. Matching muted mid-century explorer field journal style with subtle paper texture within character. Whole body fully visible, centered with ample empty transparent space. No text, letters, logos, watermark, rectangular background, 3D or photorealism."
+    }
+  ]
+}

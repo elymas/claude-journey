@@ -1,0 +1,117 @@
+/* 덱과 같은 '밤의 숲' 단일 테마 — 밝은 모드에서도 같은 밤으로 둔다 */
+:root{
+  --night:#080F0C; --panel:#0E1813; --fog:#D2DCCB; --dim:#8A9B8C; --faint:#5D6D61;
+  --glow:#F2E1A4; --ember:#E2914E; --sigil:#6FC0A1; --ice:#9ED8F5; --grove:#8EEFC0;
+  --line:rgba(210,220,203,.16); --line-strong:rgba(210,220,203,.32);
+  --fairy:url("assets/fairy.webp");
+  color-scheme:dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --night:#080F0C; --fog:#D2DCCB; --glow:#F2E1A4; }
+}
+:root[data-theme="dark"]{ --night:#080F0C; --fog:#D2DCCB; --glow:#F2E1A4; }
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;min-height:100%;
+  background:radial-gradient(120% 70% at 50% 0%, #10201A 0%, var(--night) 60%, #050A08 100%) fixed;
+  background-color:var(--night);
+  color:var(--fog);
+  font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  word-break:keep-all;overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+}
+#spores{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+main{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:56px 20px 48px}
+
+/* ── 타이틀 ── */
+.title{position:relative;text-align:center;padding-top:8px}
+.title small{display:block;font-family:"Cinzel",serif;font-size:12px;letter-spacing:.46em;color:var(--sigil);margin-bottom:16px}
+.title h1{
+  margin:0;font-family:"Gowun Batang",serif;font-weight:700;
+  font-size:clamp(36px,9vw,56px);line-height:1.25;color:var(--glow);
+  text-shadow:0 0 18px rgba(242,225,164,.5),0 0 54px rgba(242,225,164,.22);
+  animation:breathe 5.5s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.86}50%{opacity:1}}
+.pips{display:flex;justify-content:center;gap:4px;margin-top:22px}
+.pips i{width:22px;height:3px;background:var(--faint);opacity:.45;display:block}
+.pips i.on{background:var(--glow);opacity:1;box-shadow:0 0 6px rgba(242,225,164,.6)}
+.count{margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;color:var(--dim);text-align:center}
+.count b{color:var(--glow);font-weight:500}
+
+/* ── 페어리 대사창 ── */
+.talk{position:relative;margin:44px 0 8px;padding-left:0}
+.fairy{
+  position:absolute;right:6px;top:-58px;width:76px;height:76px;
+  background:var(--fairy) center/contain no-repeat;
+  filter:drop-shadow(0 0 14px rgba(120,190,255,.8));
+  animation:flit 5.2s ease-in-out infinite;
+}
+@keyframes flit{0%,100%{transform:translate(0,0) rotate(-3deg)}33%{transform:translate(8px,-8px) rotate(4deg)}66%{transform:translate(-6px,5px) rotate(-2deg)}}
+.dbox{
+  position:relative;border:1px solid rgba(140,200,255,.42);border-radius:2px;
+  background:linear-gradient(180deg, rgba(120,195,255,.30) 0%, rgba(70,135,205,.14) 11%, rgba(17,28,22,0) 20%), linear-gradient(180deg, rgba(17,28,22,.94), rgba(8,15,12,.94));
+  box-shadow:inset 0 1px 0 rgba(190,230,255,.6), inset 0 0 0 1px rgba(140,200,255,.08), 0 -4px 16px -6px rgba(120,195,255,.35);
+  padding:22px 22px 18px;
+}
+.dbox .who{
+  position:absolute;top:-11px;left:16px;background:#0B1410;border:1px solid var(--line);border-radius:2px;
+  padding:1px 8px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;color:#A8D8FF;
+}
+.dbox p{margin:0;font-family:"Gowun Batang",serif;font-size:17px;line-height:1.7;color:var(--fog)}
+.cue{position:absolute;right:14px;bottom:10px;color:var(--glow);font-size:12px;animation:blink 1.15s steps(2,end) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.12}}
+
+/* ── 막 ── */
+.act{margin-top:44px}
+.act-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.act-no{
+  font-family:"Cinzel",serif;font-weight:700;font-size:12px;letter-spacing:.34em;color:var(--sigil);
+  border:1px solid rgba(111,192,161,.4);padding:4px 9px 4px 12px;border-radius:2px;white-space:nowrap;
+}
+.act-head h2{margin:0;font-family:"Gowun Batang",serif;font-weight:700;font-size:22px;color:var(--fog)}
+.act-head .wks{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;color:var(--faint);white-space:nowrap}
+
+/* ── 퀘스트 줄 ── */
+.quests{display:flex;flex-direction:column;gap:10px;list-style:none;margin:0;padding:0}
+.quest{
+  --tone:var(--glow);
+  display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;
+  border:1px solid transparent;border-left:2px solid var(--tone);
+  background:rgba(17,28,22,.55);padding:16px 18px;
+  color:inherit;text-decoration:none;
+  transition:background .15s, border-color .15s, transform .12s;
+}
+.quest.cabin{--tone:var(--glow)}
+.quest.ice{--tone:var(--ice)}
+.quest.grove{--tone:var(--grove)}
+a.quest:hover{background:rgba(26,42,33,.85);border-color:var(--line-strong);border-left-color:var(--tone);transform:translateX(4px)}
+a.quest:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+.q-no{font-family:"Cinzel",serif;font-weight:700;font-size:20px;color:var(--tone);min-width:30px;text-align:center}
+.q-body{min-width:0}
+.q-body strong{display:block;font-family:"Gowun Batang",serif;font-weight:700;font-size:19px;line-height:1.4;color:var(--fog)}
+.q-body span{display:block;margin-top:3px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--dim)}
+.q-go{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--tone);white-space:nowrap}
+a.quest:hover .q-body strong{color:var(--glow)}
+.quest.locked{--tone:var(--faint);opacity:.6;background:rgba(17,28,22,.3)}
+.quest.locked .q-body strong{color:var(--dim)}
+.quest.main{--tone:var(--ember);opacity:.75;margin-top:6px;background:rgba(226,145,78,.05)}
+.quest.main .q-body strong{color:var(--fog)}
+
+footer{margin-top:52px;text-align:center;font-family:"IBM Plex Mono",monospace;color:var(--faint);line-height:1.8}
+footer b{display:block;font-weight:400;font-size:12px;letter-spacing:.16em}
+footer span{display:block;font-size:11px;letter-spacing:.1em;opacity:.82}
+
+@media (max-width:520px){
+  main{padding-top:40px}
+  .quest{grid-template-columns:auto 1fr;gap:12px;padding:14px 14px}
+  .q-go{grid-column:2;justify-self:start;margin-top:-4px}
+  .q-body strong{font-size:17px}
+  .dbox p{font-size:16px}
+  .fairy{width:60px;height:60px;top:-48px}
+}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

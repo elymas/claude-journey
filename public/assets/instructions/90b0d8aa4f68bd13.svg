@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="522" height="779" viewBox="0 0 522 779" role="img"><title>Ctrl + A로 전체를 잡는다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H522" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="510" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · Ctrl + A로 전체를 잡는다</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="50.6" y="70.2" font-size="15.6" textLength="49.5" lengthAdjust="spacingAndGlyphs">규칙.md</text>
+<text x="10.8" y="102.5" font-size="15.6" textLength="28.0" lengthAdjust="spacingAndGlyphs">파일</text>
+<text x="37.7" y="102.7" font-size="14.6" textLength="56.0" lengthAdjust="spacingAndGlyphs">편집</text>
+<text x="12.9" y="146.5" font-size="16.8" textLength="99.0" lengthAdjust="spacingAndGlyphs"># 이 폴더 규칙</text>
+<text x="110.9" y="102.5" font-size="15.6" textLength="39.8" lengthAdjust="spacingAndGlyphs">보기</text>
+<text x="293.8" y="71.9" font-size="18.9" textLength="19.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="238.9" y="100.5" font-size="14.4" textLength="203.4" lengthAdjust="spacingAndGlyphs">Hv vBT..</text>
+<text x="12.9" y="199.3" font-size="16.6" textLength="88.3" lengthAdjust="spacingAndGlyphs">## 이 폴더는</text>
+<text x="14.0" y="225.1" font-size="16.8" textLength="278.8" lengthAdjust="spacingAndGlyphs">정책자료를 읽고 기획안을 만드는 폴더다.</text>
+<text x="11.8" y="277.7" font-size="17.7" textLength="103.3" lengthAdjust="spacingAndGlyphs">## 결과물 위치</text>
+<text x="14.0" y="304.5" font-size="18.9" textLength="438.0" lengthAdjust="spacingAndGlyphs">새로 만든 파일은 이 폴더 안 ‘결과’ 폴더에 넣는다. 없으면 만든다.</text>
+<text x="14.0" y="329.6" font-size="16.6" textLength="164.7" lengthAdjust="spacingAndGlyphs">원본은 건드리지 않는다.</text>
+<text x="12.9" y="381.4" font-size="16.8" textLength="93.6" lengthAdjust="spacingAndGlyphs">## 하지 말 것</text>
+<text x="12.9" y="408.1" font-size="17.7" textLength="261.5" lengthAdjust="spacingAndGlyphs">- 자료에 없는 내용을 지어내지 않는다.</text>
+<text x="12.9" y="434.8" font-size="19.0" textLength="233.6" lengthAdjust="spacingAndGlyphs">- 원본 파일 이름을 바꾸지 않는다.</text>
+<text x="12.9" y="484.9" font-size="15.5" textLength="53.8" lengthAdjust="spacingAndGlyphs">## 검증</text>
+<text x="11.8" y="512.5" font-size="17.9" textLength="278.8" lengthAdjust="spacingAndGlyphs">- 숫자와 날짜는 원문에서 그대로 옮긴다.</text>
+<text x="23.7" y="538.3" font-size="19.0" textLength="264.8" lengthAdjust="spacingAndGlyphs">계산이 필요하면 계산식을 같이 적는다.</text>
+<text x="12.9" y="562.3" font-size="16.8" textLength="296.0" lengthAdjust="spacingAndGlyphs">- 원문에 없는 값은 비워두고 ‘미확인’ 목록에</text>
+<text x="24.8" y="590.2" font-size="17.8" textLength="251.9" lengthAdjust="spacingAndGlyphs">따로 적는다. 추측해서 채우지 않는다.</text>
+<text x="12.9" y="614.1" font-size="15.6" textLength="260.5" lengthAdjust="spacingAndGlyphs">- 각 항목이 어느 파일 어디에서 왔는지</text>
+<text x="23.7" y="641.8" font-size="17.8" textLength="135.6" lengthAdjust="spacingAndGlyphs">결과에 같이 적는다.</text>
+<text x="22.5" y="767.4" font-size="16.5" textLength="77.7" lengthAdjust="spacingAndGlyphs">줄 20, 열 15</text>
+<text x="97.9" y="764.7" font-size="11.8" textLength="62.5" lengthAdjust="spacingAndGlyphs">305/305자</text>
+<text x="232.5" y="765.0" font-size="14.6" textLength="45.2" lengthAdjust="spacingAndGlyphs">AA. 포맷</text>
+<text x="365.9" y="764.6" font-size="11.4" textLength="31.3" lengthAdjust="spacingAndGlyphs">100%</text>
+<text x="433.7" y="765.2" font-size="13.3" textLength="87.2" lengthAdjust="spacingAndGlyphs">Windows (CRLF</text></g><rect x=".5" y=".5" width="521" height="778" rx="6" fill="none" stroke="#d8cfc0"/></svg>

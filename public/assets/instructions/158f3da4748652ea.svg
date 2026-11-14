@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1075" height="627" viewBox="0 0 1075 627" role="img"><title>덱에서 ‘주문서 복사’를 누른다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H1075" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="1063" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · 덱에서 ‘주문서 복사’를 누른다</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="73.4" y="113.6" font-size="17.9" textLength="71.9" lengthAdjust="spacingAndGlyphs">4 돌아가기</text>
+<text x="71.9" y="176.9" font-size="11.4" textLength="96.9" lengthAdjust="spacingAndGlyphs">TEMPLATE</text>
+<text x="195.3" y="177.8" font-size="38.8" textLength="332.8" lengthAdjust="spacingAndGlyphs">규칙.md — 6주차 버전</text>
+<text x="76.5" y="268.4" font-size="18.3" textLength="103.2" lengthAdjust="spacingAndGlyphs"># 이 폴더 규칙</text>
+<text x="76.5" y="289.0" font-size="17.0" textLength="90.8" lengthAdjust="spacingAndGlyphs"># 이 폴더는</text>
+<text x="78.1" y="311.7" font-size="19.3" textLength="279.7" lengthAdjust="spacingAndGlyphs">정책자료를 읽고 기획안을 만드는 폴더다.</text>
+<text x="76.6" y="352.8" font-size="16.1" textLength="103.1" lengthAdjust="spacingAndGlyphs"># 결과물 위치</text>
+<text x="78.1" y="375.8" font-size="19.3" textLength="465.6" lengthAdjust="spacingAndGlyphs">새로 만든 파일은 이 폴더 안 ‘결과’ 폴더에 넣는다. 없으면 만든다.</text>
+<text x="78.1" y="396.4" font-size="18.0" textLength="165.6" lengthAdjust="spacingAndGlyphs">원본은 건드리지 않는다.</text>
+<text x="78.1" y="416.6" font-size="17.7" textLength="279.7" lengthAdjust="spacingAndGlyphs">결과 폴더 밖에 있는 .md는 읽지 않는다.</text>
+<text x="78.1" y="439.6" font-size="20.9" textLength="402.4" lengthAdjust="spacingAndGlyphs">같은 이름의 파일이 이미 있으면 뒤에 _2를 붙여 저장한다.</text>
+<text x="76.6" y="477.8" font-size="16.1" textLength="98.4" lengthAdjust="spacingAndGlyphs"># 하지 말 것</text>
+<text x="76.6" y="501.0" font-size="17.7" textLength="268.7" lengthAdjust="spacingAndGlyphs">- 자료에 없는 내용을 지어내지 않는다.</text>
+<text x="76.6" y="522.9" font-size="17.8" textLength="242.2" lengthAdjust="spacingAndGlyphs">- 원본 파일 이름을 바꾸지 않는다.</text>
+<text x="76.6" y="543.4" font-size="18.0" textLength="428.1" lengthAdjust="spacingAndGlyphs">- (사람이 지킨다) 비공개·대외비·개인정보 표시가 있는 파일은</text>
+<text x="93.8" y="566.1" font-size="20.9" textLength="328.1" lengthAdjust="spacingAndGlyphs">이 폴더에 넣지 않는다. 넣기 전에 내가 거른다.</text>
+<text x="759.4" y="177.8" font-size="16.1" textLength="96.9" lengthAdjust="spacingAndGlyphs">모 주문서 복사</text>
+<text x="857.8" y="209.4" font-size="14.6" textLength="42.2" lengthAdjust="spacingAndGlyphs">황색 미</text>
+<text x="895.3" y="177.8" font-size="16.1" textLength="109.4" lengthAdjust="spacingAndGlyphs">주문 제조 완료</text>
+<text x="910.9" y="209.1" font-size="16.2" textLength="104.7" lengthAdjust="spacingAndGlyphs">미번 주 추가분</text>
+<text x="640.6" y="265.1" font-size="17.7" textLength="340.6" lengthAdjust="spacingAndGlyphs">파일은 전부 Anthropic 서버로 올라간다. 시종이 거를 수</text>
+<text x="640.5" y="284.6" font-size="23.2" textLength="335.9" lengthAdjust="spacingAndGlyphs">없다. 넣기 전에 내가 거른다. 8주차에 진짜 업무 폴더를</text>
+<text x="642.2" y="311.7" font-size="19.3" textLength="204.7" lengthAdjust="spacingAndGlyphs">고를 때 이 줄이 첫 번째 관문이다.</text>
+<text x="642.2" y="346.1" font-size="19.6" textLength="343.8" lengthAdjust="spacingAndGlyphs">결과 폴더 밖의 md - 결과 파일을 원본 폴더에 복사해</text>
+<text x="640.6" y="371.4" font-size="18.0" textLength="331.3" lengthAdjust="spacingAndGlyphs">두면 다음 시종이 어느 걸 읽을지 모른다. 지난주 실제로</text>
+<text x="642.2" y="393.4" font-size="18.0" textLength="51.6" lengthAdjust="spacingAndGlyphs">생긴 일.</text>
+<text x="640.5" y="427.3" font-size="23.0" textLength="331.5" lengthAdjust="spacingAndGlyphs">_2 - 같은 날 두 번 돌리면 덮어쓴다. 실장 피드백 받아</text>
+<text x="642.2" y="454.1" font-size="17.7" textLength="267.2" lengthAdjust="spacingAndGlyphs">손으로 고친 기획안을 날리는 사고를 막는다.</text>
+<text x="642.2" y="488.5" font-size="17.7" textLength="340.6" lengthAdjust="spacingAndGlyphs">못 읽은 파일 - 한글 파일(hwp)처럼 못 여는 형식은 조</text>
+<text x="642.2" y="513.3" font-size="19.3" textLength="334.4" lengthAdjust="spacingAndGlyphs">용히 빠진다. 개수는 맞는데 내용이 없다. 적게 해야 내가</text>
+<text x="636.0" y="534.6" font-size="23.2" textLength="129.9" lengthAdjust="spacingAndGlyphs">변환할 파일을 안다.</text>
+<text x="642.2" y="572.4" font-size="21.1" textLength="235.9" lengthAdjust="spacingAndGlyphs">규칙.md를 열고 ctrl+A, ctrl+V, ctrl+S.</text></g><rect x=".5" y=".5" width="1074" height="626" rx="6" fill="none" stroke="#d8cfc0"/></svg>

@@ -1,0 +1,80 @@
+/* Astra comparison: navy cover, copper chapter markers, explicit card boundaries.
+   The complete lessons and their paper reading surface remain the content system. */
+:root{--navy:#111b29;--copper:#d49165;--cover-text:#f0e5d2;--cover-muted:#b1b9bc}
+.masthead,.cover-shell{background:var(--navy);color:var(--cover-text)}
+.masthead .site-header{height:76px;border-bottom-color:#d4916533}
+.masthead .brand{color:var(--cover-text)}
+.masthead .brand-sub{color:#b1b9bc}
+.masthead .site-header nav button{color:#adb5bc}
+.masthead .site-header nav button.active{color:var(--cover-text);border-bottom-color:var(--copper)}
+.masthead .nav-dot{color:#c9c5b9;background:#25303b}
+.masthead .edition{color:#bdc0bc}.masthead .edition span{color:#85929b}
+.cover-shell{position:relative;border-bottom:3px solid #b97851;isolation:isolate;overflow:hidden}
+.cover-shell::before{content:'';position:absolute;z-index:-1;inset:0;background:radial-gradient(ellipse at 90% 30%,#d4916510,transparent 60%);pointer-events:none}
+.cover-shell .hero-section{grid-template-columns:.94fr 1.06fr;gap:50px;padding:38px 56px 42px}
+.cover-shell .eyebrow{color:var(--copper)}.cover-shell .tiny-line{background:var(--copper)}
+.cover-shell .hero-copy h1{font-size:clamp(44px,4.5vw,60px);line-height:1.28;letter-spacing:-.065em;margin:19px 0 20px;color:var(--cover-text)}
+.cover-shell .hero-copy h1>span:not(.title-period),.cover-shell .title-period{color:var(--copper)}
+.cover-shell .hero-description{color:#b8c0c1;font-size:12px;margin-bottom:23px}
+.hero-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.cover-shell .primary-link{background:#d49165;border-color:#d49165;color:#14202a;font-weight:600;gap:30px}
+.cover-shell .primary-link:hover{background:#e1a880;border-color:#e1a880;transform:translateY(-2px)}
+.index-shortcut{font-size:11px;color:#c0c5c3;padding:8px 0;border-bottom:1px solid #87949766;transition:color .15s}
+.index-shortcut:hover{color:#f0e5d2}
+.cover-shell .hero-stats{margin-top:26px;gap:26px}
+.cover-shell .hero-stats strong{font:400 24px var(--mono);letter-spacing:-.06em;color:#e0c8ab}
+.cover-shell .hero-stats span{color:#a5b0b5;font-size:10px}
+.cover-shell .hero-stats>i{background:#9cabb344}
+.cover-shell .hero-art{border-color:#d4916566;background:#1c2936;padding:9px;transform:rotate(1deg);box-shadow:7px 8px 0 -1px #111b29,7px 8px 0 0 #d4916540}
+.cover-shell .hero-art>img{aspect-ratio:1.8;filter:saturate(.8)}
+.cover-shell .figure-label{color:#c0b49e;font-size:8px;padding-bottom:10px}
+.cover-shell .hero-art figcaption{color:#d1c4ac;font-size:11px;padding:12px 5px 2px}
+.cover-shell .hero-art figcaption svg{color:var(--copper)}
+.content-wrap{padding-top:24px}
+.guide-note{margin-top:0;margin-bottom:39px;border:1px solid #cebea5;border-left:3px solid #b97851;background:#ece5d6;padding:13px 18px 13px 10px;box-shadow:5px 5px 0 #d8ccb536}
+.guide-note p{color:#596351;font-size:12px}
+.section-heading{margin-bottom:24px}.section-heading h2{font-size:28px}
+.act-section{grid-template-columns:224px 1fr;gap:36px;padding:27px 0 30px;--act-tone:#ad6745}
+.act-1{--act-tone:#54808a}.act-2{--act-tone:#66805d}
+.act-kicker{color:var(--act-tone);font-size:10px;max-width:214px}
+.act-kicker>span:first-child{border-left:3px solid var(--act-tone);padding-left:10px;line-height:1.1;letter-spacing:.15em}
+.act-intro h3{font-size:23px;margin:13px 0 9px}.act-intro>p{font-size:11px;line-height:1.9;max-width:208px}
+.act-intro figure{margin-top:19px}.act-intro figure img{height:112px}.act-intro figcaption{font-size:10px}
+.quest-list{gap:10px}.quest-list>li{border:0}
+.quest-card{gap:21px;padding:19px 18px;border:1px solid #d6cbb7;border-left:3px solid var(--act-tone);background:#fffaf1;min-height:101px;transition:background .18s,border-color .18s,transform .18s,box-shadow .18s}
+.quest-card:hover{padding:19px 18px;background:#fffdf7;border-color:#b9a384;border-left-color:var(--act-tone);transform:translateY(-2px);box-shadow:0 5px 12px #6158430a}
+.quest-number,.quest-card.visited .quest-number{font:500 25px var(--mono);letter-spacing:-.08em;color:var(--act-tone);min-width:35px}
+.quest-card.completed .quest-number{color:#5a7652}
+.quest-meta{font-size:10px;color:#7d7e70;gap:7px}.quest-meta>span{color:#c5b89f}
+.quest-info h4{font-size:18px;margin:6px 0;line-height:1.55}.quest-detail{font-size:10px;color:#8c8574}
+.quest-enter{color:var(--act-tone);font-size:11px;gap:12px}.enter-arrow{border-color:#cdbfa5;color:var(--act-tone)}
+.card-progress{margin-top:10px;max-width:180px;background:#e3dbc9}.card-progress i{background:var(--act-tone)}
+.final-quest{margin-left:260px;padding:22px;background:#ece5d8;border-color:#c8b89d;gap:18px}
+.final-quest h3{font-size:14px}.final-symbol{height:36px;width:36px}
+@media(max-width:1100px){
+ .cover-shell .hero-section{padding:34px 35px 38px;gap:35px;grid-template-columns:.95fr 1.05fr}
+ .cover-shell .hero-copy h1{font-size:51px}.cover-shell .hero-description{font-size:11px}.hero-actions{gap:18px}.index-shortcut{font-size:10px}
+ .cover-shell .hero-stats{gap:18px}.cover-shell .hero-stats strong{font-size:21px}.cover-shell .hero-stats span{font-size:9px}
+ .act-section{grid-template-columns:210px 1fr;gap:30px}.final-quest{margin-left:240px}.quest-card,.quest-card:hover{padding:18px 15px;gap:16px}.quest-info h4{font-size:17px}.quest-meta{font-size:9px}.quest-detail{font-size:9px}.quest-number{font-size:23px}
+}
+@media(max-width:760px){
+ .masthead .site-header{height:64px;gap:18px}.masthead .site-header nav{gap:22px}.masthead .brand img{width:27px;height:27px}
+ .cover-shell::before{background:linear-gradient(90deg,#111b29 0%,#111b29e8 35%,#111b29bb),url('/assets/cabin.webp') 66% center/cover no-repeat;opacity:.65}
+ .cover-shell .hero-section{display:block;padding:26px 22px 25px}
+ .cover-shell .hero-copy h1{font-size:42px;margin:16px 0;line-height:1.27}.cover-shell .hero-copy h1 br{display:none}.cover-shell .hero-copy h1>span:not(.title-period){display:block}
+ .cover-shell .hero-description{font-size:11px;line-height:2;margin-bottom:21px}.cover-shell .hero-art{display:none}
+ .cover-shell .primary-link{padding:12px 14px;gap:23px;font-size:11px}.hero-actions{gap:20px}.index-shortcut{font-size:10px}
+ .cover-shell .hero-stats{display:none}
+ .content-wrap{padding-top:20px}.guide-note{display:grid;grid-template-columns:42px 1fr;gap:4px 12px;margin-bottom:26px;padding:12px 13px}.guide-note p{grid-column:2;width:auto;font-size:10.5px;line-height:1.8;margin:0;padding:0}.guide-name{grid-column:2;font-size:10px}.guide-name>span{display:none}.guide-portrait{grid-row:1 / span 2;align-self:center;width:42px;height:43px}.guide-portrait img{height:47px;width:55px}.guide-spark{display:none}
+ .section-heading{margin-bottom:17px}.section-heading .eyebrow{display:none}.section-heading h2{font-size:24px;margin:0}
+ .act-section{display:block;padding:23px 0 27px}.act-intro{padding:0;min-height:0}.act-kicker{max-width:none;justify-content:space-between;gap:0}.act-kicker>span:last-child{font-size:10px}
+ .act-intro h3{font-size:22px;margin:12px 0 8px}.act-intro>p{font-size:11px;max-width:none}
+ .act-intro figure{position:static;width:100%;max-width:none;margin:13px 0 15px}.act-intro figure img{width:100%;height:112px;filter:saturate(.9)}.act-intro figcaption{display:none}
+ .quest-list{gap:10px}.quest-card,.quest-card:hover{display:grid;grid-template-columns:28px minmax(0,1fr);gap:11px 14px;padding:16px 14px;min-height:0;transform:none}
+ .quest-number,.quest-card.visited .quest-number{font-size:21px;min-width:0;grid-row:1 / span 2;align-self:start;margin-top:17px}
+ .quest-meta{font-size:9px;line-height:1.8;gap:6px}.quest-info h4{font-size:17px;margin:5px 0 7px}.quest-detail{font-size:9px;line-height:1.6}
+ .quest-enter{grid-column:2;font-size:10px;gap:9px;justify-self:start}.enter-arrow{width:20px;height:20px;border:0}.enter-arrow svg{width:15px;height:15px}
+ .quest-card:hover .enter-arrow{background:none;color:var(--act-tone);transform:none}.card-progress{margin-top:9px;max-width:170px}
+ .final-quest{margin-left:0;margin-top:0;padding:20px 16px;gap:13px}.final-quest h3{font-size:13px}.final-symbol{width:30px;height:30px}
+}
+@media(max-width:360px){.cover-shell .hero-section{padding-left:16px;padding-right:16px}.cover-shell .hero-copy h1{font-size:42px}.hero-actions{gap:15px}.cover-shell .hero-stats{gap:18px}.cover-shell .hero-stats span{font-size:8px}.quest-info h4{font-size:16px}.quest-card,.quest-card:hover{gap:10px 12px;padding:15px 12px}.quest-meta{font-size:8px}}

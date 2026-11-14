@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1050" height="659" viewBox="0 0 1050 659" role="img"><title>주문서 복사 — 질문지 전체가 복사된다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H1050" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="1038" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · 주문서 복사 — 질문지 전체가 복사된다</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="50.2" y="113.9" font-size="19.1" textLength="72.1" lengthAdjust="spacingAndGlyphs">• 돌아가기</text>
+<text x="45.8" y="176.6" font-size="12.9" textLength="99.2" lengthAdjust="spacingAndGlyphs">TEMPLATE</text>
+<text x="170.9" y="179.8" font-size="42.4" textLength="274.7" lengthAdjust="spacingAndGlyphs">템플릿_질문지.md</text>
+<text x="51.9" y="269.0" font-size="17.5" textLength="109.9" lengthAdjust="spacingAndGlyphs"># 템플릿_질문지</text>
+<text x="54.9" y="291.5" font-size="20.6" textLength="270.1" lengthAdjust="spacingAndGlyphs">이 폴더의 규칙.md를 먼저 읽고 따른다.</text>
+<text x="51.9" y="331.5" font-size="17.5" textLength="253.3" lengthAdjust="spacingAndGlyphs">## 칸 채우는 법 — 사람이 읽는 부분</text>
+<text x="53.4" y="354.2" font-size="19.1" textLength="245.7" lengthAdjust="spacingAndGlyphs">- 괄호 ( ) 안을 내 답으로 바꾼다.</text>
+<text x="53.4" y="375.7" font-size="19.1" textLength="264.0" lengthAdjust="spacingAndGlyphs">- 보기( / )는 하나만 남기고 지운다.</text>
+<text x="51.9" y="395.3" font-size="18.9" textLength="202.6" lengthAdjust="spacingAndGlyphs">- 모르면 ‘알아서’라고 쓴다.</text>
+<text x="51.9" y="436.9" font-size="17.5" textLength="64.1" lengthAdjust="spacingAndGlyphs">#할 일</text>
+<text x="51.9" y="459.4" font-size="18.9" textLength="315.9" lengthAdjust="spacingAndGlyphs">1. 만들기 전에 아래 질문지를 끝까지 읽는다.</text>
+<text x="77.8" y="480.8" font-size="19.1" textLength="361.7" lengthAdjust="spacingAndGlyphs">괄호가 비었거나 보기가 둘 이상 남은 칸은 빈칸이다.</text>
+<text x="77.8" y="500.7" font-size="19.1" textLength="319.3" lengthAdjust="spacingAndGlyphs">‘예:’ 뒤의 값은 예시다. 답으로 쓰지 않는다.</text>
+<text x="77.8" y="523.7" font-size="19.1" textLength="412.1" lengthAdjust="spacingAndGlyphs">빈칸은 만들기 전에 한꺼번에 묻는다. 지어서 채우지 않는다.</text>
+<text x="77.8" y="546.5" font-size="22.7" textLength="425.9" lengthAdjust="spacingAndGlyphs">‘알아서’라고 적힌 칸은 정해서 쓰고, 정한 값을 마지막 보고에 적는다.</text>
+<text x="53.4" y="564.7" font-size="19.1" textLength="51.9" lengthAdjust="spacingAndGlyphs">적는다.</text>
+<text x="51.9" y="585.0" font-size="17.5" textLength="114.5" lengthAdjust="spacingAndGlyphs">2. 색을 정한다.</text>
+<text x="738.6" y="177.3" font-size="19.3" textLength="97.8" lengthAdjust="spacingAndGlyphs">[ 주문서 복사</text>
+<text x="758.5" y="203.1" font-size="9.8" textLength="47.3" lengthAdjust="spacingAndGlyphs">내파의</text>
+<text x="873.0" y="177.4" font-size="17.5" textLength="109.9" lengthAdjust="spacingAndGlyphs">주문 제조 완료</text>
+<text x="834.8" y="208.2" font-size="16.0" textLength="160.2" lengthAdjust="spacingAndGlyphs">주황색 칸을 내 답으로</text>
+<text x="616.9" y="275.2" font-size="22.7" textLength="210.0" lengthAdjust="spacingAndGlyphs">잠깐, 주문 내용을 설명해줘.</text>
+<text x="616.9" y="305.9" font-size="22.5" textLength="310.6" lengthAdjust="spacingAndGlyphs">칸 채우는 법 - 괄호 안을 담으로, 보기는 하나만,</text>
+<text x="619.6" y="332.3" font-size="22.2" textLength="292.8" lengthAdjust="spacingAndGlyphs">모르면 알아서'. 빈 팔호• 보기 둘 이상•'예: 값은</text>
+<text x="616.9" y="354.0" font-size="22.5" textLength="170.6" lengthAdjust="spacingAndGlyphs">빈칸으로 보고 먼저 묻는다.</text>
+<text x="616.9" y="389.0" font-size="22.5" textLength="341.2" lengthAdjust="spacingAndGlyphs">색은 표로 먼저 - 캡처에서 뽑은 색은 어림일 수 있다.</text>
+<text x="619.6" y="414.8" font-size="22.1" textLength="311.3" lengthAdjust="spacingAndGlyphs">그래서 만들기 전에 표를 보고 '좋다'고 해야 만든다.</text>
+<text x="616.9" y="450.2" font-size="22.7" textLength="341.2" lengthAdjust="spacingAndGlyphs">스물한 장 전부- 고르지 않는다. 다 만들어 두면 시안</text>
+<text x="619.6" y="475.0" font-size="17.5" textLength="306.8" lengthAdjust="spacingAndGlyphs">때 시종이 내용에 맞는 장을 골라 늘리고 줄여 쓴다.</text>
+<text x="616.9" y="507.2" font-size="22.7" textLength="345.6" lengthAdjust="spacingAndGlyphs">숫자 없음 - 예시 숫자는 진짜인 척 시안까지 따라간다.</text>
+<text x="619.6" y="532.5" font-size="20.6" textLength="274.7" lengthAdjust="spacingAndGlyphs">그래프 장은 모양만. 마무리 장만 '감사합니다&quot;</text>
+<text x="619.6" y="568.0" font-size="17.5" textLength="343.4" lengthAdjust="spacingAndGlyphs">글꼴 - 확인할 수 없다고 맑은 고딕으로 바꿔 버리지 않게</text>
+<text x="619.6" y="591.2" font-size="16.0" textLength="149.6" lengthAdjust="spacingAndGlyphs">했다. 바꾸지 말고 보고만</text></g><rect x=".5" y=".5" width="1049" height="658" rx="6" fill="none" stroke="#d8cfc0"/></svg>

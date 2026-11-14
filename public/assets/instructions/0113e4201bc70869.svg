@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="535" height="684" viewBox="0 0 535 684" role="img"><title>Ctrl + V로 덮어쓴다. 바뀐 것을 확인하고 ctrl + s 로 저장한다.</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H535" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="523" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · Ctrl + V로 덮어쓴다. 바뀐 것을 확인하고 ctrl + s 로 </text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="14.1" y="72.9" font-size="18.4" textLength="14.1" lengthAdjust="spacingAndGlyphs">=</text>
+<text x="47.9" y="71.7" font-size="13.5" textLength="52.6" lengthAdjust="spacingAndGlyphs">시종.md</text>
+<text x="298.5" y="74.2" font-size="15.5" textLength="15.0" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="11.3" y="105.2" font-size="15.6" textLength="138.9" lengthAdjust="spacingAndGlyphs">파일 편집 보기</text>
+<text x="11.3" y="147.3" font-size="16.6" textLength="111.7" lengthAdjust="spacingAndGlyphs"># 정책자료 요약</text>
+<text x="14.1" y="167.8" font-size="17.6" textLength="264.7" lengthAdjust="spacingAndGlyphs">이 폴더의 규칙.md를 먼저 읽고 따른다.</text>
+<text x="12.1" y="206.8" font-size="15.9" textLength="58.3" lengthAdjust="spacingAndGlyphs">## 할 일</text>
+<text x="12.2" y="228.7" font-size="18.4" textLength="357.6" lengthAdjust="spacingAndGlyphs">1. 폴더 안 정책자료가 몇 건인지 먼저 세어 알려준다.</text>
+<text x="28.2" y="247.8" font-size="17.5" textLength="391.4" lengthAdjust="spacingAndGlyphs">그 다음 이 폴더의 정책자료 파일을 하나씩 끝까지 읽는다.</text>
+<text x="26.3" y="268.4" font-size="17.6" textLength="208.4" lengthAdjust="spacingAndGlyphs">(결과 폴더와 .md 파일은 제외)</text>
+<text x="13.1" y="289.0" font-size="18.5" textLength="306.0" lengthAdjust="spacingAndGlyphs">2. 파일마다 핵심요약 3줄, 쟁점 2줄을 뽑는다.</text>
+<text x="12.1" y="309.0" font-size="21.5" textLength="428.1" lengthAdjust="spacingAndGlyphs">3. 자료명 / 핵심요약 / 쟁점 / 출처(파일명·쪽) 네 열 표로 만들어</text>
+<text x="29.1" y="330.0" font-size="19.4" textLength="354.8" lengthAdjust="spacingAndGlyphs">결과 폴더에 YYYY-MM-DD_자료요약.md로 저장한다.</text>
+<text x="13.1" y="347.2" font-size="17.6" textLength="282.5" lengthAdjust="spacingAndGlyphs">4. 표 아래에 ‘자료 간 차이’ 목록을 만든다.</text>
+<text x="28.2" y="369.5" font-size="19.6" textLength="406.4" lengthAdjust="spacingAndGlyphs">같은 주제를 두고 자료끼리 숫자나 입장이 다른 지점을 찾아,</text>
+<text x="28.2" y="388.4" font-size="18.4" textLength="385.8" lengthAdjust="spacingAndGlyphs">어느 자료가 무엇이라 하는지 출처와 함께 나란히 적는다.</text>
+<text x="30.0" y="407.3" font-size="17.4" textLength="284.4" lengthAdjust="spacingAndGlyphs">어긋나는 곳이 없으면 ‘없음’이라고 적는다.</text>
+<text x="13.1" y="428.7" font-size="18.4" textLength="289.1" lengthAdjust="spacingAndGlyphs">기획안은 쓰지 않는다. 의견도 달지 않는다.</text>
+<text x="11.3" y="467.6" font-size="16.5" textLength="124.8" lengthAdjust="spacingAndGlyphs">## 다 됐다는 기준</text>
+<text x="11.3" y="487.3" font-size="16.5" textLength="253.4" lengthAdjust="spacingAndGlyphs">- 결과 폴더에 자료요약.md가 생겼다.</text>
+<text x="11.3" y="507.0" font-size="16.5" textLength="215.9" lengthAdjust="spacingAndGlyphs">- 표의 모든 줄에 출처가 있다.</text>
+<text x="10.3" y="526.7" font-size="16.6" textLength="380.1" lengthAdjust="spacingAndGlyphs">- 내놓기 전에 표의 숫자·날짜·출처를 원문에서 다시 찾아</text>
+<text x="24.4" y="547.3" font-size="16.5" textLength="467.4" lengthAdjust="spacingAndGlyphs">규칙.md의 검증 세 줄에 맞는지 대조한다. 다르면 원문 쪽으로 고친다.</text>
+<text x="10.3" y="567.8" font-size="17.6" textLength="358.5" lengthAdjust="spacingAndGlyphs">- 결과 맨 아래에 ‘점검 기록’을 만든다. 고친 항목마다</text>
+<text x="24.4" y="586.8" font-size="16.4" textLength="444.0" lengthAdjust="spacingAndGlyphs">무엇을 / 고치기 전 → 고친 후 / 근거(파일명·쪽)를 한 줄씩 적는다.</text>
+<text x="23.5" y="607.3" font-size="17.4" textLength="384.8" lengthAdjust="spacingAndGlyphs">고친 것이 없어도 ‘점검 기록: 고친 항목 없음’이라고 쓴다.</text>
+<text x="10.3" y="627.8" font-size="18.4" textLength="249.7" lengthAdjust="spacingAndGlyphs">- 하나라도 안 되면 멈추고 물어본다.</text></g><rect x=".5" y=".5" width="534" height="683" rx="6" fill="none" stroke="#d8cfc0"/></svg>

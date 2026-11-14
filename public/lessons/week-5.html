@@ -1,0 +1,2182 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>WEEK 05 · 스스로 고치는 시종</title></head><body data-check-storage="journey-week05" data-week="5"><header class="lesson-bar"><a class="reader-home" href="../" aria-label="전체 지도">↖ <span>전체 지도</span></a><span class="reader-brand">CLAUDE / FIELD NOTES</span><button type="button" id="toc-open" aria-expanded="false" aria-controls="lesson-toc">목차 <span>☰</span></button></header><div data-chapter="05" class="reader-meta"><span class="reader-week">CHAPTER</span><h1>스스로 고치는 시종</h1><span>영혼의 얼음 동굴 · 끝</span></div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* ── 단일 테마: 이 덱은 '밤의 숲' 게임 화면이므로 다크 하나로 확정한다 ── */
+:root{
+  --night:#f4eee3;
+  --bark:#fffdf8;
+  --moss:#eae4d7;
+  --panel:#fffdf8;
+  --fog:#293d36;
+  --dim:#686b5d;
+  --faint:#7b796b;
+  --glow:#ad553a;
+  --ember:#a64f33;
+  --sigil:#496550;
+  --danger:#b44938;
+  --line:rgba(41,61,54,.16);
+  --line-strong:rgba(41,61,54,.32);
+  --dr:url("../assets/doctor.webp");
+  --boss:url("../assets/boss.webp");
+  --cabin:url("../assets/cave.webp");
+  --fairy:url("../assets/fairy.webp");
+  --h-calm:url("../assets/hero.webp");
+  --h-hurt:url("../assets/hero.webp");
+  --h-aura:url("../assets/hero.webp");
+  --h-aura-solo:url("../assets/hero.webp");
+  --h-aura-hurt:url("../assets/hero.webp");
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;
+  background:radial-gradient(120% 90% at 50% 0%, #f4eee3 0%, var(--night) 62%, #ede5d7 100%);
+  color:var(--fog);
+  font-family:"Noto Sans KR","Noto Serif KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:16px 12px 12px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── 무대 ── */
+.stage{
+  position:relative;
+  width:min(97vw, calc((100dvh - 104px) * 16 / 9));
+  aspect-ratio:16/9;
+  container-type:inline-size;
+  border:1px solid var(--line-strong);
+  border-radius:3px;
+  overflow:hidden;
+  background:var(--night);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6), 0 26px 70px -30px rgba(0,0,0,.95);
+  cursor:pointer;
+}
+.stage:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+
+.slide{position:absolute;inset:0;display:none;padding:4.6cqw 5cqw 4cqw;flex-direction:column}
+.slide.on{display:flex;animation:fadein .38s ease both}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+.slide::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(70% 120% at 12% -10%, rgba(73,101,80,.09), transparent 60%),
+    radial-gradient(80% 100% at 100% 110%, rgba(226,145,78,.10), transparent 58%),
+    linear-gradient(180deg,#f8f3e9 0%, #f4eee3 100%);
+}
+.slide > *{position:relative;z-index:1}
+#s1{padding:0}
+#s1::before{display:none}
+
+/* ── 머리표 ── */
+.head{display:flex;align-items:baseline;gap:1.2cqw;margin-bottom:2.6cqw}
+.chapter{
+  font-family:"DM Mono",serif;font-weight:700;
+  font-size:max(12px,1.15cqw);letter-spacing:.34em;color:var(--sigil);
+  border:1px solid rgba(73,101,80,.4);padding:.5cqw .9cqw;border-radius:2px;white-space:nowrap;
+}
+.head h2{margin:0;font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,3.3cqw);letter-spacing:-.01em;color:var(--fog);text-wrap:balance}
+.head .sub{margin-left:auto;font-size:max(12px,1.2cqw);color:var(--faint);letter-spacing:.08em;font-family:"DM Mono",monospace;white-space:nowrap}
+
+/* ── 대사창 ── */
+/* 제작자 표기 */
+/* 엔딩 카드 */
+.endcard{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;gap:0;position:relative;z-index:12}
+.endcard .tbc{font-family:"DM Mono",serif;font-size:max(12px,6.6cqw);font-weight:700;letter-spacing:.06em;
+  color:var(--glow);text-shadow:0 0 4cqw rgba(173,85,58,.42);line-height:1.1;text-align:center}
+.endcard .wk{margin-top:1.1cqw;font-family:"DM Mono",serif;font-size:max(12px,2cqw);letter-spacing:.34em;color:var(--sigil)}
+.endcard .when{margin-top:3.4cqw;padding-top:2.2cqw;border-top:1px solid var(--line);
+  font-size:max(12px,2.05cqw);color:var(--fog);letter-spacing:.02em;text-align:center}
+.endsign{position:absolute;left:50%;bottom:3.1cqw;transform:translateX(-50%);z-index:14;text-align:center;
+  font-family:"DM Mono",monospace;color:var(--faint);line-height:1.7}
+.endsign b{display:block;font-weight:400;font-size:max(12px,1.2cqw);letter-spacing:.16em}
+.endsign span{display:block;font-size:max(12px,1.05cqw);letter-spacing:.1em;opacity:.82}
+/* ══ 장소 테마: 얼음 동굴(ice) · 빛의 숲(grove) ══ */
+.scene .room.ice{
+  background:
+    radial-gradient(62% 46% at 50% -4%, rgba(196,236,255,.30), rgba(196,236,255,0) 72%),
+    linear-gradient(112deg, rgba(160,214,244,.11) 0 7%, transparent 7% 21%, rgba(160,214,244,.07) 21% 30%, transparent 30% 51%, rgba(160,214,244,.10) 51% 57%, transparent 57% 79%, rgba(160,214,244,.06) 79% 85%, transparent 85%),
+    linear-gradient(246deg, rgba(120,190,232,.09) 0 11%, transparent 11% 39%, rgba(120,190,232,.06) 39% 46%, transparent 46%),
+    radial-gradient(42% 30% at 18% 88%, rgba(96,168,220,.26), transparent 70%),
+    radial-gradient(46% 34% at 82% 82%, rgba(96,168,220,.20), transparent 70%),
+    linear-gradient(180deg,#0B1D2B 0%,#071523 55%,#040B12 100%);
+  filter:none;
+}
+.scene .room.ice::before{content:"";position:absolute;left:0;right:0;top:0;height:30%;
+  background:linear-gradient(180deg,#040A10,#061019 70%,transparent);
+  clip-path:polygon(0 0,100% 0,100% 34%,94% 60%,90% 38%,84% 72%,79% 44%,73% 80%,68% 40%,62% 66%,57% 42%,50% 88%,45% 46%,39% 70%,33% 40%,27% 76%,21% 44%,15% 62%,9% 38%,4% 58%,0 40%);
+  opacity:.92}
+.scene .room.ice::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;
+  background:linear-gradient(0deg,rgba(150,210,245,.16),transparent);opacity:.8}
+.scene .room.grove{
+  background:
+    radial-gradient(48% 40% at 28% 32%, rgba(110,232,172,.24), transparent 70%),
+    radial-gradient(40% 34% at 76% 58%, rgba(120,240,190,.18), transparent 70%),
+    radial-gradient(28% 22% at 56% 86%, rgba(173,85,58,.12), transparent 70%),
+    radial-gradient(70% 40% at 50% 0%, rgba(2,10,6,.9), transparent 80%),
+    linear-gradient(180deg,#07241B 0%,#041C13 50%,#03120C 100%);
+  filter:none;
+}
+.scene .room.grove::before,.scene .room.grove::after{content:"";position:absolute;top:-4%;bottom:-4%;width:7%;
+  background:linear-gradient(90deg,transparent,rgba(1,8,5,.95) 30%,rgba(1,8,5,.95) 70%,transparent);opacity:.9}
+.scene .room.grove::before{left:9%;transform:skewX(-3deg)}
+.scene .room.grove::after{right:14%;width:5%;transform:skewX(4deg)}
+.scene .fx{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:1}
+/* 타이틀 카드 */
+.slide.titlecard{padding:0}
+.slide.titlecard::before{display:none}
+.tcard{position:absolute;inset:0;z-index:12;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 6cqw 4cqw;pointer-events:none}
+.tcard small{display:block;font-family:"DM Mono",serif;font-size:max(12px,1.35cqw);letter-spacing:.46em;color:var(--sigil);margin-bottom:2cqw;opacity:.92}
+.tcard h1{margin:0;font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,6.2cqw);line-height:1.25;letter-spacing:-.01em;color:var(--glow);
+  text-shadow:0 0 1.4cqw rgba(173,85,58,.5),0 0 4cqw rgba(173,85,58,.22);animation:breathe 5.5s ease-in-out infinite;word-break:keep-all}
+.tcard .place{display:block;margin-top:2.4cqw;font-family:"DM Mono",monospace;font-size:max(12px,1.25cqw);letter-spacing:.3em;color:var(--dim)}
+.titlecard.ice .tcard h1{color:#253c36;text-shadow:0 0 1.4cqw rgba(190,235,255,.55),0 0 4cqw rgba(190,235,255,.25)}
+.titlecard.ice .tcard small{color:#3c727a}
+.titlecard.grove .tcard h1{color:#253c36;text-shadow:0 0 1.4cqw rgba(78,114,84,.55),0 0 4cqw rgba(78,114,84,.25)}
+.titlecard.grove .tcard small{color:#4e7254}
+
+#y4 .goals{flex:0 0 auto;min-height:0}
+#y4 .goal{min-height:33.5cqw;padding:2.4cqw 2.6cqw;gap:1cqw}
+#y4 .goal .t{margin-top:auto}
+#y4 .goal b{font-size:max(12px,2.5cqw)}
+#y4 .goal span{font-size:max(12px,1.65cqw);line-height:1.7}
+#y4 .dbox{margin-top:auto;margin-bottom:.6cqw}
+.byline{
+  position:absolute;left:50%;bottom:2cqw;transform:translateX(-50%);z-index:14;text-align:center;
+  font-family:"DM Mono",monospace;color:var(--faint);white-space:nowrap;pointer-events:none;line-height:1.7;
+}
+.byline b{display:block;font-weight:400;font-size:max(12px,1.1cqw);letter-spacing:.16em}
+.byline span{display:block;font-size:max(12px,.95cqw);letter-spacing:.1em;opacity:.82}
+.dbox{
+  margin-top:2.4cqw;flex:0 0 auto;
+  border:1px solid var(--line-strong);border-radius:2px;
+  background:linear-gradient(180deg, rgba(255,253,248,.94), rgba(244,238,227,.94));
+  padding:1.9cqw 2.2cqw 1.7cqw;position:relative;
+  box-shadow:inset 0 0 0 1px rgba(173,85,58,.07);
+}
+.dbox .who{
+  position:absolute;top:-1.05cqw;left:1.8cqw;background:var(--night);padding:0 .7cqw;
+  font-size:max(12px,1.15cqw);letter-spacing:.22em;color:var(--glow);font-family:"DM Mono",monospace;
+}
+.dbox p{margin:0;font-family:"Noto Serif KR",serif;font-size:max(12px,1.95cqw);line-height:1.62;color:var(--fog)}
+.dbox p + p{margin-top:.6cqw;color:var(--dim);font-size:max(12px,1.7cqw)}
+.cue{position:absolute;right:1.5cqw;bottom:1.1cqw;color:var(--glow);font-size:max(12px,1.3cqw);animation:blink 1.15s steps(2,end) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.12}}
+
+/* ── 프롤로그 ── */
+#s1 .scene-img{
+  position:absolute;inset:0;display:block;
+  background:var(--cabin) center/cover no-repeat;
+  filter:brightness(.50) saturate(.68) contrast(1.08);
+}
+#s1 .grade{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(52% 48% at 47% 30%, rgba(173,85,58,.26), rgba(173,85,58,0) 66%),
+    linear-gradient(180deg, rgba(6,18,15,.62) 0%, rgba(244,238,227,.10) 34%, rgba(4,9,7,.82) 78%, rgba(4,9,7,.94) 100%),
+    linear-gradient(90deg, rgba(4,9,7,.62), rgba(4,9,7,0) 26%, rgba(4,9,7,0) 74%, rgba(4,9,7,.62)),
+    radial-gradient(70% 70% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,.62) 100%);
+}
+#s1 .tint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg, rgba(28,72,60,.30), rgba(10,26,22,.18));mix-blend-mode:color}
+#s1 canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.prologue{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:4.6cqw 5cqw 4cqw}
+.prologue .dbox{margin-top:auto}
+.oracle{
+  text-align:center;margin-bottom:auto;margin-top:11cqw;
+  font-family:"Noto Serif KR",serif;font-weight:700;
+  font-size:max(12px,3.9cqw);line-height:1.5;letter-spacing:.02em;color:var(--glow);
+  text-shadow:0 0 18px rgba(173,85,58,.5), 0 0 54px rgba(173,85,58,.22);
+  animation:breathe 5.5s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.86}50%{opacity:1}}
+.oracle small{display:block;font-size:max(12px,1.3cqw);letter-spacing:.5em;color:var(--sigil);margin-bottom:1.6cqw;font-family:"DM Mono",serif;text-shadow:none;opacity:.9}
+
+/* ══ 스토리 슬라이드 ══ */
+.story{padding:0}
+.story::before{display:none}
+.scene{position:absolute;inset:0;isolation:isolate;overflow:hidden;background:#f4eee3}
+.scene .room{position:absolute;inset:-4%;background:var(--cabin) 62% 42%/cover no-repeat;filter:brightness(.30) saturate(.42) contrast(1.1) blur(3px)}
+.scene .room.field{background-position:24% 62%;filter:brightness(.26) saturate(.5) contrast(1.12) blur(4px)}
+.scene .veil{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(60% 60% at 30% 40%, rgba(173,85,58,.10), transparent 70%),
+    linear-gradient(180deg, rgba(4,10,8,.55), rgba(4,10,8,.20) 40%, rgba(3,7,6,.92));
+}
+.hero{
+  position:absolute;right:5cqw;top:1%;height:98%;width:52cqw;
+  background:var(--h-calm) center/contain no-repeat;
+  filter:drop-shadow(0 1.4cqw 2.4cqw rgba(0,0,0,.55));
+  animation:idle 4.6s ease-in-out infinite;
+}
+.hero.hurt{background-image:var(--h-hurt)}
+.hero.aura{background-image:var(--h-aura)}
+.hero.aura.solo{background-image:var(--h-aura-solo)}
+.hero.aura-hurt{background-image:var(--h-aura-hurt)}
+@keyframes idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.4%)}}
+.hero.small{height:74%;top:8%;width:40cqw;right:3cqw}
+.hero.mid{height:86%;top:4%;width:46cqw}
+
+.fairy{
+  position:absolute;width:15cqw;height:15cqw;
+  background:var(--fairy) center/contain no-repeat;
+  filter:drop-shadow(0 0 2.4cqw rgba(92,132,134,.8));
+  animation:flit 5.2s ease-in-out infinite;
+}
+@keyframes flit{
+  0%,100%{transform:translate(0,0) rotate(-3deg)}
+  33%{transform:translate(2.5cqw,-2cqw) rotate(4deg)}
+  66%{transform:translate(-1.5cqw,1.4cqw) rotate(-2deg)}
+}
+.story-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:4.6cqw 5cqw 4cqw;z-index:3}
+.direction{
+  margin:0 0 2.4cqw;align-self:flex-start;
+  font-family:"DM Mono",monospace;font-size:max(12px,1.35cqw);letter-spacing:.04em;color:var(--dim);
+  border-left:2px solid var(--faint);padding-left:1cqw;line-height:1.6;
+}
+.story .dbox{margin-top:0}
+.story .dbox .who{background:#fffdf8;border:1px solid var(--line);border-radius:2px;padding:.18cqw .8cqw;left:1.6cqw}
+
+/* ── 1-3 지진과 추락 ── */
+#s1c .scene{background:#120806}
+#s1c .room{filter:brightness(.22) saturate(.3) contrast(1.2) blur(7px)}
+#s1c .veil{background:
+  radial-gradient(55% 55% at 50% 42%, rgba(255,214,120,.28), transparent 72%),
+  linear-gradient(180deg, rgba(30,8,4,.65), rgba(6,3,2,.9));}
+.streaks{
+  position:absolute;inset:-40% -4%;
+  background:repeating-linear-gradient(90deg,
+    rgba(255,238,196,0) 0 46px, rgba(255,238,196,.55) 46px 48px, rgba(255,238,196,0) 48px 128px);
+  -webkit-mask-image:repeating-linear-gradient(180deg, transparent 0 40px, #000 96px 190px, transparent 250px 290px);
+  mask-image:repeating-linear-gradient(180deg, transparent 0 40px, #000 96px 190px, transparent 250px 290px);
+  filter:blur(.6px);animation:rush .42s linear infinite;opacity:.75;
+}
+@keyframes rush{from{transform:translateY(0)}to{transform:translateY(-290px)}}
+.quaker{position:absolute;inset:0;animation:quake .9s cubic-bezier(.36,.07,.19,.97) 1 both}
+@keyframes quake{
+  0%{transform:translate(0,0) rotate(0)}
+  8%{transform:translate(-2.4%,1.6%) rotate(-1.4deg)}
+  18%{transform:translate(2.2%,-1.4%) rotate(1.2deg)}
+  30%{transform:translate(-1.8%,1.2%) rotate(-1deg)}
+  44%{transform:translate(1.4%,-1%) rotate(.8deg)}
+  60%{transform:translate(-1%,.7%) rotate(-.5deg)}
+  78%{transform:translate(.6%,-.4%) rotate(.3deg)}
+  100%{transform:translate(0,0) rotate(0)}
+}
+.hero.falling{
+  right:auto;left:50%;height:56%;top:30%;width:36cqw;margin-left:-18cqw;
+  animation:tumble 1.5s cubic-bezier(.2,.6,.4,1) both;
+}
+@keyframes tumble{
+  0%{transform:translateY(-52%) rotate(-26deg) scale(.86);filter:blur(2px)}
+  55%{transform:translateY(6%) rotate(12deg) scale(1.02);filter:blur(0)}
+  100%{transform:translateY(0) rotate(6deg) scale(1);filter:blur(0)}
+}
+.shout{
+  position:absolute;left:0;right:0;top:9%;text-align:center;z-index:4;
+  font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,8.4cqw);line-height:1;letter-spacing:-.01em;
+  color:#FFF0BE;
+  text-shadow:0 0 3cqw rgba(255,200,90,.85), 0 0 8cqw rgba(255,150,50,.55), 0 .4cqw 0 rgba(90,30,10,.7);
+  animation:slam .62s cubic-bezier(.2,1.4,.35,1) both;
+}
+@keyframes slam{
+  0%{transform:scale(2.6);opacity:0;filter:blur(1.4cqw)}
+  60%{transform:scale(.94);opacity:1;filter:blur(0)}
+  100%{transform:scale(1);opacity:1}
+}
+#s1d .scene{background:#080D0B}
+#s1d .room{filter:brightness(.24) saturate(.35) contrast(1.15) blur(5px)}
+.hero.knocked{transform:rotate(-9deg);animation:none;top:4%;height:92%}
+.dust{position:absolute;inset:0;
+  background:
+    radial-gradient(2px 2px at 22% 62%, rgba(214,200,168,.5), transparent 60%),
+    radial-gradient(2px 2px at 41% 38%, rgba(214,200,168,.38), transparent 60%),
+    radial-gradient(3px 3px at 66% 74%, rgba(214,200,168,.32), transparent 60%),
+    radial-gradient(2px 2px at 78% 30%, rgba(214,200,168,.42), transparent 60%),
+    radial-gradient(2px 2px at 12% 26%, rgba(214,200,168,.3), transparent 60%);
+  animation:settle 7s linear infinite;}
+@keyframes settle{from{transform:translateY(-2%)}to{transform:translateY(4%)}}
+#s1e .veil{background:
+  radial-gradient(46% 46% at 26% 40%, rgba(92,132,134,.22), transparent 70%),
+  linear-gradient(180deg, rgba(4,10,8,.5), rgba(3,7,6,.92));}
+#s7a .veil{background:
+  radial-gradient(52% 52% at 62% 44%, rgba(173,85,58,.20), transparent 70%),
+  linear-gradient(180deg, rgba(4,10,8,.5), rgba(3,7,6,.9));}
+
+/* ── 패널 공통 ── */
+.cols{display:grid;gap:2cqw;flex:1 1 auto;min-height:0;overflow:hidden}
+.c-2{grid-template-columns:1fr 1fr}
+.c-32{grid-template-columns:1.35fr 1fr}
+.c-4{grid-template-columns:repeat(4,1fr)}
+.panel{
+  border:1px solid var(--line);border-radius:2px;background:rgba(255,253,248,.55);
+  padding:1.9cqw 2cqw;display:flex;flex-direction:column;gap:1.1cqw;min-height:0;overflow:hidden;
+}
+.panel.bare{background:none;border:none;padding:0}
+.plabel{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);letter-spacing:.22em;color:var(--faint);text-transform:uppercase}
+.panel h3{margin:0;font-family:"Noto Serif KR",serif;font-size:max(12px,2.1cqw);font-weight:700;color:var(--fog)}
+.panel p{margin:0;font-size:max(12px,1.55cqw);line-height:1.72;color:var(--dim)}
+#s5 .cols{flex:0 1 auto}
+#s5 .strip{margin-top:auto}
+
+/* ── 스탯창 ── */
+.stat{display:grid;grid-template-columns:auto 1fr;gap:.7cqw 1.6cqw;align-items:baseline}
+.stat dt{font-family:"DM Mono",monospace;font-size:max(12px,1.2cqw);letter-spacing:.14em;color:var(--faint);white-space:nowrap}
+.stat dd{margin:0;font-size:max(12px,1.6cqw);color:var(--fog);font-variant-numeric:tabular-nums}
+.stat dd em{font-style:normal;color:var(--dim);font-size:max(12px,1.35cqw)}
+.lv{color:var(--glow);font-family:"DM Mono",monospace;font-weight:500}
+.bar{display:inline-flex;gap:.3cqw;vertical-align:middle;margin-right:.7cqw}
+.bar i{width:1.5cqw;height:.85cqw;background:var(--faint);border-radius:1px;display:block}
+.bar i.f{background:var(--sigil)}
+.bar i.e{background:var(--ember)}
+.tag{display:inline-block;border:1px solid var(--line-strong);border-radius:999px;padding:.28cqw .95cqw;font-size:max(12px,1.25cqw);color:var(--dim);margin:.2cqw .3cqw .2cqw 0}
+.tag.bad{border-color:rgba(212,104,94,.45);color:var(--danger)}
+.tag.good{border-color:rgba(73,101,80,.45);color:var(--sigil)}
+
+/* ── 퀘스트 보드 ── */
+.quests{display:flex;flex-direction:column;gap:1.1cqw;flex:1;min-height:0}
+.quest{
+  font:inherit;color:inherit;text-align:left;width:100%;
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.4cqw;align-items:center;
+  border:1px solid transparent;border-left:2px solid var(--ember);
+  background:rgba(255,253,248,.5);padding:1.25cqw 1.6cqw;cursor:pointer;
+  transition:background .15s, border-color .15s, transform .12s;
+}
+.quest:hover{background:rgba(234,228,215,.8);border-color:var(--line-strong);border-left-color:var(--ember);transform:translateX(.4cqw)}
+.quest:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.quest.story{border-left-color:var(--glow);background:rgba(173,85,58,.08)}
+.quest.story:hover{border-left-color:var(--glow);background:rgba(173,85,58,.14)}
+.quest.locked{border-left-color:var(--faint);opacity:.72}
+.quest.locked:hover{border-left-color:var(--faint)}
+.q-no{font-family:"DM Mono",serif;font-size:max(12px,1.5cqw);color:var(--ember);letter-spacing:.1em}
+.quest.story .q-no{color:var(--glow)}
+.quest.locked .q-no{color:var(--faint)}
+.q-body strong{display:block;font-family:"Noto Serif KR",serif;font-size:max(12px,1.85cqw);font-weight:700;color:var(--fog);margin-bottom:.25cqw}
+.q-body span{font-size:max(12px,1.4cqw);color:var(--dim)}
+.q-diff{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.15em;color:var(--faint);white-space:nowrap;text-align:right}
+.quest.story .q-diff{color:var(--glow)}
+
+/* ── 시스템 창 ── */
+.modal[hidden]{display:none}
+.modal{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  background:rgba(3,7,6,.72);backdrop-filter:blur(2px);animation:fadein .18s ease both}
+.modal-box{
+  width:min(52cqw, 86%);border:1px solid var(--glow);border-radius:2px;
+  background:linear-gradient(180deg,#141F19,#0A120E);
+  box-shadow:0 0 0 1px rgba(0,0,0,.7), 0 2cqw 6cqw -1cqw rgba(0,0,0,.9), inset 0 0 0 1px rgba(173,85,58,.12);
+  padding:3cqw 3cqw 2.4cqw;text-align:left;animation:pop .22s cubic-bezier(.2,1.3,.4,1) both;
+}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-tag{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);letter-spacing:.3em;color:var(--sigil);display:block;margin-bottom:1.4cqw}
+.modal-text{margin:0 0 2.4cqw;font-family:"Noto Serif KR",serif;font-size:max(12px,2.1cqw);line-height:1.62;color:var(--fog);text-align:left;white-space:pre-line}
+.modal-btn{
+  display:block;margin-left:auto;
+  font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.5cqw);letter-spacing:.1em;
+  color:var(--night);background:var(--glow);border:none;border-radius:2px;
+  padding:.9cqw 2.6cqw;cursor:pointer;transition:filter .15s;
+}
+.modal-btn:hover{filter:brightness(1.12)}
+.modal-btn:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+
+/* ── 하네스 4요소 ── */
+.parts{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqw;flex:1 1 auto;min-height:0}
+.part{border:1px solid var(--line);border-radius:2px;padding:1.6cqw 1.5cqw;display:flex;flex-direction:column;gap:.9cqw;background:rgba(255,253,248,.45)}
+.part .n{font-family:"DM Mono",serif;font-size:max(12px,1.25cqw);letter-spacing:.2em;color:var(--sigil)}
+.part b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.95cqw);color:var(--fog);font-weight:700;line-height:1.3;word-break:keep-all}
+.part i{font-style:normal;font-size:max(12px,1.2cqw);color:var(--faint);font-family:"DM Mono",monospace;letter-spacing:.04em}
+.part span{font-size:max(12px,1.4cqw);color:var(--dim);line-height:1.65}
+.part b .rt{display:block;text-align:right;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit}
+.part .lack{margin-top:auto;padding-top:1cqw;border-top:1px solid var(--line);font-size:max(12px,1.25cqw);color:var(--danger);line-height:1.5}
+
+/* ── 주문 비교 ── */
+.spell{border:1px solid var(--line);border-radius:2px;padding:1.7cqw 1.8cqw;display:flex;flex-direction:column;gap:1cqw;min-height:0}
+.spell.fail{border-color:rgba(212,104,94,.4);background:rgba(212,104,94,.05)}
+.spell.pass{border-color:rgba(73,101,80,.45);background:rgba(73,101,80,.06)}
+.spell .mark{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.2em}
+.spell.fail .mark{color:var(--danger)}
+.spell.pass .mark{color:var(--sigil)}
+.spell q{display:block;font-family:"Noto Serif KR",serif;font-size:max(12px,1.75cqw);line-height:1.68;color:var(--fog);quotes:"「" "」"}
+.spell .why{font-size:max(12px,1.35cqw);color:var(--dim);line-height:1.6;margin-top:auto}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw;margin-top:1.6cqw}
+.strip div{border-top:1px solid var(--line-strong);padding-top:.9cqw}
+.strip b{display:block;font-size:max(12px,1.5cqw);color:var(--glow);font-weight:500;margin-bottom:.3cqw;font-family:"Noto Serif KR",serif}
+.strip span{font-size:max(12px,1.28cqw);color:var(--dim);line-height:1.55}
+
+/* ── 인벤토리 / 흐름 ── */
+.inv{display:grid;grid-template-columns:repeat(4,1fr);gap:.9cqw}
+.inv div{border:1px solid var(--line);border-radius:2px;padding:.9cqw .8cqw;text-align:left;font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);color:var(--dim)}
+.inv div b{display:block;color:var(--fog);font-size:max(12px,1.35cqw);font-weight:500;margin-bottom:.2cqw}
+.flow{display:flex;align-items:stretch;gap:.8cqw}
+.flow div{flex:1;border:1px solid var(--line);padding:1.1cqw .9cqw;text-align:left;font-size:max(12px,1.35cqw);color:var(--fog);display:flex;flex-direction:column;justify-content:center;gap:.25cqw}
+.flow div small{color:var(--faint);font-family:"DM Mono",monospace;font-size:max(12px,1cqw);letter-spacing:.14em}
+.flow span{align-self:center;color:var(--ember);font-size:max(12px,1.4cqw)}
+
+/* ── 각인 ── */
+.runes{display:flex;flex-direction:column;gap:1.15cqw}
+.rune{display:grid;grid-template-columns:auto 1fr;gap:1.3cqw;align-items:start;border-bottom:1px solid var(--line);padding-bottom:1.05cqw}
+.rune:last-child{border-bottom:none;padding-bottom:0}
+.rune .sig{font-family:"DM Mono",serif;font-size:max(12px,1.7cqw);color:var(--sigil);line-height:1.2}
+.rune b{display:block;font-size:max(12px,1.65cqw);color:var(--fog);font-family:"Noto Serif KR",serif;margin-bottom:.2cqw}
+.rune span{font-size:max(12px,1.35cqw);color:var(--dim);line-height:1.6}
+
+/* ── 몬스터 ── */
+.boss-hp{display:flex;align-items:center;gap:1cqw;margin-bottom:.4cqw}
+.boss-hp .track{flex:1;height:1.1cqw;border:1px solid rgba(212,104,94,.5);border-radius:1px;overflow:hidden;background:rgba(0,0,0,.4)}
+.boss-hp .track i{display:block;height:100%;width:78%;background:linear-gradient(90deg,#8E3A33,var(--danger))}
+.boss-hp .n{font-family:"DM Mono",monospace;font-size:max(12px,1.2cqw);color:var(--danger);font-variant-numeric:tabular-nums}
+ul.weak{margin:0;padding:0;display:flex;flex-direction:column;gap:.95cqw}
+.weak li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:1cqw;align-items:baseline}
+.weak .k{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);color:var(--sigil);letter-spacing:.14em}
+.weak b{font-size:max(12px,1.55cqw);color:var(--fog);font-weight:500;font-family:"Noto Serif KR",serif}
+.weak em{font-style:normal;display:block;font-size:max(12px,1.3cqw);color:var(--dim);margin-top:.15cqw;line-height:1.55}
+.creed{border-left:2px solid var(--glow);padding:.9cqw 0 .9cqw 1.5cqw;font-family:"Noto Serif KR",serif;font-size:max(12px,1.9cqw);line-height:1.6;color:var(--glow)}
+.creed small{display:block;font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.2cqw);color:var(--faint);margin-top:.5cqw;letter-spacing:.05em}
+
+/* ── 로드맵 ── */
+.gained{color:var(--sigil);font-family:"DM Mono",monospace;font-size:max(12px,1.25cqw);margin-left:.6cqw}
+.road{display:flex;flex-direction:column;gap:.55cqw}
+.road div{display:grid;grid-template-columns:auto 1fr;gap:.4cqw 1.1cqw;align-items:baseline;padding-bottom:.55cqw;border-bottom:1px solid var(--line)}
+.road div:last-child{border-bottom:none}
+.road .wk{font-family:"DM Mono",monospace;font-size:max(12px,1.05cqw);letter-spacing:.12em;color:var(--faint);white-space:nowrap}
+.road b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.55cqw);color:var(--dim);font-weight:400;justify-self:start}
+.road em{font-style:normal;grid-column:2;font-size:max(12px,1.14cqw);color:var(--faint);line-height:1.5;word-break:keep-all}
+.road .now em{color:var(--dim)}
+.road .now b{color:var(--glow);font-weight:700}
+.road .now .wk{color:var(--glow)}
+
+/* ── 실습 카드 ── */
+.parts .part.now{border-color:rgba(173,85,58,.55);background:rgba(173,85,58,.07)}
+.parts .part.now .n{color:var(--glow)}
+.parts .part.later{opacity:.55}
+.part .wk{margin-top:auto;padding-top:1cqw;border-top:1px solid var(--line);font-size:max(12px,1.2cqw);letter-spacing:.06em;font-family:"DM Mono",monospace}
+.part.now .wk{color:var(--glow)}
+.part.later .wk{color:var(--faint)}
+
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;flex:0 1 auto}
+.goal{border:1px solid var(--line-strong);border-left:2px solid var(--glow);background:rgba(173,85,58,.06);
+  padding:2cqw 2.2cqw;display:flex;flex-direction:column;gap:.9cqw;text-align:left}
+.goal .n{font-family:"DM Mono",serif;font-size:max(12px,1.5cqw);letter-spacing:.2em;color:var(--glow)}
+.goal b{font-family:"Noto Serif KR",serif;font-size:max(12px,2.3cqw);color:var(--fog);font-weight:700;line-height:1.3}
+.goal span{font-size:max(12px,1.45cqw);color:var(--dim);line-height:1.7}
+.goal .t{margin-top:auto;font-family:"DM Mono",monospace;font-size:max(12px,1.2cqw);color:var(--sigil);letter-spacing:.1em}
+
+.steps{display:flex;flex-direction:column;gap:0;text-align:left}
+.step{display:grid;grid-template-columns:auto auto 1fr;gap:1.1cqw;align-items:start;
+  border-bottom:1px solid var(--line);padding:1cqw 0;cursor:pointer;background:none;border-left:0;border-right:0;border-top:0;
+  font:inherit;color:inherit;text-align:left;width:100%}
+.step:last-child{border-bottom:none}
+.step:hover .box{border-color:var(--sigil)}
+.step:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.step .box{width:1.8cqw;height:1.8cqw;border:1px solid var(--line-strong);border-radius:2px;flex:none;margin-top:.35cqw;
+  display:flex;align-items:center;justify-content:center;font-size:max(12px,1.2cqw);line-height:1;color:transparent}
+.step.done .box{border-color:var(--sigil);color:var(--sigil);background:rgba(73,101,80,.14)}
+.step .k{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);color:var(--faint);margin-top:.5cqw}
+.step b{display:block;font-family:"Noto Serif KR",serif;font-size:max(12px,1.68cqw);color:var(--fog);font-weight:700;margin-bottom:.2cqw;line-height:1.4}
+.step em{font-style:normal;display:block;font-size:max(12px,1.32cqw);color:var(--dim);line-height:1.6}
+.step.done b{color:var(--dim)}
+
+.verify{display:flex;flex-direction:column;gap:1cqw;text-align:left}
+.vrow{display:grid;grid-template-columns:auto 1fr;gap:1cqw;align-items:baseline}
+.vrow .m{font-family:"DM Mono",monospace;font-size:max(12px,1.3cqw);line-height:1.4}
+.vrow.ok .m{color:var(--sigil)}
+.vrow.no .m{color:var(--danger)}
+.vrow b{display:block;font-size:max(12px,1.5cqw);color:var(--fog);font-weight:500;font-family:"Noto Serif KR",serif;margin-bottom:.15cqw}
+.vrow em{font-style:normal;display:block;font-size:max(12px,1.3cqw);color:var(--dim);line-height:1.6}
+
+.codebox{
+  font-family:"DM Mono",monospace;font-size:max(12px,1.3cqw);line-height:1.85;color:var(--fog);
+  background:rgba(3,7,6,.55);border:1px solid var(--line);border-left:2px solid var(--sigil);
+  padding:1.5cqw 1.8cqw;margin:0;white-space:pre-wrap;overflow:auto;text-align:left;flex:1 1 auto;min-height:0;
+}
+.codebox .c{color:var(--faint);user-select:none}
+.codebox .h{color:var(--glow)}
+.codebox .u{color:var(--ember)}
+
+/* ── 펼침형 실습 단계 ── */
+.asteps{display:flex;flex-direction:column;text-align:left;overflow-y:auto;min-height:0;flex:1 1 auto}
+.astep{display:grid;grid-template-columns:auto 1fr;gap:.3cqw 1.1cqw;
+  border-bottom:1px solid var(--line);padding:.95cqw 0;align-items:start}
+.astep:last-child{border-bottom:none}
+.a-box{
+  width:1.8cqw;height:1.8cqw;border:1px solid var(--line-strong);border-radius:2px;
+  background:none;padding:0;margin-top:.5cqw;cursor:pointer;flex:none;
+  display:flex;align-items:center;justify-content:center;font-size:max(12px,1.2cqw);line-height:1;color:transparent;
+}
+.a-box:hover{border-color:var(--sigil)}
+.a-box:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.astep.done .a-box{border-color:var(--sigil);color:var(--sigil);background:rgba(73,101,80,.14)}
+.a-head{
+  font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left;
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.1cqw;align-items:baseline;width:100%;
+}
+.a-head:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+.a-head .k{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);color:var(--faint)}
+.a-head b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.68cqw);color:var(--fog);font-weight:700;line-height:1.42}
+.a-head:hover b{color:var(--glow)}
+.astep.done .a-head b{color:var(--dim)}
+.a-head .caret{font-size:max(12px,1.1cqw);color:var(--faint);transition:transform .18s}
+.astep.open .a-head .caret{transform:rotate(180deg);color:var(--sigil)}
+.a-body{grid-column:2;display:none;padding:.85cqw 0 .35cqw;flex-direction:column;gap:.8cqw}
+.astep.open .a-body{display:flex}
+.a-body .d{margin:0;font-size:max(12px,1.32cqw);color:var(--dim);line-height:1.68}
+.a-body .vrow .m{font-size:max(12px,1.2cqw)}
+.a-body .vrow b{font-size:max(12px,1.4cqw)}
+.a-body .vrow em{font-size:max(12px,1.25cqw)}
+
+.imgpanel{gap:1.2cqw}
+.imgslot{
+  flex:1 1 auto;min-height:0;border:1px dashed var(--line-strong);border-radius:2px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  background:repeating-linear-gradient(135deg, rgba(41,61,54,.03) 0 8px, transparent 8px 16px);
+}
+.imgslot span{font-family:"DM Mono",monospace;font-size:max(12px,1.25cqw);letter-spacing:.14em;color:var(--faint);line-height:2}
+.imgslot img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+
+#v7 .codebox,#v12 .codebox{font-size:max(12px,1.13cqw);line-height:1.6;padding:1.3cqw 1.5cqw}
+#v7 .codebox{font-size:max(12px,1.04cqw);line-height:1.52}
+.slide.spell-long .codebox{font-size:max(12px,.88cqw);line-height:1.42;padding:1cqw 1.3cqw}
+.slide.spell-long .panel p{font-size:max(12px,1.36cqw);line-height:1.6}
+#y8s .panel p{font-size:max(12px,1.3cqw);line-height:1.55}
+#v12 .codebox{font-size:max(12px,1.04cqw);line-height:1.52}
+#v7 .cols,#v12 .cols{grid-template-columns:1.45fr 1fr}
+#v7 .panel p,#v12 .panel p{font-size:max(12px,1.44cqw);line-height:1.66}
+.codebox .c{color:var(--faint)}
+.codebox .e{color:var(--danger);opacity:.85}
+.goal .sublabel{display:block;font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.32cqw);font-weight:400;color:var(--sigil);letter-spacing:.01em;margin-top:.4cqw}
+.bosspanel{gap:.9cqw}
+.bossbody{display:grid;grid-template-columns:auto 1fr;gap:1.6cqw;align-items:start;flex:1 1 auto;min-height:0}
+.bossart{
+  width:13cqw;height:17cqw;flex:none;
+  background:var(--boss) center/contain no-repeat;
+  filter:drop-shadow(0 0 2.2cqw rgba(168,92,222,.55));
+  animation:bossfloat 4.4s ease-in-out infinite;
+}
+@keyframes bossfloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-4%) rotate(1deg)}}
+.bosstext{display:flex;flex-direction:column;gap:.9cqw;min-width:0}
+.bosstext h3{margin:0}
+/* 스토리 장면의 몬스터 */
+.bossfoe{
+  position:absolute;left:5cqw;top:6%;width:31cqw;height:58%;
+  background:var(--boss) center/contain no-repeat;
+  filter:drop-shadow(0 1.2cqw 2.6cqw rgba(0,0,0,.6)) drop-shadow(0 0 3cqw rgba(168,92,222,.5));
+  animation:bossloom 5s ease-in-out infinite;
+  z-index:2;
+}
+@keyframes bossloom{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2.5%) scale(1.03)}}
+.veil.boss{background:
+  radial-gradient(46% 46% at 24% 42%, rgba(168,92,222,.30), transparent 70%),
+  linear-gradient(180deg, rgba(10,4,16,.62), rgba(4,2,7,.94));}
+.bossside{display:flex;align-items:flex-start}
+.bubble{
+  position:relative;align-self:stretch;
+  border:1px solid rgba(190,120,240,.5);border-radius:3px;
+  background:linear-gradient(180deg, rgba(60,26,86,.55), rgba(26,12,38,.6));
+  padding:1.1cqw 1.3cqw;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,1.42cqw);line-height:1.6;color:#754a3c;
+  word-break:keep-all;
+}
+.bubble::before,.bubble::after{
+  content:"";position:absolute;top:2.2cqw;width:0;height:0;
+  border-top:.75cqw solid transparent;border-bottom:.75cqw solid transparent;
+}
+.bubble::before{left:-1.05cqw;border-right:1.05cqw solid rgba(190,120,240,.5)}
+.bubble::after{left:-.9cqw;border-right:.9cqw solid #2A1140}
+.ix{color:var(--glow);font-family:"DM Mono",monospace;font-size:.94em}
+.spellcopy{
+  margin-left:1.1cqw;padding:.55cqw 1.05cqw;white-space:nowrap;align-self:center;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,1.32cqw);font-weight:700;letter-spacing:.04em;
+  color:var(--glow);background:rgba(173,85,58,.10);
+  border:1px solid rgba(173,85,58,.5);border-radius:2px;cursor:pointer;
+  transition:background .18s, color .18s, border-color .18s;
+}
+.spellcopy:hover{background:rgba(173,85,58,.22);color:#FFF3CE;border-color:rgba(173,85,58,.85)}
+.spellcopy:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+.spellcopy.done{color:var(--sigil);border-color:rgba(73,101,80,.8);background:rgba(73,101,80,.16)}
+/* 슬라이드 10 · 1단계는 사진 대신 설명 칸 */
+.imgslot-flow .flowgroup.whygroup{align-items:stretch;justify-content:flex-start;height:100%;text-align:left}
+/* 설명 칸일 때는 빈 슬롯처럼 보이는 점선·빗금을 끈다 */
+#v11 .imgslot:has(.whygroup.active){border-style:none;background:none;padding:0}
+#v11 .imgslot:has(.whygroup.active) span{letter-spacing:normal}
+.whybox{display:flex;flex-direction:column;gap:1.5cqw;width:100%;height:100%;text-align:left}
+.whybox p{margin:0;font-size:max(12px,1.55cqw);line-height:1.72;color:var(--dim);word-break:keep-all;text-align:left}
+.whybox p.last{margin-top:auto;color:var(--faint)}
+/* 공격 내용 패널 — 붉은 계열 */
+.panel.weakpanel{
+  border-color:rgba(212,104,94,.45);
+  background:linear-gradient(180deg,rgba(212,104,94,.13),rgba(212,104,94,.05) 46%,rgba(255,253,248,.45));
+}
+.panel.weakpanel .plabel{color:var(--danger)}
+.panel.weakpanel .weak .k{color:var(--danger)}
+.panel.weakpanel .creed{border-color:rgba(212,104,94,.4);background:rgba(212,104,94,.08);font-size:max(12px,1.75cqw)}
+.panel.weakpanel,.panel.bosspanel{overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
+ul.weak{gap:.8cqw}
+/* 주문서 복사 안내 토스트 */
+.toast{
+  position:absolute;left:50%;bottom:4cqw;transform:translateX(-50%);z-index:30;
+  display:none;align-items:center;gap:1cqw;
+  padding:1.3cqw 2.2cqw;border:1px solid var(--glow);border-radius:2px;
+  background:linear-gradient(180deg,#1A2A20,#0A120E);
+  box-shadow:0 1.4cqw 4cqw -.8cqw rgba(0,0,0,.85), inset 0 0 0 1px rgba(173,85,58,.14);
+  font-family:"Noto Serif KR",serif;font-size:max(12px,2cqw);font-weight:700;color:var(--glow);
+  white-space:nowrap;
+}
+.toast.on{display:flex;animation:toastin .25s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes toastin{from{opacity:0;transform:translateX(-50%) translateY(1.2cqw)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.toast .kbd{
+  font-family:"DM Mono",monospace;font-size:max(12px,1.5cqw);letter-spacing:.06em;
+  color:var(--night);background:var(--glow);border-radius:2px;padding:.3cqw .8cqw;
+}
+.head .sub .hl{color:var(--ember);font-weight:500}
+.ix{color:var(--glow);font-family:"DM Mono",monospace;font-size:.94em}
+.panel p .u{color:var(--ember);font-family:"DM Mono",monospace}
+.creedline{
+  display:block;margin-top:.35cqw;white-space:nowrap;
+  font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.2cqw);font-weight:400;
+  letter-spacing:.01em;color:var(--faint);
+}
+.spellback.done{margin-left:.8cqw}
+#s7b .head{align-items:flex-start;gap:1cqw}
+#s7b .head h2{white-space:nowrap;flex:0 0 auto}
+#s7b .head .sub{align-self:flex-start;margin-top:.9cqw}
+#s7b .spellcopy,#s7b .spellback.done{align-self:flex-start;margin-top:.5cqw;flex:0 0 auto}
+#s7b .head .sub{flex:1 1 auto;min-width:0}
+#s7b .spellback.done{margin-right:.2cqw}
+/* 마법 주문 배우기 — 아코디언 안의 이동 링크 */
+.spelllink{
+  align-self:flex-start;margin-top:.7cqw;padding:.5cqw .95cqw;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,1.42cqw);font-weight:700;letter-spacing:.03em;
+  color:var(--glow);background:rgba(173,85,58,.08);
+  border:1px solid rgba(173,85,58,.42);border-radius:2px;
+  cursor:pointer;transition:background .18s, color .18s, border-color .18s;
+}
+.spelllink:hover{background:rgba(173,85,58,.18);color:#FFF3CE;border-color:rgba(173,85,58,.75)}
+.spelllink:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+
+/* 주문 제조 완료 — 슬라이드 17에서 세팅 ②로 복귀 */
+.spellback{
+  margin-left:1.1cqw;padding:.55cqw 1.05cqw;white-space:nowrap;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,1.32cqw);font-weight:700;letter-spacing:.04em;
+  color:var(--sigil);background:rgba(73,101,80,.10);
+  border:1px solid rgba(73,101,80,.5);border-radius:2px;cursor:pointer;
+  transition:background .18s, color .18s, border-color .18s;
+}
+.spellback:hover{background:rgba(73,101,80,.22);color:#BDEBD8;border-color:rgba(73,101,80,.85)}
+.spellback:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+.head .sub + .spellback{margin-left:1.1cqw}
+
+.backrow{position:relative;z-index:2;margin-bottom:1.2cqw}
+.backrow .spellback{margin-left:0}
+.headside{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:.7cqw;flex:0 0 auto}
+.headbtns{display:flex;gap:.8cqw}
+.headside .sub{margin-left:0;text-align:right;white-space:nowrap}
+#v7 .head,#v12 .head{align-items:flex-start;gap:1cqw}
+#v7 .head h2,#v12 .head h2{white-space:nowrap;flex:0 0 auto}
+#v7 .spellcopy,#v12 .spellcopy,#v7 .spellback,#v12 .spellback{margin-left:0}
+.runestrip{margin-top:1.2cqw;display:flex;flex-direction:column;gap:.6cqw}
+.rlabel{font-family:"DM Mono",monospace;font-size:max(12px,1.05cqw);letter-spacing:.2em;color:var(--faint);text-transform:uppercase}
+.rrow{display:flex;gap:1.1cqw;align-items:stretch}
+.ritem{
+  flex:1 1 0;min-width:0;font:inherit;color:inherit;text-align:left;cursor:pointer;
+  border:1px solid var(--line);border-left:2px solid var(--faint);background:rgba(255,253,248,.45);
+  padding:.95cqw 1.2cqw;display:flex;flex-direction:column;gap:.55cqw;
+  transition:flex-grow .32s cubic-bezier(.2,.8,.3,1), background .2s, border-color .2s;
+}
+.ritem:hover{border-color:var(--line-strong)}
+.ritem:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.ritem.open{flex-grow:2.4}
+/* 노란 강조는 '이번 주에 하는 칸'에만. 나머지는 펼쳐도 색이 안 들어와 참고용임이 드러난다 */
+.ritem.main{border-left-color:var(--glow);background:rgba(173,85,58,.08)}
+.ritem.main .sig{color:var(--glow)}
+.ritem.ref.open{border-left-color:var(--line-strong);background:rgba(255,253,248,.72)}
+.rhead{display:flex;align-items:baseline;gap:.85cqw;white-space:nowrap}
+.ritem .sig{font-family:"DM Mono",serif;font-size:max(12px,1.2cqw);color:var(--faint);letter-spacing:.1em}
+.ritem b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.6cqw);color:var(--dim);font-weight:700}
+.ritem.main b{color:var(--fog)}
+.ritem.open b{color:var(--fog);font-size:max(12px,1.85cqw)}
+.ritem em{font-style:normal;font-size:max(12px,1.22cqw);color:var(--faint)}
+.ritem.open em{color:var(--dim)}
+.rbody{display:none;font-size:max(12px,1.24cqw);line-height:1.58;color:var(--dim);word-break:keep-all}
+.ritem.open .rbody{display:block;animation:rfade .28s ease both}
+@keyframes rfade{from{opacity:0;transform:translateY(.4cqw)}to{opacity:1;transform:translateY(0)}}
+.rbody .rwk{display:block;margin-top:.7cqw;padding-top:.55cqw;border-top:1px solid var(--line);
+  font-family:"DM Mono",monospace;font-size:max(12px,1.02cqw);letter-spacing:.06em;color:var(--faint)}
+.ritem.main .rbody .rwk{color:var(--glow)}
+#v4,.slide.today{padding-top:3.4cqw;padding-bottom:3.4cqw}
+#v4 .head,.slide.today .head{margin-bottom:1.6cqw}
+#v4 .goals,.slide.today .goals{flex:0 0 auto;gap:1.6cqw}
+#v4 .goal,.slide.today .goal{padding:1.5cqw 1.7cqw;gap:.55cqw}
+#v4 .goal b,.slide.today .goal b{font-size:max(12px,2.1cqw)}
+#v4 .goal span,.slide.today .goal span{font-size:max(12px,1.36cqw);line-height:1.6}
+#v4 .dbox,.slide.today .dbox{margin-top:1.4cqw;padding:1.5cqw 2cqw 1.3cqw}
+#v4 .dbox p,.slide.today .dbox p{font-size:max(12px,1.72cqw)}
+.runestrip{margin-top:1.3cqw;display:flex;flex-direction:column;gap:.6cqw;flex:1 1 auto;min-height:0}
+.rrow{display:flex;gap:1.1cqw;align-items:stretch;flex:1 1 auto;min-height:0}
+.ritem{overflow:hidden}
+.rbody{overflow:hidden}
+
+/* ── Mr.그럴듯 등장 인트로 — 동굴 ── */
+.monintro{
+  position:absolute;inset:0;z-index:40;display:none;overflow:hidden;
+  background:#07050B;
+}
+.slide.on .monintro{display:block}
+.slide.dr .monintro.done .mi-art{animation:none!important;opacity:1;transform:translateX(0) scaleX(.95)}
+.slide.dr .monintro.done .mi-msg{animation:none!important;opacity:1;transform:none}
+.monintro.done .mi-drops{display:none}
+.monintro.done .mi-skip{animation:none;opacity:.75}
+/* 동굴 벽과 입구 */
+.mi-cave{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(42% 52% at 50% 46%, rgba(120,52,180,.30), rgba(52,20,86,.10) 55%, rgba(0,0,0,0) 76%),
+    radial-gradient(78% 88% at 50% 50%, rgba(0,0,0,0) 30%, rgba(3,2,6,.92) 100%),
+    radial-gradient(120% 70% at 50% 108%, rgba(96,44,150,.22), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg,#0A0710 0%, #07050B 60%, #040308 100%);
+}
+/* 종유석 실루엣 */
+.mi-cave::before,.mi-cave::after{
+  content:"";position:absolute;left:0;right:0;height:22%;
+  background:repeating-linear-gradient(90deg,
+    #05040A 0 3.2cqw, rgba(0,0,0,0) 3.2cqw 4.2cqw, #05040A 4.2cqw 6.4cqw, rgba(0,0,0,0) 6.4cqw 8.1cqw);
+  -webkit-mask-image:linear-gradient(180deg,#000 22%,rgba(0,0,0,.35) 62%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 22%,rgba(0,0,0,.35) 62%,transparent 100%);
+}
+.mi-cave::before{top:0;clip-path:polygon(0 0,100% 0,100% 40%,96% 78%,92% 34%,86% 92%,80% 30%,74% 70%,68% 26%,62% 86%,55% 38%,48% 74%,42% 28%,36% 88%,30% 36%,24% 68%,18% 24%,12% 80%,6% 32%,0 62%)}
+.mi-cave::after{bottom:0;transform:scaleY(-1);clip-path:polygon(0 0,100% 0,100% 44%,95% 72%,89% 30%,83% 84%,77% 26%,70% 66%,64% 32%,57% 78%,50% 28%,44% 70%,38% 24%,31% 82%,25% 34%,19% 64%,13% 28%,7% 76%,0 40%)}
+/* 바닥 안개 */
+.mi-fog{
+  position:absolute;left:-10%;right:-10%;bottom:-6%;height:46%;
+  background:radial-gradient(60% 100% at 50% 100%, rgba(140,80,200,.26), rgba(0,0,0,0) 72%);
+  filter:blur(1.4cqw);
+  animation:mifog 9s ease-in-out infinite;
+}
+@keyframes mifog{0%,100%{transform:translateX(-2%) scaleY(1)}50%{transform:translateX(2%) scaleY(1.12)}}
+/* 떨어지는 물방울 */
+.mi-drip{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(1.5px 9px at 18% 0%, rgba(190,150,240,.5), transparent 70%),
+    radial-gradient(1.5px 7px at 43% 0%, rgba(190,150,240,.36), transparent 70%),
+    radial-gradient(1.5px 11px at 71% 0%, rgba(190,150,240,.44), transparent 70%),
+    radial-gradient(1.5px 8px at 88% 0%, rgba(190,150,240,.3), transparent 70%);
+  animation:midrip 3.2s linear infinite;
+}
+@keyframes midrip{from{transform:translateY(-12%)}to{transform:translateY(112%)}}
+
+.mi-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:4cqw;z-index:2}
+.mi-art{
+  width:26cqw;height:34cqw;flex:none;
+  background:var(--boss) center/contain no-repeat;
+  opacity:0;
+  filter:drop-shadow(0 0 3cqw rgba(168,92,222,.75));
+  animation:mirise 2.4s cubic-bezier(.2,.7,.3,1) .2s both, mifloat 3.4s ease-in-out 2.6s infinite;
+}
+@keyframes mirise{
+  0%{opacity:0;transform:translateY(16%) scale(.82);filter:blur(2.4cqw) drop-shadow(0 0 0 rgba(168,92,222,0))}
+  60%{opacity:.9;filter:blur(.5cqw) drop-shadow(0 0 3cqw rgba(168,92,222,.6))}
+  100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0) drop-shadow(0 0 3cqw rgba(168,92,222,.75))}
+}
+@keyframes mifloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5%)}}
+.mi-msg{
+  max-width:42cqw;opacity:0;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,2.5cqw);line-height:1.7;color:#754a3c;
+  text-shadow:0 0 2.4cqw rgba(168,92,222,.6);word-break:keep-all;
+  animation:mitext 1.6s ease-out 1.5s both;
+}
+.mi-msg b{color:#D9A8FF;font-weight:700}
+@keyframes mitext{from{opacity:0;transform:translateY(1.4cqw)}to{opacity:1;transform:translateY(0)}}
+.mi-skip{
+  position:absolute;bottom:4cqw;left:50%;transform:translateX(-50%);z-index:3;
+  font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.18em;color:var(--faint);
+  opacity:0;animation:miblink 2.2s ease-in-out 3s infinite;
+}
+@keyframes miblink{0%,100%{opacity:.25}50%{opacity:.9}}
+
+/* ── Mr.그럴듯 소멸 (슬라이드 12) ── */
+.bossmelt{
+  position:absolute;left:5cqw;top:6%;width:31cqw;height:58%;z-index:2;
+  background:var(--boss) center/contain no-repeat;
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 0 3cqw rgba(168,92,222,.5));
+  animation:bossmelt 3.6s cubic-bezier(.45,.02,.75,.4) .6s both;
+}
+@keyframes bossmelt{
+  0%{opacity:.95;transform:scaleY(1) scaleX(1) translateY(0);filter:blur(0) drop-shadow(0 0 3cqw rgba(168,92,222,.5))}
+  35%{opacity:.8;transform:scaleY(.82) scaleX(1.08) translateY(9%);filter:blur(.3cqw)}
+  70%{opacity:.4;transform:scaleY(.34) scaleX(1.3) translateY(28%);filter:blur(1cqw)}
+  100%{opacity:0;transform:scaleY(.06) scaleX(1.55) translateY(40%);filter:blur(2cqw)}
+}
+.hitfx{
+  position:absolute;z-index:25;pointer-events:none;white-space:nowrap;
+  font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,2.1cqw);letter-spacing:.02em;
+  animation:hitpop 1.15s cubic-bezier(.2,.9,.3,1) both;
+}
+.hitfx.skill{color:var(--sigil);text-shadow:0 0 1.8cqw rgba(73,101,80,.75)}
+.hitfx.fx-def{color:#8CC4FF;text-shadow:0 0 1.8cqw rgba(140,196,255,.7)}
+.hitfx.fx-mag{color:#CFA6FF;text-shadow:0 0 1.8cqw rgba(207,166,255,.7)}
+.hitfx.fx-acc{color:#FFD86B;text-shadow:0 0 1.8cqw rgba(255,216,107,.7)}
+.hitfx.fx-atk{color:#FF9A6B;text-shadow:0 0 1.8cqw rgba(255,154,107,.7)}
+.hitfx.fx-hp{color:#8CE8A8;text-shadow:0 0 1.8cqw rgba(140,232,168,.7)}
+.hitfx.fx-exp{color:#FFE98A;text-shadow:0 0 1.8cqw rgba(255,233,138,.75);font-size:max(12px,2.4cqw)}
+.hitfx.fx-wis{color:#A6EEFF;text-shadow:0 0 1.8cqw rgba(166,238,255,.7)}
+.hitfx.fx-skill{color:var(--sigil);text-shadow:0 0 1.8cqw rgba(73,101,80,.75)}
+.hitfx.dmg{color:#FF7B6B;text-shadow:0 0 1.8cqw rgba(255,123,107,.7);display:flex;align-items:center;gap:.55cqw}
+.hitmon{
+  width:2.6cqw;height:2.6cqw;flex:none;
+  background:var(--boss) center/contain no-repeat;
+  filter:drop-shadow(0 0 .7cqw rgba(178,102,214,.85));
+  animation:hitmonshake .42s ease-in-out 2 both;
+}
+@keyframes hitmonshake{
+  0%,100%{transform:translateX(0) rotate(0)}
+  25%{transform:translateX(-.22cqw) rotate(-7deg)}
+  75%{transform:translateX(.22cqw) rotate(7deg)}
+}
+@keyframes hitpop{
+  0%{opacity:0;transform:translate(-50%,0) scale(.7)}
+  22%{opacity:1;transform:translate(-50%,-1.4cqw) scale(1.12)}
+  55%{opacity:1;transform:translate(-50%,-2.6cqw) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-5cqw) scale(.95)}
+}
+.gatehint{
+  position:absolute;left:50%;bottom:1.1cqw;transform:translateX(-50%);z-index:12;
+  font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.12em;
+  color:var(--danger);opacity:0;pointer-events:none;
+}
+.gatehint.show{animation:ghshake 1.8s ease both}
+@keyframes ghshake{
+  0%{opacity:0} 8%{opacity:1;transform:translateX(-50%) translateX(-.5cqw)}
+  14%{transform:translateX(-50%) translateX(.5cqw)} 20%{transform:translateX(-50%) translateX(0)}
+  80%{opacity:1} 100%{opacity:0}
+}
+.boss-hp .track i{transition:width .5s cubic-bezier(.3,.8,.4,1)}
+.imgslot.filled{background:none;border-style:solid;border-color:var(--line)}
+.imgslot-flow{
+  flex-direction:column;padding:1cqw;position:relative;
+  align-items:stretch;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;
+}
+
+.imgslot-flow .flowstep{margin:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:.5cqw;flex:0 0 auto}
+.imgslot-flow .flowstep img{
+  width:100%;height:auto;max-width:100%;display:block;
+  border:1px solid var(--line);border-radius:2px;cursor:zoom-in;
+}
+/* 원본이 작은 이미지는 늘려서 뭉개지 말고, 자연 크기까지만 + 여백 */
+.imgslot-flow .flowstep img.small{width:auto;max-width:min(100%, 62%);margin:.4cqw auto}
+.imgslot-flow .flowstep figcaption{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);letter-spacing:.08em;color:var(--dim);text-align:center}
+.imgslot-flow .flowarrow{font-size:max(12px,1.4cqw);color:var(--sigil);text-align:center;flex:0 0 auto}
+.imgslot-flow .flowgroup{display:none;flex-direction:column;align-items:center;gap:.7cqw;width:100%;animation:flowfade .22s ease}
+.imgslot-flow .flowgroup.solo{justify-content:center;height:100%}
+.imgslot-flow .flowgroup.solo .flowstep img{width:100%}
+.imgslot-flow .flowgroup.active{display:flex}
+.imgslot-flow .flowempty{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.06em;color:var(--faint);text-align:center;line-height:1.9;margin:auto}
+
+/* ── 이미지 확대(라이트박스) ── */
+.lightbox{
+  position:fixed;inset:0;z-index:999;display:none;
+  align-items:center;justify-content:center;padding:4vh 4vw;
+  background:rgba(4,9,7,.92);backdrop-filter:blur(3px);cursor:zoom-out;
+}
+.lightbox.on{display:flex}
+.lightbox img{
+  max-width:80vw;max-height:80vh;width:auto;height:auto;object-fit:contain;
+  border:1px solid var(--line-strong);border-radius:3px;box-shadow:0 24px 80px rgba(0,0,0,.7);
+}
+.lightbox .lbcap{
+  position:absolute;bottom:5vh;left:50%;transform:translateX(-50%);
+  font-family:"DM Mono",monospace;font-size:13px;letter-spacing:.1em;color:var(--dim);
+}
+.lightbox .lbclose{
+  position:absolute;top:3vh;right:3vw;font-size:26px;line-height:1;color:var(--fog);
+  background:none;border:none;cursor:pointer;padding:6px 10px;
+}
+@keyframes flowfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── 조작부 ── */
+
+
+.hud{
+  width:min(97vw, calc((100dvh - 104px) * 16 / 9));
+  display:flex;align-items:center;gap:14px;
+  font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.16em;color:var(--faint);
+}
+.hud .now{color:var(--dim);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud button{font:inherit;letter-spacing:.16em;color:var(--fog);background:transparent;border:1px solid var(--line-strong);border-radius:2px;padding:6px 13px;cursor:pointer;transition:border-color .15s,color .15s}
+.hud button:hover{border-color:var(--sigil);color:var(--sigil)}
+.hud button:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.hud .count{color:var(--glow);font-variant-numeric:tabular-nums}
+.pips{display:flex;gap:3px}
+.pips i{width:11px;height:2px;background:var(--faint);opacity:.45;display:block}
+.pips i.on{background:var(--glow);opacity:1}
+
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:640px){.hud{font-size:10px;gap:9px}.hud button{padding:5px 9px}.pips{display:none}}
+
+.slide.spell-long .codebox{font-size:max(12px,1.28cqw);line-height:1.55;padding:1.1cqw 1.4cqw;overflow-y:auto;max-height:36cqw;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
+.slide.spell-long .codebox.more,.slide.spell-long .panel.more{-webkit-mask-image:linear-gradient(#000 84%,transparent 100%);mask-image:linear-gradient(#000 84%,transparent 100%)}
+.slide.spell-long .panel{max-height:36cqw;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
+.vpick .m{color:var(--glow)}
+.vpick.ok .m{color:var(--sigil)}.vpick.no .m{color:var(--danger)}
+.vpick .pk{display:inline-flex;gap:.4cqw;margin-left:.3cqw}
+.vpick .pk button{font:inherit;font-family:"Noto Serif KR",serif;font-size:max(12px,1.3cqw);line-height:1.3;padding:.1cqw .7cqw;border:1px solid var(--line-strong);background:transparent;color:var(--fog);border-radius:.4cqw;cursor:pointer}
+.vpick.ok .pk button[data-pick=ok]{border-color:var(--sigil);color:var(--sigil);background:rgba(73,101,80,.12)}
+.vpick.no .pk button[data-pick=no]{border-color:var(--danger);color:var(--danger);background:rgba(212,104,94,.12)}
+.vpick em{display:none}
+.vpick.ok em[data-for=ok],.vpick.no em[data-for=no]{display:block}
+.vpick input{display:block;width:100%;box-sizing:border-box;margin-top:.5cqw;font:inherit;font-size:max(12px,1.2cqw);padding:.45cqw .8cqw;background:rgba(0,0,0,.28);border:1px solid var(--line-strong);color:var(--fog);border-radius:.4cqw;outline:none}
+.vpick input:focus{border-color:var(--glow)}
+
+/* ── Dr.딱거기까지 ── */
+.drmon{position:absolute;left:26cqw;bottom:40%;width:27cqw;aspect-ratio:1;z-index:1;background:var(--dr) center/contain no-repeat;filter:drop-shadow(0 1.2cqw 2cqw rgba(0,0,0,.6))}
+.scene .hero{z-index:2}
+.drmon{transform-origin:100% 100%}
+.slide.on .drmon.crawl{animation:drcrawl 12s linear forwards}
+@keyframes drcrawl{0%{transform:translateX(84cqw) scaleX(.95)}6.0%{transform:translateX(75.5cqw) scaleX(1.3)}12.4%{transform:translateX(67cqw) scaleX(1.05)}20.0%{transform:translateX(67cqw) scaleX(.95)}26.0%{transform:translateX(58.5cqw) scaleX(1.3)}32.4%{transform:translateX(50cqw) scaleX(1.05)}40.0%{transform:translateX(50cqw) scaleX(.95)}46.0%{transform:translateX(42.0cqw) scaleX(1.3)}52.4%{transform:translateX(34cqw) scaleX(1.05)}60.0%{transform:translateX(34cqw) scaleX(.95)}66.0%{transform:translateX(25.5cqw) scaleX(1.3)}72.4%{transform:translateX(17cqw) scaleX(1.05)}80.0%{transform:translateX(17cqw) scaleX(.95)}86.0%{transform:translateX(8.5cqw) scaleX(1.3)}92.4%{transform:translateX(0cqw) scaleX(1.05)}100.0%{transform:translateX(0cqw) scaleX(.95)}}
+.slide.on .drmon.crawl.far{animation:drcrawlfar 14s linear forwards}
+@keyframes drcrawlfar{0%{transform:translateX(70cqw) scaleX(.95)}5.0%{transform:translateX(63.0cqw) scaleX(1.3)}10.3%{transform:translateX(56cqw) scaleX(1.05)}16.7%{transform:translateX(56cqw) scaleX(.95)}21.7%{transform:translateX(49.0cqw) scaleX(1.3)}27.0%{transform:translateX(42cqw) scaleX(1.05)}33.3%{transform:translateX(42cqw) scaleX(.95)}38.3%{transform:translateX(35.0cqw) scaleX(1.3)}43.7%{transform:translateX(28cqw) scaleX(1.05)}50.0%{transform:translateX(28cqw) scaleX(.95)}55.0%{transform:translateX(21.0cqw) scaleX(1.3)}60.3%{transform:translateX(14cqw) scaleX(1.05)}66.7%{transform:translateX(14cqw) scaleX(.95)}71.7%{transform:translateX(8.0cqw) scaleX(1.3)}77.0%{transform:translateX(2cqw) scaleX(1.05)}83.3%{transform:translateX(2cqw) scaleX(.95)}88.3%{transform:translateX(-4.0cqw) scaleX(1.3)}93.7%{transform:translateX(-10cqw) scaleX(1.05)}100.0%{transform:translateX(-10cqw) scaleX(.95)}}
+.dbox.fy{border-color:rgba(92,132,134,.42);background:linear-gradient(180deg, rgba(102,137,139,.30) 0%, rgba(70,135,205,.14) 11%, rgba(255,253,248,0) 20%), linear-gradient(180deg, rgba(255,253,248,.94), rgba(244,238,227,.94));box-shadow:inset 0 1px 0 rgba(181,202,190,.6), inset 0 0 0 1px rgba(92,132,134,.08), 0 -0.4cqw 1.6cqw -0.6cqw rgba(102,137,139,.35)}
+.dbox.fy .who{color:#A8D8FF}
+.dbox.oi{border-color:rgba(73,101,80,.42);background:linear-gradient(180deg, rgba(60,150,105,.30) 0%, rgba(30,95,65,.14) 11%, rgba(255,253,248,0) 20%), linear-gradient(180deg, rgba(255,253,248,.94), rgba(244,238,227,.94));box-shadow:inset 0 1px 0 rgba(160,230,195,.55), inset 0 0 0 1px rgba(73,101,80,.08), 0 -0.4cqw 1.6cqw -0.6cqw rgba(73,101,80,.3)}
+.dbox.oi .who{color:#9FE0C0}
+.story .dbox.fy:has(+ .dbox),.story .dbox.oi:has(+ .dbox){border-bottom-color:transparent}
+.goldglow{color:#FFE28A;font-weight:700;text-shadow:0 0 .4cqw rgba(255,226,138,.9),0 0 1.4cqw rgba(255,196,60,.7),0 0 3cqw rgba(255,170,30,.45);animation:goldpulse 2.4s ease-in-out infinite}
+@keyframes goldpulse{0%,100%{text-shadow:0 0 .4cqw rgba(255,226,138,.9),0 0 1.4cqw rgba(255,196,60,.6),0 0 3cqw rgba(255,170,30,.35)}50%{text-shadow:0 0 .6cqw #fff3c4,0 0 2cqw rgba(255,210,90,.95),0 0 4.5cqw rgba(255,180,40,.7)}}
+.dbox.dr{border-color:rgba(224,23,63,.55);background:linear-gradient(180deg, rgba(70,14,24,.94), rgba(26,6,10,.94));box-shadow:inset 0 0 0 1px rgba(224,23,63,.12)}
+.dbox.dr .who{color:#FF8A9A}
+.slide.on .drmon.back{transform-origin:0% 100%;animation:drback 11s linear .4s forwards}
+@keyframes drback{0%{transform:translateX(0) scaleX(.97)}5%{transform:translateX(1cqw) scaleX(1.14)}12%{transform:translateX(6cqw) scaleX(1.06)}18%{transform:translateX(6cqw) scaleX(.97)}24%{transform:translateX(6cqw) scaleX(.97)}30%{transform:translateX(9cqw) scaleX(1.14)}38%{transform:translateX(18cqw) scaleX(1.04)}44%{transform:translateX(18cqw) scaleX(.97)}50%{transform:translateX(18cqw) scaleX(.97)}56%{transform:translateX(23cqw) scaleX(1.14)}64%{transform:translateX(34cqw) scaleX(1.04)}70%{transform:translateX(34cqw) scaleX(.97)}76%{transform:translateX(34cqw) scaleX(.97)}82%{transform:translateX(42cqw) scaleX(1.14)}100%{transform:translateX(84cqw) scaleX(1.02)}}
+.drmon i,.slide.dr .mi-art i,.slide.dr .bossart i,.mi-drops i{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff8a9a,#e0173f 60%,#9c0a2a);box-shadow:0 0 .6cqw rgba(224,23,63,.6);opacity:0;animation:pop var(--du) ease-out var(--dl) infinite}
+@keyframes pop{0%{transform:translate(0,0) scale(.3);opacity:0}6%{opacity:1;transform:translate(calc(var(--dx)*.3),calc(var(--dy)*.45)) scale(1)}16%{transform:translate(var(--dx),var(--dy)) scale(.95);opacity:.9}26%{transform:translate(calc(var(--dx)*1.2),calc(var(--dy)*.2)) scale(.5);opacity:0}100%{transform:translate(calc(var(--dx)*1.2),calc(var(--dy)*.2)) scale(.5);opacity:0}}
+.drmon i:nth-child(1),.slide.dr .mi-art i:nth-child(1),.slide.dr .bossart i:nth-child(1),.mi-drops i:nth-child(1){left:8%;bottom:38%;width:1.3cqw;height:1.3cqw;--dx:-1.2cqw;--dy:-2.6cqw;--du:3.4s;--dl:0s}
+.drmon i:nth-child(2),.slide.dr .mi-art i:nth-child(2),.slide.dr .bossart i:nth-child(2),.mi-drops i:nth-child(2){left:91%;bottom:44%;width:1cqw;height:1cqw;--dx:1.4cqw;--dy:-2.2cqw;--du:4.2s;--dl:1.1s}
+.drmon i:nth-child(3),.slide.dr .mi-art i:nth-child(3),.slide.dr .bossart i:nth-child(3),.mi-drops i:nth-child(3){left:16%;bottom:78%;width:1.2cqw;height:1.2cqw;--dx:-1cqw;--dy:-3cqw;--du:3.8s;--dl:2.3s}
+.drmon i:nth-child(4),.slide.dr .mi-art i:nth-child(4),.slide.dr .bossart i:nth-child(4),.mi-drops i:nth-child(4){left:82%;bottom:84%;width:1.5cqw;height:1.5cqw;--dx:1.2cqw;--dy:-2.8cqw;--du:4.6s;--dl:0.6s}
+.drmon i:nth-child(5),.slide.dr .mi-art i:nth-child(5),.slide.dr .bossart i:nth-child(5),.mi-drops i:nth-child(5){left:4%;bottom:60%;width:0.9cqw;height:0.9cqw;--dx:-1.5cqw;--dy:-2cqw;--du:3.2s;--dl:1.7s}
+.drmon i:nth-child(6),.slide.dr .mi-art i:nth-child(6),.slide.dr .bossart i:nth-child(6),.mi-drops i:nth-child(6){left:95%;bottom:66%;width:1.1cqw;height:1.1cqw;--dx:1.5cqw;--dy:-2.4cqw;--du:4.0s;--dl:2.9s}
+.drmon i:nth-child(7),.slide.dr .mi-art i:nth-child(7),.slide.dr .bossart i:nth-child(7),.mi-drops i:nth-child(7){left:28%;bottom:93%;width:1.3cqw;height:1.3cqw;--dx:-0.8cqw;--dy:-3.2cqw;--du:3.6s;--dl:0.3s}
+.drmon i:nth-child(8),.slide.dr .mi-art i:nth-child(8),.slide.dr .bossart i:nth-child(8),.mi-drops i:nth-child(8){left:68%;bottom:96%;width:1cqw;height:1cqw;--dx:0.9cqw;--dy:-3cqw;--du:4.4s;--dl:2.0s}
+.slide.dr .bossart i:nth-child(1){width:0.91cqw;height:0.91cqw;--dx:-0.72cqw;--dy:-1.56cqw}
+.mi-drops i:nth-child(1){--dl:2.0s;--du:2.2s}
+.slide.dr .bossart i:nth-child(2){width:0.7cqw;height:0.7cqw;--dx:0.84cqw;--dy:-1.32cqw}
+.mi-drops i:nth-child(2){--dl:2.27s;--du:2.2s}
+.slide.dr .bossart i:nth-child(3){width:0.84cqw;height:0.84cqw;--dx:-0.6cqw;--dy:-1.7999999999999998cqw}
+.mi-drops i:nth-child(3){--dl:2.58s;--du:2.2s}
+.slide.dr .bossart i:nth-child(4){width:1.05cqw;height:1.05cqw;--dx:0.72cqw;--dy:-1.68cqw}
+.mi-drops i:nth-child(4){--dl:2.15s;--du:2.2s}
+.slide.dr .bossart i:nth-child(5){width:0.63cqw;height:0.63cqw;--dx:-0.8999999999999999cqw;--dy:-1.2cqw}
+.mi-drops i:nth-child(5){--dl:2.42s;--du:2.2s}
+.slide.dr .bossart i:nth-child(6){width:0.77cqw;height:0.77cqw;--dx:0.8999999999999999cqw;--dy:-1.44cqw}
+.mi-drops i:nth-child(6){--dl:2.73s;--du:2.2s}
+.slide.dr .bossart i:nth-child(7){width:0.91cqw;height:0.91cqw;--dx:-0.48cqw;--dy:-1.92cqw}
+.mi-drops i:nth-child(7){--dl:2.08s;--du:2.2s}
+.slide.dr .bossart i:nth-child(8){width:0.7cqw;height:0.7cqw;--dx:0.54cqw;--dy:-1.7999999999999998cqw}
+.mi-drops i:nth-child(8){--dl:2.5s;--du:2.2s}
+@media (prefers-reduced-motion:reduce){.drmon,.drmon i{animation:none!important;opacity:1}}
+
+/* ── Dr.딱거기까지 · 몬스터 UI 테마 ── */
+.slide.dr .mi-cave{background:
+    radial-gradient(42% 52% at 50% 46%, rgba(224,23,63,.22), rgba(90,20,40,.10) 55%, rgba(0,0,0,0) 76%),
+    radial-gradient(78% 88% at 50% 50%, rgba(0,0,0,0) 30%, rgba(3,4,8,.92) 100%),
+    radial-gradient(120% 70% at 50% 108%, rgba(120,170,200,.16), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg,#070A10 0%, #05070B 60%, #030408 100%)}
+.slide.dr .mi-fog{background:radial-gradient(60% 100% at 50% 100%, rgba(224,23,63,.22), rgba(0,0,0,0) 72%)}
+.slide.dr .mi-drip{background:
+    radial-gradient(1.5px 9px at 18% 0%, rgba(255,138,154,.5), transparent 70%),
+    radial-gradient(1.5px 7px at 43% 0%, rgba(255,138,154,.36), transparent 70%),
+    radial-gradient(1.5px 11px at 71% 0%, rgba(255,138,154,.44), transparent 70%),
+    radial-gradient(1.5px 8px at 88% 0%, rgba(255,138,154,.3), transparent 70%)}
+.slide.dr .mi-stage{justify-content:flex-start;padding-left:9cqw}
+.slide.dr .mi-art{position:relative;width:28cqw;height:28cqw;background:var(--dr) center/contain no-repeat;opacity:1;transform-origin:100% 100%;
+  filter:drop-shadow(0 0 3cqw rgba(224,23,63,.6));opacity:0;animation:drcrawl 12s linear 3s both, miappear .01s linear 3s forwards}
+@keyframes miappear{from{opacity:0}to{opacity:1}}
+.mi-drops{position:absolute;right:4cqw;bottom:34%;width:16cqw;height:16cqw;z-index:2;opacity:0;animation:midrops 1.6s linear 2s forwards}
+@keyframes midrops{0%{opacity:0}12%{opacity:1}75%{opacity:1}100%{opacity:0}}
+.slide.dr .mi-msg{max-width:60cqw;font-size:max(12px,2.3cqw);color:#F3D6DA;text-shadow:0 0 2.4cqw rgba(224,23,63,.55);animation:mitext 1.6s ease-out 14.6s both}
+.slide.dr .mi-msg b{color:#FF8A9A}
+.slide.dr .bossart{position:relative;background:var(--dr) center/contain no-repeat;width:15cqw;height:15cqw;filter:drop-shadow(0 0 2.2cqw rgba(224,23,63,.5));animation:drbob 5s ease-in-out infinite}
+@keyframes drbob{0%,100%{transform:translateX(0) scaleX(1)}45%{transform:translateX(0) scaleX(1)}55%{transform:translateX(.6cqw) scaleX(1.04)}70%{transform:translateX(.6cqw) scaleX(.98)}}
+.slide.dr .bubble{border-color:rgba(224,23,63,.5);background:linear-gradient(180deg, rgba(86,22,36,.55), rgba(38,12,20,.6));color:#F3D6DA}
+.slide.dr .bubble::before{border-right-color:rgba(224,23,63,.5)}
+.slide.dr .bubble::after{border-right-color:#2A1016}
+.slide.dr .boss-hp .track i{background:linear-gradient(90deg,#8E3A33,#E0173F)}
+.veil.boss.dr{background:
+  radial-gradient(46% 46% at 72% 48%, rgba(224,23,63,.22), transparent 70%),
+  linear-gradient(180deg, rgba(6,10,16,.62), rgba(3,4,8,.94))}
+
+.quiz{margin-top:.6cqw;border:1px solid var(--line-strong);border-radius:.6cqw;background:rgba(244,238,227,.55);padding:.9cqw 1.1cqw 1cqw;position:relative}
+.qz-dots{display:flex;gap:.4cqw;position:absolute;top:1cqw;right:1.1cqw}
+.qz-dots i{width:.8cqw;height:.8cqw;border-radius:50%;border:1px solid var(--line-strong);background:transparent}
+.qz-dots i.on{background:var(--glow);border-color:var(--glow)}
+.qz-dots i.ok{background:var(--sigil);border-color:var(--sigil)}
+.qz-card{display:none;animation:jin .25s ease-out}
+.qz-card.on{display:block}
+.qz-tag{font-family:"DM Mono",monospace;font-size:max(12px,.95cqw);letter-spacing:.3em;color:var(--sigil)}
+.qz-q{margin:.5cqw 0 .9cqw;font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,1.5cqw);line-height:1.55;color:var(--fog);text-align:center}
+.qz-a{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:.6cqw}
+.qz-a.stack{grid-auto-flow:row}
+.qz-a button{font:inherit;font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,1.3cqw);line-height:1.4;padding:.6cqw .8cqw;text-align:center;border:1px solid var(--line-strong);background:rgba(234,228,215,.5);color:var(--fog);border-radius:.45cqw;cursor:pointer;transition:transform .12s,border-color .12s,opacity .12s}
+.qz-a button:hover{transform:translateY(-.15cqw);border-color:var(--glow)}
+.qz-card.answered .qz-a button{opacity:.35}
+.qz-card.answered .qz-a button.on{opacity:1}
+.qz-card.answered.ok .qz-a button.on{border-color:var(--sigil);color:var(--sigil);background:rgba(73,101,80,.12)}
+.qz-card.answered.no .qz-a button.on{border-color:var(--danger);color:var(--danger);background:rgba(212,104,94,.12)}
+.qz-fb{display:none;margin-top:.8cqw;padding:.7cqw .9cqw;border-radius:.45cqw;font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.25cqw);line-height:1.65;color:var(--fog);animation:jin .25s ease-out}
+.qz-card.answered .qz-fb{display:block}
+.qz-card.ok .qz-fb{background:rgba(73,101,80,.1);border-left:.25cqw solid var(--sigil)}
+.qz-card.no .qz-fb{background:rgba(212,104,94,.1);border-left:.25cqw solid var(--danger)}
+.qz-nav{display:none;margin-top:.7cqw;text-align:right}
+.qz-card.answered .qz-nav{display:block}
+.qz-nav button{font:inherit;font-family:"Noto Sans KR",sans-serif;font-weight:500;font-size:max(12px,1.25cqw);padding:.4cqw 1cqw;border:1px solid var(--glow);background:rgba(173,85,58,.1);color:var(--glow);border-radius:.45cqw;cursor:pointer}
+.qz-card.no .qz-nav button{border-color:var(--danger);color:var(--danger);background:rgba(212,104,94,.08)}
+.qz-done{display:none;animation:jin .3s ease-out}
+.quiz.done .qz-card{display:none}
+.quiz.done .qz-done{display:block}
+.qz-stamp{display:inline-block;font-family:"DM Mono",serif;font-size:max(12px,1.3cqw);letter-spacing:.3em;color:var(--sigil);border:1px solid currentColor;padding:.2cqw .8cqw;border-radius:.3cqw;transform:rotate(-2deg)}
+.qz-done p{margin:.7cqw 0 0;font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.3cqw);line-height:1.65;color:var(--fog)}
+@keyframes jin{from{opacity:0;transform:translateY(-.4cqw)}to{opacity:1;transform:none}}
+/* ── 스크롤바: 룬 막대 — 글 칸 바깥 홈에 둔다 ── */
+.asteps,.imgslot-flow,.slide.spell-long .codebox,.slide.spell-long .panel,.panel.weakpanel,.panel.bosspanel{scrollbar-width:thin;scrollbar-color:rgba(173,85,58,.42) transparent;scrollbar-gutter:stable}
+.asteps{padding-right:1.2cqw;margin-right:-.4cqw}
+.imgslot-flow{padding-right:.9cqw}
+.slide.spell-long .codebox{padding-right:1.9cqw}
+.slide.spell-long .panel{padding-right:1.6cqw}
+.asteps::-webkit-scrollbar,.imgslot-flow::-webkit-scrollbar,.slide.spell-long .codebox::-webkit-scrollbar,.slide.spell-long .panel::-webkit-scrollbar,.panel.weakpanel::-webkit-scrollbar,.panel.bosspanel::-webkit-scrollbar{width:.6cqw;height:.6cqw}
+.asteps::-webkit-scrollbar-track,.imgslot-flow::-webkit-scrollbar-track,.slide.spell-long .codebox::-webkit-scrollbar-track,.slide.spell-long .panel::-webkit-scrollbar-track,.panel.weakpanel::-webkit-scrollbar-track,.panel.bosspanel::-webkit-scrollbar-track{background:transparent;border-left:1px solid rgba(41,61,54,.10);margin:.6cqw 0}
+.asteps::-webkit-scrollbar-thumb,.imgslot-flow::-webkit-scrollbar-thumb,.slide.spell-long .codebox::-webkit-scrollbar-thumb,.slide.spell-long .panel::-webkit-scrollbar-thumb,.panel.weakpanel::-webkit-scrollbar-thumb,.panel.bosspanel::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(173,85,58,.55),rgba(73,101,80,.45));border-radius:1cqw;border:.15cqw solid transparent;background-clip:padding-box;box-shadow:inset 0 0 0 1px rgba(173,85,58,.25)}
+.asteps::-webkit-scrollbar-thumb:hover,.imgslot-flow::-webkit-scrollbar-thumb:hover,.slide.spell-long .codebox::-webkit-scrollbar-thumb:hover,.slide.spell-long .panel::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,rgba(173,85,58,.85),rgba(73,101,80,.7));background-clip:padding-box}
+
+.a-head b{word-break:keep-all}
+.qz-q,.qz-a button{word-break:keep-all}
+</style>
+
+<style>
+/* ── 6주차 기준 맞춤: 글자 안 끊기게 · 대사 따옴표 들여쓰기 ── */
+.stage{word-break:keep-all;overflow-wrap:break-word}
+.dbox p.qhang{padding-left:var(--qw,.32em);text-indent:calc(-1 * var(--qw,.32em))}
+</style>
+
+<div class="stage" id="stage" tabindex="0" role="group" aria-label="[WEEK 5] 스스로 고치는 시종 슬라이드">
+
+  <!-- 1 -->
+  
+  <section class="slide on titlecard ice" id="y0" data-name="1 · 타이틀">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas></div>
+    <div class="tcard">
+      <small>WEEK 05 · 2막 시종을 만든다</small>
+      <h1>스스로 고치는 시종</h1>
+      <span class="place">영혼의 얼음 동굴 · 끝</span>
+    </div>
+    
+  </section>
+
+  <section class="slide story" id="y1" data-name="2 · WEEK 05 오프닝">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura"></div></div>
+    <div class="story-body">
+      <p class="direction">얼음의 금이 조금 더 벌어졌다. 지난주 표의 빈칸 자리다.</p>
+      <div class="dbox oi"><span class="who">오인턴</span>
+        <p>“2주차에 검증 세 줄 적어놨잖아. 근데 지키는지는 결국 내가 확인하네.”</p><p>“…시종이 내놓기 전에 자기가 확인하면 안 되나?”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide story" id="y2" data-name="3 · 규칙과 점검은 다르다">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo"></div><div class="fairy" style="left:13cqw;top:30%"></div></div>
+    <div class="story-body">
+      <p class="direction">페어리가 금 간 자리를 콕 찍는다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“저 세 줄은 <span style="color:var(--glow)">지켜야 할 규칙</span>이에요. 지켰는지 안 지켰는지는 안 나와요.”</p><p>“이번 주엔 저걸 <span style="color:var(--glow)">내놓기 전에 한 번 돌리는 점검</span>으로 바꿔요. 그러면 기록이 남아요.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="y3" data-gate="quest" data-name="4 · 진행해야 하는 퀘스트">
+    <div class="head">
+      <span class="chapter">QUEST BOARD</span>
+      <h2>진행해야 하는 퀘스트</h2>
+      <span class="sub">WEEK 05 / 26</span>
+    </div>
+    <div class="quests">
+      <button type="button" class="quest locked" data-msg="아직이야.
+틀린 걸 내가 매번 잡아주고 있잖아." data-btn="확인" data-tag="SYSTEM">
+        <span class="q-no">◆</span>
+        <span class="q-body"><strong>[메인] 클로드로 AI Agent 구축해서 현실로 돌아가기</strong><span>최종 목표. 시종이 아직 자기 결과를 스스로 확인하지 못한다</span></span>
+        <span class="q-diff">잠김 · LV 부족</span>
+      </button>
+      <button type="button" class="quest story" data-go="1">
+        <span class="q-no">✦</span>
+        <span class="q-body"><strong>[스토리] 스스로 다시 보게 만들기</strong><span>내놓기 전에 스스로 점검하게 하고, 그 위에 둘째 시종 ‘기획안’을 세운다 — 이번 주 진행분</span></span>
+        <span class="q-diff">진행 가능 ▶</span>
+      </button>
+      <button type="button" class="quest" data-msg="의사 선생님 말씀이 맞긴 한데… 오늘은 이미 두 잔째다.
+내일의 내가 어떻게든 해 보겠지." data-btn="포기하기" data-tag="WARNING">
+        <span class="q-no">○</span>
+        <span class="q-body"><strong>[서브] 의사선생님 말 듣고 커피 그만 마시기</strong><span>수락 175회 · 실패 175회 · 완료 0회</span></span>
+        <span class="q-diff">난이도 ★★★</span>
+      </button>
+    </div>
+    <div class="dbox fy"><span class="who">페어리</span>
+      <p>“이번 주는 시종.md에 두 줄 더하고, <span style="color:var(--glow)">새 시종 하나</span>를 들여요. 요약 위에 기획안이 서요.”</p><span class="cue">▼</span></div>
+  </section>
+
+  <section class="slide today" id="y4" data-name="5 · 오늘 할 일">
+    <div class="head">
+      <span class="chapter">TODAY</span>
+      <h2>오늘 할 일은 두 가지</h2>
+      <span class="sub">TOTAL 45 MIN + 돌발 15</span>
+    </div>
+    <div class="goals">
+      <div class="goal">
+        <span class="n">STEP 01</span>
+        <b>내놓기 전에 점검하게 한다 <span class="sublabel">- 그 점검을 내가 확인</span></b>
+        <span>‘다 됐다는 기준’에 점검 줄을 더해 시종.md를 덮어쓰고, 같은 호출로 다시 돌린다. 결과 맨 아래 <span style="color:var(--glow)">점검 기록</span>에서 고친 항목 하나를 골라 <span style="color:var(--glow)">원문에서 직접 확인</span>한다.</span>
+        <span class="t">약 20분</span>
+      </div>
+      <div class="goal">
+        <span class="n">STEP 02</span>
+        <b>둘째 시종을 들인다 <span class="sublabel">- 요약 위에 기획안</span></b>
+        <span>기획안.md를 새로 만든다. 원본은 읽지 않고 <span style="color:var(--glow)">요약 파일 하나만</span> 읽어 배경·쟁점·제안·다음 단계 네 덩어리로 쓰게 한다. 기획안의 숫자가 요약과 같은지 <span style="color:var(--glow)">점검 기록으로 대조</span>한다.</span>
+        <span class="t">약 25분</span>
+      </div>
+    </div>
+    <div class="dbox"><span class="who">준비물</span>
+      <p>지난주 표가 나온 그 대화. 규칙.md에 <span style="color:var(--glow)">검증 세 줄</span>이 그대로 있는지 먼저 확인한다.<br>오늘 나오는 기획안이 다음 주 발표자료의 뼈대가 된다.</p><span class="cue">▼</span></div>
+  </section>
+
+  <section class="slide" id="y5" data-gate="check" data-hit="dmg" data-name="6 · 실습 ① 내놓기 전에 점검하기">
+    <div class="head">
+      <span class="chapter">STEP 01</span>
+      <h2>검증을 내놓기 전에 스스로 하게 한다</h2>
+      <span class="sub">20 MIN · 제목을 누르면 펼쳐짐</span>
+    </div>
+    <div class="cols c-32">
+      <div class="panel">
+        <span class="plabel">Steps · 네모는 체크, 제목은 펼치기</span>
+        <div class="asteps">
+          <div class="astep open" data-step="1">
+            <button type="button" class="a-box" data-ck="a1" data-fxk="mag" data-fx="✦ 마력 ＋15" aria-label="1단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="true"><span class="k">01</span><b>시종.md를 5주차 버전으로 덮어쓴다 — 점검 줄 추가</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">주문서를 복사해 시종.md를 <b>ctrl+A → ctrl+V</b>로 덮어쓴다. 바뀐 건 ‘다 됐다는 기준’의 점검 줄뿐이다 — <span style="color:var(--glow)">내놓기 전에</span> 규칙.md의 검증 세 줄에 맞는지 스스로 대조하게 한다.</p><p class="d">점검 기록은 고친 항목마다 <span style="color:var(--glow)">무엇을, 무엇에서 무엇으로, 어느 파일 몇 쪽 기준으로</span> 고쳤는지 적게 한다. 전·후와 근거가 있어야 내가 다시 확인할 수 있다.</p><button type="button" class="spelllink" data-goto="y6">✦ 마법 주문 제작 — 시종.md 5주차 버전</button>
+            </div>
+          </div>
+          <div class="astep" data-step="2">
+            <button type="button" class="a-box" data-ck="a2" data-fxk="atk" data-fx="⚔ 공격 ＋20" aria-label="2단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">02</span><b>“시종.md 읽고, 정책자료 요약해줘”를 다시 친다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">호출은 지난주와 같다. 시종.md가 바뀌었으니 결과 맨 아래에 점검 기록이 붙어 나와야 한다.</p>
+            </div>
+          </div>
+          <div class="astep" data-step="3">
+            <button type="button" class="a-box" data-ck="a3" data-fxk="acc" data-fx="◎ 명중 ＋20" aria-label="3단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">03</span><b>점검 기록을 보고, 하나를 골라 원문을 연다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">위에서부터 읽지 말고 <span style="color:var(--glow)">맨 아래 점검 기록부터</span>. 판정 세 번을 차례로 통과하면 끝.</p>
+              <div class="quiz" data-quiz="y5-3">
+                <div class="qz-dots"><i></i><i></i><i></i></div>
+                <div class="qz-card on" data-q="0"><span class="qz-tag">JUDGE 1 / 3</span><p class="qz-q">결과 맨 아래에 ‘점검 기록’이 붙어 나왔나?</p><div class="qz-a"><button type="button" data-ok="1" data-fb="표보다 먼저 봐야 할 자리가 생겼다. 다음 판정으로.">있다</button><button type="button" data-fb="점검 줄이 안 들어갔거나, 시종.md를 다시 안 읽었다. 호출 앞부분 「시종.md 읽고,」를 확인하고 02번부터 다시 돌린 뒤 여기로.">없다</button></div><div class="qz-fb"></div><div class="qz-nav"></div></div>
+                <div class="qz-card" data-q="1"><span class="qz-tag">JUDGE 2 / 3</span><p class="qz-q">고친 항목마다 무엇을 / 고치기 전 → 고친 후 / 근거(파일명·쪽)가 한 줄씩 있나?</p><div class="qz-a"><button type="button" data-ok="1" data-fb="“고쳤다”가 아니라 무엇을 어떻게 고쳤는지가 남았다. 이제 그 하나를 확인하러 간다.">있다</button><button type="button" data-fb="주문서의 둘째 점검 줄이 빠졌다. 시종.md를 주문서로 다시 덮어쓰고 02번부터 다시 돌린 뒤 여기로.">개수만 있다</button><button type="button" data-ok="1" data-fb="안 돈 것과 돌았는데 고칠 게 없던 것이 구분됐다. 표에서 한 줄을 골라 다음 판정을 한다.">‘고친 항목 없음’</button></div><div class="qz-fb"></div><div class="qz-nav"></div></div>
+                <div class="qz-card" data-q="2"><span class="qz-tag">JUDGE 3 / 3</span><p class="qz-q">하나를 골라 근거 파일의 그 쪽을 열어 보니,<br>고친 후 값이 원문에 그대로 있나?</p><div class="qz-a"><button type="button" data-ok="1" data-fb="시종의 점검을 내가 한 번 점검했다. 이제 틀린 건 시종이 먼저 잡고, 나는 기록을 골라 확인만 한다.">있다</button><button type="button" data-fb="점검도 틀릴 수 있다. 그래서 이 확인을 건너뛰지 않는다. 원문 값으로 직접 고치고, 다음에 돌릴 때 같은 항목을 다시 본 뒤 여기로.">다르다</button></div><div class="qz-fb"></div><div class="qz-nav"></div></div>
+                <div class="qz-done"><span class="qz-stamp">CLEAR</span><p>검증을 시종이 먼저 하고, 나는 기록 하나만 확인했다. 이 요약 위에 둘째 시종을 세운다.</p></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel imgpanel">
+        <span class="plabel">작업 화면 예시</span>
+        <div class="imgslot filled imgslot-flow">
+          <div class="flowgroup active" data-step="1"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/51b9924e09f6292b.svg" alt="덱에서 '주문서 복사'를 누른다"><figcaption>덱에서 '주문서 복사'를 누른다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/668c0dba048c1c1a.svg" alt="정책자료 폴더의 시종.md를 연다"><figcaption>정책자료 폴더의 시종.md를 연다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/c06cf02d5c5c1a09.svg" alt="Ctrl + A로 전체를 잡는다"><figcaption>Ctrl + A로 전체를 잡는다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/0113e4201bc70869.svg" alt="Ctrl + V로 덮어쓴다. 바뀐 것을 확인하고 ctrl + s 로 저장한다."><figcaption>Ctrl + V로 덮어쓴다. 바뀐 것을 확인하고 ctrl + s 로 저장한다.</figcaption></figure></div>
+          <div class="flowgroup" data-step="2"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/7fccf9cd65786a83.svg" alt="「시종.md 읽고, 정책자료 요약해줘」 — 지난주와 같은 문장"><figcaption>「시종.md 읽고, 정책자료 요약해줘」 — 지난주와 같은 문장</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/b81250503d61ceda.svg" alt="표의 숫자·날짜·쪽수를 원문과 하나씩 대조하는 중"><figcaption>표의 숫자·날짜·쪽수를 원문과 하나씩 대조하는 중</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/0bcfe2db95a40d15.svg" alt="결과 — 고친 항목은 파일 맨 아래 ‘점검 기록’에 적혔다고 알려준다"><figcaption>결과 — 고친 항목은 파일 맨 아래 ‘점검 기록’에 적혔다고 알려준다</figcaption></figure></div>
+          <div class="flowgroup" data-step="3"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/a77effdde01b56fd.svg" alt="결과 파일 맨 아래 ‘점검 기록’ — 무엇을 / 고치기 전 → 고친 후 / 근거(파일명·쪽)"><figcaption>결과 파일 맨 아래 ‘점검 기록’ — 무엇을 / 고치기 전 → 고친 후 / 근거(파일명·쪽)</figcaption></figure></div>
+        </div>
+      </div>
+    </div>
+    <div class="gatehint" id="gh-y5">모든 단계를 체크해야 다음으로 넘어갑니다</div>
+  </section>
+
+  <section class="slide spell-long" id="y6" data-hidden="1" data-name="시종.md 5주차 버전">
+    <div class="backrow"><button type="button" class="spellback" data-goto="y5">◀ 돌아가기</button></div>
+    <div class="head">
+      <span class="chapter">TEMPLATE</span>
+      <h2>시종.md — 스스로 점검한다</h2>
+      <div class="headside">
+        <div class="headbtns">
+          <button type="button" class="spellcopy" data-copy="#y6 .codebox">⧉ 주문서 복사</button>
+          <button type="button" class="spellback done" data-goto="y5">주문 제조 완료 ▶</button>
+        </div>
+        <span class="sub">주황색이 이번 주 추가분</span>
+      </div>
+    </div>
+    <div class="cols c-32">
+      <pre class="codebox"><span class="h"># 정책자료 요약</span>
+이 폴더의 규칙.md를 먼저 읽고 따른다.
+
+<span class="h">## 할 일</span>
+1. 폴더 안 정책자료가 몇 건인지 먼저 세어 알려준다.
+   그 다음 이 폴더의 정책자료 파일을 하나씩 끝까지 읽는다.
+   (결과 폴더와 .md 파일은 제외)
+2. 파일마다 핵심요약 3줄, 쟁점 2줄을 뽑는다.
+3. 자료명 / 핵심요약 / 쟁점 / 출처(파일명·쪽) 네 열 표로 만들어
+   결과 폴더에 YYYY-MM-DD_자료요약.md로 저장한다.
+4. 표 아래에 ‘자료 간 차이’ 목록을 만든다.
+   같은 주제를 두고 자료끼리 숫자나 입장이 다른 지점을 찾아,
+   어느 자료가 무엇이라 하는지 출처와 함께 나란히 적는다.
+   어긋나는 곳이 없으면 ‘없음’이라고 적는다.
+기획안은 쓰지 않는다. 의견도 달지 않는다.
+
+<span class="h">## 다 됐다는 기준</span>
+- 결과 폴더에 자료요약.md가 생겼다.
+- 표의 모든 줄에 출처가 있다.
+<span class="u">- 내놓기 전에 표의 숫자·날짜·출처를 원문에서 다시 찾아</span>
+<span class="u">  규칙.md의 검증 세 줄에 맞는지 대조한다. 다르면 원문 쪽으로 고친다.</span>
+<span class="u">- 결과 맨 아래에 ‘점검 기록’을 만든다. 고친 항목마다</span>
+<span class="u">  무엇을 / 고치기 전 → 고친 후 / 근거(파일명·쪽)를 한 줄씩 적는다.</span>
+<span class="u">  고친 것이 없어도 ‘점검 기록: 고친 항목 없음’이라고 쓴다.</span>
+- 하나라도 안 되면 멈추고 물어본다.</pre>
+      <div class="panel">
+        <span class="plabel">잠깐, 주문 내용을 설명해줘.</span>
+        <p><span class="ix">내놓기 전에</span> — 이 네 글자가 순서를 정한다. 기준 안에 있으니 호출마다 돈다.</p><p><span class="ix">규칙.md의 검증 세 줄</span> — 2주차 규칙이 점검의 기준이다.</p><p><span class="ix">고치기 전 → 고친 후 / 근거</span> — “고쳤다”는 말만 있으면 믿을 수밖에 없다. 전·후와 쪽수가 있어야 내가 그 하나를 원문에서 다시 확인한다.</p><p><span class="ix">고친 것이 없어도</span> — 기록이 항상 남아야 “안 돌았다”와 “돌았는데 고칠 게 없었다”를 구분한다.</p><p><span style="color:var(--faint)">시종.md를 열고 ctrl+A, ctrl+V로 덮어쓴다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide story" id="y7" data-name="7 · 스스로 되돌아갔다">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo"></div><div class="fairy" style="left:12cqw;top:33%"></div></div>
+    <div class="story-body">
+      <p class="direction">시종이 내놓기 직전에 멈춘다. 금 간 자리를 스스로 다시 얼린다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“지금 보셨죠? <span style="color:var(--glow)">스스로 되돌아간 거</span>예요. 용사님이 시키지 않았는데.”</p><p>“이제 틀린 건 얘가 먼저 잡아요. 용사님은 고친 기록만 확인하면 돼요.<br>&#160;그럼 이 표 위에 <span style="color:var(--glow)">둘째 시종</span>을 세워요 — 요약을 읽고 기획안을 쓰는 애요.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="y8" data-gate="check" data-hit="dmg" data-name="8 · 실습 ② 둘째 시종 기획안.md">
+    <div class="head">
+      <span class="chapter">STEP 02</span>
+      <h2>둘째 시종을 들인다 — 기획안.md</h2>
+      <span class="sub">25 MIN · 제목을 누르면 펼쳐짐</span>
+    </div>
+    <div class="cols c-32">
+      <div class="panel">
+        <span class="plabel">Steps · 네모는 체크, 제목은 펼치기</span>
+        <div class="asteps">
+          <div class="astep open" data-step="1">
+            <button type="button" class="a-box" data-ck="b1" data-fxk="mag" data-fx="✦ 마력 ＋15" aria-label="1단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="true"><span class="k">01</span><b>폴더에 기획안.md 새 파일을 만들고 주문서를 붙인다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">시종.md는 그대로 둔다. <span style="color:var(--glow)">새 파일</span>이다. 정책자료 폴더에 기획안.md를 만들고, 주문서를 복사해 빈 파일에 <b>ctrl+V → ctrl+S</b>.</p><p class="d">왜 시종.md에 안 붙이고 새 파일인가 — 요약이 틀린 채로 기획안까지 가면 발표자료 전체가 틀린 전제 위에 선다. <span style="color:var(--glow)">중간에 내가 한 번 보는 지점</span>이 있어야 한다. 그래서 시종을 나눈다. 네 칸은 요약 시종과 똑같다.</p><button type="button" class="spelllink" data-goto="y8s">✦ 마법 주문 제작 — 기획안.md</button>
+            </div>
+          </div>
+          <div class="astep" data-step="2">
+            <button type="button" class="a-box" data-ck="b2" data-fxk="atk" data-fx="⚔ 공격 ＋20" aria-label="2단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">02</span><b>“기획안.md 읽고, 결과 폴더의 자료요약.md로 기획안 써줘”를 친다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">파일 이름은 결과 폴더에 실제로 있는 이름을 그대로 쓴다 (예: 2026-10-02_자료요약.md). 기획안 시종은 <span style="color:var(--glow)">원본을 읽지 않고 요약 하나만</span> 읽는다. 그래서 금방 끝난다.</p>
+              <div class="quiz" data-quiz="y8-2">
+                <div class="qz-dots"><i></i></div>
+                <div class="qz-card on" data-q="0"><span class="qz-tag">JUDGE 1 / 1</span><p class="qz-q">호출하고 나서 무슨 일이 일어났나?</p><div class="qz-a stack"><button type="button" data-ok="1" data-fb="열어 둔다. 다음 칸에서 안을 본다.">결과 폴더에 YYYY-MM-DD_기획안.md가 생겼다</button><button type="button" data-ok="1" data-fb="요약에 없는 걸 쓰기 전에 멈춘 것이다 — 다 됐다는 기준 마지막 줄이 작동했다. 골라 주면 이어서 쓴다. 담당자·기한처럼 요약에 없는 값은 ‘사용자 지정’으로 따로 표시된다.">주제를 뭘로 할지 물어본다</button><button type="button" data-fb="폴더가 안 붙은 대화다. 정책자료 폴더를 연결한 대화에서 다시 친 뒤 여기로.">“파일을 찾지 못했다”</button><button type="button" data-fb="할 일 1번이 안 들어갔다. 기획안.md를 주문서로 다시 덮어쓰고 다시 친 뒤 여기로.">원본 정책자료를 읽기 시작했다</button></div><div class="qz-fb"></div><div class="qz-nav"></div></div>
+                <div class="qz-done"><span class="qz-stamp">CLEAR</span><p>둘째 시종이 요약 하나만 읽고 기획안을 냈다.</p></div>
+              </div>
+
+            </div>
+          </div>
+          <div class="astep" data-step="3">
+            <button type="button" class="a-box" data-ck="b3" data-fxk="acc" data-fx="◎ 명중 ＋20" aria-label="3단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">03</span><b>기획안 아래 점검 기록의 숫자 하나를 요약에서 찾는다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">기획안을 열면 맨 아래 점검 기록에 기획안의 숫자마다 요약의 어느 항목과 같은지 적혀 있다. 요약은 STEP 01에서 원문과 맞춰 놨으니, <span style="color:var(--glow)">요약과 같으면 원문과도 같다.</span></p>
+              <div class="quiz" data-quiz="y8-3">
+                <div class="qz-dots"><i></i><i></i></div>
+                <div class="qz-card on" data-q="0"><span class="qz-tag">JUDGE 1 / 2</span><p class="qz-q">배경 / 쟁점 / 제안 / 다음 단계 네 덩어리이고, 덩어리마다 첫 줄이 결론 한 문장인가?</p><div class="qz-a"><button type="button" data-ok="1" data-fb="다음 주 발표자료의 장 제목이 이 문장 그대로다. 다음 판정으로.">그렇다</button><button type="button" data-fb="할 일 3번이 빠졌다. 기획안.md를 다시 덮어쓰고 다시 친 뒤 여기로.">아니다</button></div><div class="qz-fb"></div><div class="qz-nav"></div></div>
+                <div class="qz-card" data-q="1"><span class="qz-tag">JUDGE 2 / 2</span><p class="qz-q">점검 기록에서 숫자 하나를 골라 요약 파일을 열어 보니,<br>그 숫자가 거기 있나?</p><div class="qz-a"><button type="button" data-ok="1" data-fb="요약 → 기획안, 시종 둘이 이어졌다.">있다</button><button type="button" data-fb="지어냈다. Mr.그럴듯이다. 할 일 4번 “요약에 없는 숫자는 쓰지 않는다”가 들어갔는지 보고 다시 친 뒤 여기로.">없다</button></div><div class="qz-fb"></div><div class="qz-nav"></div></div>
+                <div class="qz-done"><span class="qz-stamp">CLEAR</span><p>2막 완료. 요약 → 기획안, 시종 둘이 이어졌다. 다음 주엔 이 기획안이 발표자료의 뼈대가 된다.</p></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel imgpanel">
+        <span class="plabel">작업 화면 예시</span>
+        <div class="imgslot filled imgslot-flow">
+          <div class="flowgroup active" data-step="1"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/920918b213523571.svg" alt="덱에서 '주문서 복사'를 누른다"><figcaption>덱에서 '주문서 복사'를 누른다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/b6bc942cc45d0938.svg" alt="파일 → 새 Markdown 탭"><figcaption>파일 → 새 Markdown 탭</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/2ab5214cdf3a8341.svg" alt="빈 탭에 Ctrl + V로 붙여 넣는다"><figcaption>빈 탭에 Ctrl + V로 붙여 넣는다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/a59a55f29a85a1e8.svg" alt="ctrl + s → ‘Markdown 파일로…’를 고르고, 정책자료 폴더에 기획안.md로 저장한다"><figcaption>ctrl + s → ‘Markdown 파일로…’를 고르고, 정책자료 폴더에 기획안.md로 저장한다</figcaption></figure></div>
+          <div class="flowgroup" data-step="2"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/e0b4052140be9d5f.svg" alt="호출 — 요약에 주제가 없어서 멈추고 물어본다 (다 됐다는 기준 마지막 줄)"><figcaption>호출 — 요약에 주제가 없어서 멈추고 물어본다 (다 됐다는 기준 마지막 줄)</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/524359511e293be8.svg" alt="담당자·기한도 요약에 없어 물어본다 — 직접 적어 준다"><figcaption>담당자·기한도 요약에 없어 물어본다 — 직접 적어 준다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/17365875b3f1095f.svg" alt="결과 — 내가 적어 준 값은 ‘사용자 지정’으로 따로 표시"><figcaption>결과 — 내가 적어 준 값은 ‘사용자 지정’으로 따로 표시</figcaption></figure></div>
+          <div class="flowgroup" data-step="3"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/0784b0cb8c8746e1.svg" alt="기획안 — 배경 / 쟁점. 첫 줄은 결론 한 문장, 괄호엔 요약의 어느 항목인지"><figcaption>기획안 — 배경 / 쟁점. 첫 줄은 결론 한 문장, 괄호엔 요약의 어느 항목인지</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/671675bc07eb3684.svg" alt="제안 / 다음 단계, 그리고 맨 아래 점검 기록"><figcaption>제안 / 다음 단계, 그리고 맨 아래 점검 기록</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/62fa611308281a0e.svg" alt="점검 기록 — 기획안 값 / 요약 값 / 일치. 요약에 없는 값은 ‘대조 불가’로 남는다"><figcaption>점검 기록 — 기획안 값 / 요약 값 / 일치. 요약에 없는 값은 ‘대조 불가’로 남는다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/d6e0bfc0acb0fa09.svg" alt="물어봤다. “이 기획안의 기대효과가 뭐야?” — 없다. 기획안.md가 정한 덩어리가 네 개뿐이라 넣지 않았다고 한다"><figcaption>물어봤다. “이 기획안의 기대효과가 뭐야?” — 없다. 기획안.md가 정한 덩어리가 네 개뿐이라 넣지 않았다고 한다</figcaption></figure></div>
+        </div>
+      </div>
+    </div>
+    <div class="gatehint" id="gh-y8">모든 단계를 체크해야 다음으로 넘어갑니다</div>
+  </section>
+  <section class="slide spell-long" id="y8s" data-hidden="1" data-name="기획안.md">
+    <div class="backrow"><button type="button" class="spellback" data-goto="y8">◀ 돌아가기</button></div>
+    <div class="head">
+      <span class="chapter">TEMPLATE</span>
+      <h2>기획안.md — 요약 위에 세운다</h2>
+      <div class="headside">
+        <div class="headbtns">
+          <button type="button" class="spellcopy" data-copy="#y8s .codebox" data-toast="<span class=&quot;kbd&quot;>새 파일</span><span>에</span><span class=&quot;kbd&quot;>Ctrl + V</span><span>로 붙이고,</span><span class=&quot;kbd&quot;>Ctrl + S</span><span>로 기획안.md로 저장하자.</span>">⧉ 주문서 복사</button>
+          <button type="button" class="spellback done" data-goto="y8">주문 제조 완료 ▶</button>
+        </div>
+        <span class="sub">새 파일 · 전부 이번 주 내용</span>
+      </div>
+    </div>
+    <div class="cols c-32">
+      <pre class="codebox"><span class="h"># 기획안</span>
+이 폴더의 규칙.md를 먼저 읽고 따른다.
+
+<span class="h">## 할 일</span>
+1. 부를 때 받은 결과 폴더의 요약 파일 한 개만 읽는다.
+   정책자료 원본은 읽지 않는다.
+2. 요약 맨 아래의 ‘점검 기록’을 먼저 본다.
+   고친 항목이 있으면 고친 후의 값을 쓴다.
+3. 기획안은 네 덩어리로 쓴다.
+   덩어리마다 첫 줄은 결론 한 문장, 그 아래 근거 세 줄 이하.
+   - 배경: 왜 지금 이 얘기를 하는가
+   - 쟁점: 무엇이 문제인가 (숫자 하나 이상)
+   - 제안: 그래서 무엇을 하자는 것인가
+   - 다음 단계: 누가 언제까지 무엇을
+4. 숫자·날짜마다 괄호 안에 요약 파일의 어느 항목에서 왔는지 적는다.
+   요약에 없는 숫자는 쓰지 않는다.
+5. 맨 아래에 ‘점검 기록’을 만든다.
+   기획안의 숫자마다 요약의 숫자와 같은지 한 줄씩 적는다.
+6. 결과 폴더에 YYYY-MM-DD_기획안.md로 저장한다.
+
+<span class="h">## 다 됐다는 기준</span>
+- 네 덩어리가 모두 있고, 덩어리마다 첫 줄이 결론 문장이다.
+- 요약에 없는 숫자가 하나도 없다.
+- 점검 기록에 기획안의 숫자가 전부 올라가 있다.
+- 요약에 없는 내용을 써야 할 것 같으면 쓰지 말고 멈춰서 물어본다.</pre>
+      <div class="panel">
+        <span class="plabel">잠깐, 주문 내용을 설명해줘.</span>
+        <p><span class="ix">요약 파일 한 개만</span> — 원본을 다시 읽으면 요약 시종이 한 점검이 헛일이 된다. 둘째 시종은 첫째의 결과만 믿는다.</p><p><span class="ix">점검 기록을 먼저</span> — 요약에서 고친 값이 있으면 그 값으로 쓴다. 오늘 STEP 01이 여기서 쓰인다.</p><p><span class="ix">첫 줄은 결론 한 문장</span> — 다음 주 발표자료의 장 제목이 이 문장 그대로다. 여기서 못 쓰면 슬라이드에서도 못 쓴다.</p><p><span class="ix">요약에 없는 숫자</span> — 기획안 시종이 Mr.그럴듯이 되는 자리. 괄호 출처가 그걸 막는다.</p><p><span style="color:var(--faint)">빈 기획안.md에 ctrl+V, ctrl+S.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide dr" id="y8a" data-name="8-1 · 돌발 — Dr.딱거기까지">
+    <div class="monintro" id="monintro">
+      <div class="mi-cave"></div>
+      <div class="mi-fog"></div>
+      <div class="mi-drip"></div>
+      <div class="mi-drops"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="mi-stage">
+        <div class="mi-art"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="mi-msg">시키신 건 배경, 쟁점, 제안, 다음 단계.<br>네 개 했습니다. 파일 밖으로는 한 글자도 안 나갑니다.<br>저는 <b>Dr.딱거기까지</b>.</div>
+      </div>
+      <div class="mi-skip">아무 키나 누르면 계속</div>
+    </div>
+  </section>
+  <section class="slide dr" id="y8a1" data-name="8-2 · 적힌 것만 하는 시종">
+    
+    <div class="head">
+      <span class="chapter">QUEST 02 · MONSTER</span>
+      <h2>Dr.딱거기까지</h2>
+      <span class="sub">적힌 것만 한다</span>
+    </div>
+    <div class="cols c-2">
+      <div class="panel bosspanel">
+        <span class="plabel">Enemy</span>
+        <div class="boss-hp"><span class="n">HP</span><span class="track"><i id="hpbar"></i></span><span class="n" id="hpnum">78%</span></div>
+        <div class="bossbody">
+          <div class="bossside">
+            <div class="bossart" role="img" aria-label="흰 가운을 입고 클립보드를 든 달팽이 박사 Dr.딱거기까지"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="bosstext">
+            <div class="bubble">기대효과요? 그런 덩어리는 없었는데요.<br>시키신 건 네 개. 딱 거기까지.</div>
+            <h3>적힌 것만 하는 시종</h3>
+            <p>하네스를 잘 채운 지금부터 나오는 몬스터다. 그럴듯의 삼촌. 규칙을 잘 지키니까 틀리지는 않는데, 안 적은 건 영원히 안 한다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel weakpanel">
+        <span class="plabel">약점 · 기획안.md에 늘릴 세 줄</span>
+        <ul class="weak">
+          <li><span class="k">01</span><div><b>목표·기대효과·대상·시간을 먼저 묻게 한다</b><em>내 목표를 모르는 시종은 요약을 다시 늘어놓을 뿐이다. 답은 기획안 맨 위에 그대로 적게 한다.</em></div></li>
+          <li><span class="k">02</span><div><b>덩어리를 다섯으로 적어 준다</b><em>배경 · 쟁점 · 제안 · 다음 단계 · 기대효과.<br>안 적은 덩어리는 안 나온다.</em></div></li>
+          <li><span class="k">03</span><div><b>기대효과는 ‘추정’이라고 적게 한다</b><em>이 줄이 없으면 기대효과 자리에서 그럴듯이 돌아온다.</em></div></li>
+        </ul>
+        <div class="creed">“안 적었으면 안 한다.<br>&#160;그러니까 뭘 적을지가 내 일이다”
+          <small>— 묻는 줄을 하네스에 넣으면, 그때부터는 시종이 먼저 묻는다</small></div>
+      </div>
+    </div>
+  </section>
+  <section class="slide story" id="y8a2" data-name="8-3 · Dr.딱거기까지 조우">
+    <div class="scene"><div class="room ice"></div><div class="veil boss dr"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura-hurt small"></div><div class="drmon crawl far"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="story-body">
+      <p class="direction">기획안을 읽던 오인턴이 멈춘다. 네 덩어리 — 그리고 끝.</p>
+      <div class="dbox oi"><span class="who">오인턴</span>
+        <p>“…잠깐. 기획안에 <span style="color:var(--danger)">기대효과가 없는데?</span> 이런 기획안으로 누굴 설득해?”</p><span class="cue">▼</span></div>
+      <div class="dbox dr"><span class="who">Dr.딱거기까지</span>
+        <p>“기대효과요? 그런 덩어리는 없었는데요.<br>&#160;시키신 건 배경, 쟁점, 제안, 다음 단계. 네 개. <span style="color:var(--danger)">딱 거기까지.</span>”</p><p>“말이 되죠. 파일에 없으니까. 저는 파일 밖으로는 한 글자도 안 나갑니다. 그게 제 ‘규칙’입니다.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+  <section class="slide story" id="y8b" data-name="8-4 · 그럴듯의 삼촌">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo small"></div><div class="drmon"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fairy" style="left:8cqw;top:22%"></div></div>
+    <div class="story-body">
+      <p class="direction">페어리가 박사와 오인턴 사이로 내려온다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“저 녀석, <span style="color:var(--danger)">Mr.그럴듯의 삼촌</span>이에요. 조카는 없는 걸 지어내고, 삼촌은 적힌 것만 해요.”</p><span class="cue">▼</span></div>
+      <div class="dbox dr"><span class="who">Dr.딱거기까지</span>
+        <p>“아, 내 귀염둥이 조카, Mr.그럴듯을 이미 만났다고요?<br>&#160;그 녀석은, 허풍떠는 말투가 참 귀엽죠.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+  <section class="slide story" id="y8b2" data-name="8-5 · 집안 내력">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo small"></div><div class="drmon"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fairy" style="left:8cqw;top:22%"></div></div>
+    <div class="story-body">
+      <p class="direction">오인턴이 지난주 숫자 세 개를 떠올린다.</p>
+      <div class="dbox oi"><span class="who">오인턴</span>
+        <p>“귀엽긴요. 지난주에 그 녀석 때문에 숫자 세 개를 다시 찾았는데요.”</p><span class="cue">▼</span></div>
+      <div class="dbox dr"><span class="who">Dr.딱거기까지</span>
+        <p>“그래서 제가 온 겁니다. 조카가 사고 친 집은 삼촌이 뒤처리를 하죠.<br>&#160;저는 지어내지 않습니다. 대신 안 적힌 건 안 합니다.<br>&#160;집안이 다 그래요 — 하나는 넘치고, 하나는 모자라고.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+  <section class="slide story" id="y8b3" data-name="8-6 · 다스리는 법은 똑같다">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo small"></div><div class="drmon"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fairy" style="left:8cqw;top:22%"></div></div>
+    <div class="story-body">
+      <p class="direction">페어리가 오인턴 귀 옆으로 바짝 붙는다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“규칙을 잘 먹일수록 박사는 더 보수적이 돼요 — 사고 안 치려고 적히지 않은 건 절대 안 하거든요.<br>&#160;다스리는 법은 똑같아요. 파일에 적는 거예요. 이번엔 <span style="color:var(--glow)">시종이 모르는 건 나한테 묻게</span> 적어요.”</p><span class="cue">▼</span></div>
+      <div class="dbox dr"><span class="who">Dr.딱거기까지</span>
+        <p>“…묻는 것도, 적혀 있어야 묻습니다.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+  
+  <section class="slide" id="y8c" data-gate="check" data-hit="dmg" data-name="9 · 실습 ③ 한 줄 늘리기">
+    <div class="head">
+      <span class="chapter">STEP 03</span>
+      <h2>시종이 먼저 묻게 만든다</h2>
+      <span class="sub">15 MIN · 제목을 누르면 펼쳐짐</span>
+    </div>
+    <div class="cols c-32">
+      <div class="panel">
+        <span class="plabel">Steps · 네모는 체크, 제목은 펼치기</span>
+        <div class="asteps">
+          <div class="astep open" data-step="1">
+            <button type="button" class="a-box" data-ck="c1" data-fxk="wis" data-fx="☽ 지혜 ＋20" aria-label="1단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="true"><span class="k">01</span><b>기획안.md를 ‘먼저 묻는’ 버전으로 덮어쓴다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">기대효과가 없는 건 시종 탓이 아니라 <span style="color:var(--glow)">목표를 모르는 채로 쓰게 한 파일 탓</span>이다. 목표 없는 기획안은 요약을 재배열한 것일 뿐이다. 주문서를 복사해 기획안.md를 <b>ctrl+A → ctrl+V</b>로 덮어쓰고 ctrl+S.</p><p class="d">늘어난 건 셋 — 쓰기 전에 <span style="color:var(--glow)">목표·기대효과·대상·시간</span>을 묻고 답 전엔 안 쓴다 / 답에 맞는 주제 후보를 내고 고르게 한다 / 다섯째 덩어리 기대효과, 근거 없으면 ‘추정’.</p><button type="button" class="spelllink" data-goto="y8cs">✦ 마법 주문 제작 — 기획안.md 먼저 묻는 버전</button>
+            </div>
+          </div>
+          <div class="astep" data-step="2">
+            <button type="button" class="a-box" data-ck="c2" data-fxk="atk" data-fx="⚔ 공격 ＋25" aria-label="2단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">02</span><b>같은 호출을 다시 치고, 시종이 먼저 묻는지 본다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">「기획안.md 읽고, 결과 폴더의 자료요약.md로 기획안 써줘」 — 아까와 같은 문장. 바뀐 건 파일뿐이다. 이번엔 시종이 쓰기 전에 <span style="color:var(--glow)">물어야</span> 한다. 답하고, 후보를 고르고, 새 기획안의 맨 위와 맨 아래 덩어리를 본다.</p>
+              <div class="quiz" data-quiz="y8c-2">
+                <div class="qz-dots"><i></i><i></i></div>
+                <div class="qz-card on" data-q="0"><span class="qz-tag">JUDGE 1 / 2</span><p class="qz-q">호출하니 시종이 먼저 뭘 했나?</p><div class="qz-a stack"><button type="button" data-ok="1" data-fb="답 전엔 안 쓰는 줄이 작동했다. 답하고 주제 후보 중 하나를 고른다.">목표·기대효과·대상·시간을 물었다</button><button type="button" data-fb="저장이 안 됐거나 덮어쓰기 전 파일을 읽었다. 기획안.md 할 일 2번이 있는지 보고 저장한 뒤 다시 친다.">묻지 않고 바로 썼다</button><button type="button" data-fb="할 일 3번이 빠졌다. 고르는 건 나다. 주문서로 다시 덮어쓰고 다시 친다.">후보 없이 주제를 하나로 정했다</button></div><div class="qz-fb"></div><div class="qz-nav"></div></div>
+                <div class="qz-card" data-q="1"><span class="qz-tag">JUDGE 2 / 2</span><p class="qz-q">고른 뒤 나온 기획안 — 맨 위에 내 답이 있고, 기대효과 덩어리는?</p><div class="qz-a stack"><button type="button" data-ok="1" data-fb="딱거기까지는 묻게 해서, 그럴듯은 추정 표시로 다스렸다. 이 기획안이 다음 주 콘티의 재료다.">있고, 근거 없는 줄에 ‘추정’이 붙어 있다</button><button type="button" data-fb="할 일 5번의 기대효과 줄이 빠졌다. 주문서로 다시 덮어쓰고 다시 친다.">기대효과가 없다</button><button type="button" data-fb="그럴듯이 돌아왔다. ‘추정’ 줄이 할 일과 기준 양쪽에 있는지 본다.">숫자가 붙은 기대효과가 나왔다</button></div><div class="qz-fb"></div><div class="qz-nav"></div></div>
+                <div class="qz-done"><span class="qz-stamp">CLEAR</span><p>시종이 모르는 건 나한테 묻게 적었고, 지어내기 쉬운 자리엔 ‘추정’을 붙였다. 2막 완료.</p></div>
+              </div>
+
+            </div>
+          </div>
+          <div class="astep" data-step="3">
+            <button type="button" class="a-box" data-ck="c3" data-fxk="wis" data-fx="☽ 지혜 ＋20" aria-label="3단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">03</span><b>새 기획안의 맨 위와 맨 아래를 본다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">맨 위 — 내가 답한 네 줄이 <span style="color:var(--glow)">답하신 그대로</span> 적혀 있는지. 맨 아래 — 점검 기록에 내가 직접 준 값(담당자·기한)이 <span style="color:var(--glow)">‘대조 불가’</span>로 따로 남았는지. 그리고 시종의 마지막 보고를 읽는다.</p>
+              <p class="d">시종이 먼저 말해 준다: 기대효과는 ‘추정’으로 소박하게 썼다, 요약에 연결 근거가 없는 둘은 사례로만 썼다, 15분에 맞되 쟁점 근거가 약하면 길어질 수 있다. <span style="color:var(--sigil)">다섯째 덩어리를 쓰게 했더니, 약한 자리를 스스로 짚는다.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel imgpanel">
+        <span class="plabel">작업 화면 예시</span>
+        <div class="imgslot filled imgslot-flow">
+          <div class="flowgroup active" data-step="1"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/26320bdb5d31d8f5.svg" alt="주문서 복사를 누른다. 폴더의 기획안.md를 열고 Ctrl + A."><figcaption>주문서 복사를 누른다. 폴더의 기획안.md를 열고 Ctrl + A.</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/db968964cbe9d359.svg" alt="Ctrl + V로 덮어쓴다. 5번이 다섯 덩어리로 바뀐 것을 확인하고 Ctrl + S로 저장한다."><figcaption>Ctrl + V로 덮어쓴다. 5번이 다섯 덩어리로 바뀐 것을 확인하고 Ctrl + S로 저장한다.</figcaption></figure></div>
+          <div class="flowgroup" data-step="2"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/581300643284001a.svg" alt="같은 호출을 다시 친다 — 이번엔 쓰기 전에 네 가지를 먼저 묻는다. 같은 이름이 있어서 _2로 저장하겠다고 한다"><figcaption>같은 호출을 다시 친다 — 이번엔 쓰기 전에 네 가지를 먼저 묻는다. 같은 이름이 있어서 _2로 저장하겠다고 한다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/3ca9352be544c3d5.svg" alt="네 가지를 내 말로 답한다. 목표 / 현실적인 기대효과 / 보고 대상 / 15분. 덮어쓰라고 하면 덮어쓴다"><figcaption>네 가지를 내 말로 답한다. 목표 / 현실적인 기대효과 / 보고 대상 / 15분. 덮어쓰라고 하면 덮어쓴다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/8c8d2fe9adce4b26.svg" alt="요약에서 목표에 맞는 주제 후보 셋을 근거 항목과 함께 낸다"><figcaption>요약에서 목표에 맞는 주제 후보 셋을 근거 항목과 함께 낸다</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/a4f2316007b3d66d.svg" alt="후보 3까지 보고 고른다. 기대효과는 근거 없으면 ‘추정’으로 적겠다고 먼저 말한다 — “2번으로 가자”"><figcaption>후보 3까지 보고 고른다. 기대효과는 근거 없으면 ‘추정’으로 적겠다고 먼저 말한다 — “2번으로 가자”</figcaption></figure></div>
+          <div class="flowgroup" data-step="3"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/7ba7041ecc99c5b7.svg" alt="시종의 마지막 보고 — 확인할 곳 네 가지를 먼저 말한다. 기대효과는 ‘추정’으로 소박하게, 연결 근거 없는 둘은 사례로만"><figcaption>시종의 마지막 보고 — 확인할 곳 네 가지를 먼저 말한다. 기대효과는 ‘추정’으로 소박하게, 연결 근거 없는 둘은 사례로만</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/6b6ab656b819e0f1.svg" alt="맨 위 — 제목은 고른 주제. 기획 조건 네 줄이 내가 답한 그대로. 배경·쟁점의 첫 줄은 결론 한 문장"><figcaption>맨 위 — 제목은 고른 주제. 기획 조건 네 줄이 내가 답한 그대로. 배경·쟁점의 첫 줄은 결론 한 문장</figcaption></figure><div class="flowarrow">▼</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/211bd150b508e184.svg" alt="맨 아래 — 점검 기록. 반영한 요약 점검 세 건, 숫자 대조 전부 일치, 내가 준 값 둘은 ‘대조 불가’"><figcaption>맨 아래 — 점검 기록. 반영한 요약 점검 세 건, 숫자 대조 전부 일치, 내가 준 값 둘은 ‘대조 불가’</figcaption></figure></div>
+        </div>
+      </div>
+    </div>
+    <div class="gatehint" id="gh-y8c">모든 단계를 체크해야 다음으로 넘어갑니다</div>
+  </section>
+  <section class="slide spell-long" id="y8cs" data-hidden="1" data-name="기획안.md 다섯 덩어리">
+    <div class="backrow"><button type="button" class="spellback" data-goto="y8c">◀ 돌아가기</button></div>
+    <div class="head">
+      <span class="chapter">TEMPLATE</span>
+      <h2>기획안.md — 먼저 묻는 버전</h2>
+      <div class="headside">
+        <div class="headbtns">
+          <button type="button" class="spellcopy" data-copy="#y8cs .codebox">⧉ 주문서 복사</button>
+          <button type="button" class="spellback done" data-goto="y8c">주문 제조 완료 ▶</button>
+        </div>
+        <span class="sub">주황색이 늘린 줄 · 기획안.md를 덮어쓴다</span>
+      </div>
+    </div>
+    <div class="cols c-32">
+      <pre class="codebox"><span class="h"># 기획안</span>
+이 폴더의 규칙.md를 먼저 읽고 따른다.
+
+<span class="h">## 할 일</span>
+1. 부를 때 받은 결과 폴더의 요약 파일 한 개만 읽는다.
+   정책자료 원본은 읽지 않는다.
+<span class="u">2. 쓰기 전에 네 가지를 묻는다. 답을 받기 전에는 쓰지 않는다.</span>
+<span class="u">   이 기획안의 목표 / 얻고 싶은 기대효과 /</span>
+<span class="u">   누구에게 보고하나 / 발표 시간은 몇 분인가</span>
+<span class="u">3. 답을 받으면 요약에서 목표에 맞는 주제 후보를 2~3개 낸다.</span>
+<span class="u">   후보마다 요약의 어느 항목이 근거인지 적고, 고르게 한다.</span>
+4. 요약 맨 아래의 ‘점검 기록’을 먼저 본다.
+   고친 항목이 있으면 고친 후의 값을 쓴다.
+5. 기획안 맨 위에 <span class="u">목표·기대효과·대상·시간을 내가 답한 그대로</span> 적고,
+   <span class="u">다섯</span> 덩어리로 쓴다.
+   덩어리마다 첫 줄은 결론 한 문장, 그 아래 근거 세 줄 이하.
+   - 배경: 왜 지금 이 얘기를 하는가
+   - 쟁점: 무엇이 문제인가 (숫자 하나 이상)
+   - 제안: 그래서 무엇을 하자는 것인가
+   - 다음 단계: 누가 언제까지 무엇을
+<span class="u">   - 기대효과: 제안이 내가 답한 기대효과를 어떻게 가져오는가.</span>
+<span class="u">     요약에 근거가 없으면 숫자 없이 쓰고 ‘추정’이라고 적는다.</span>
+6. 숫자·날짜마다 괄호 안에 요약 파일의 어느 항목에서 왔는지 적는다.
+   요약에 없는 숫자는 쓰지 않는다.
+7. 맨 아래에 ‘점검 기록’을 만든다.
+   기획안의 숫자마다 요약의 숫자와 같은지 한 줄씩 적는다.
+8. 결과 폴더에 YYYY-MM-DD_기획안.md로 저장한다. <span class="u">같은 이름이 있으면 _2를 붙인다.</span>
+
+<span class="h">## 다 됐다는 기준</span>
+<span class="u">- 묻기 전에 쓰지 않았다. 맨 위에 내가 답한 목표·기대효과·대상·시간이 있다.</span>
+- <span class="u">다섯</span> 덩어리가 모두 있고, 덩어리마다 첫 줄이 결론 문장이다.
+- 요약에 없는 숫자가 하나도 없다.
+<span class="u">- 기대효과에 근거 없는 줄은 ‘추정’이라고 적혀 있다.</span>
+- 점검 기록에 기획안의 숫자가 전부 올라가 있다.
+- 요약에 없는 내용을 써야 할 것 같으면 쓰지 말고 멈춰서 물어본다.</pre>
+      <div class="panel">
+        <span class="plabel">잠깐, 주문 내용을 설명해줘.</span>
+        <p><span class="ix">쓰기 전에 묻는다</span> — 목표·기대효과·대상·시간은 요약에 없다. 시종이 모르는 건 지어내게 두지 말고 나한테 묻게 적는다. 답 전엔 안 쓴다는 줄이 있어야 멈춘다.</p><p><span class="ix">주제 후보를 낸다</span> — 내가 목표를 말하면 시종이 요약에서 맞는 주제를 찾아 근거와 함께 내민다. 고르는 건 나다.</p><p><span class="ix">‘추정’이라고 적는다</span> — 기대효과는 시종이 지어내기 제일 쉬운 자리. 이 한 줄이 그럴듯을 막는다. 할 일과 기준 양쪽에 적어야 내놓기 전에 스스로 확인한다.</p><p><span style="color:var(--faint)">기획안.md를 열고 ctrl+A, ctrl+V, ctrl+S.</span></p>
+      </div>
+    </div>
+  </section>
+  <section class="slide story" id="y8c2" data-name="9-1 · 적힌 만큼은 정직하다">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo small"></div><div class="drmon"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fairy" style="left:8cqw;top:22%"></div></div>
+    <div class="story-body">
+      <p class="direction">새 기획안의 마지막 보고를 페어리가 읽는다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“보세요, 시종이 먼저 고백했어요. 기대효과는 추정이라고, 두 사례는 연결 근거가 없다고.<br>&#160;전에 만난 그럴듯이었으면 숫자까지 붙여서 당당하게 틀렸을 거예요.<br>&#160;박사는 적힌 만큼만 하지만, 적힌 만큼은 정직해요. 그래서 <span style="color:var(--glow)">뭘 적느냐가 내 일</span>이에요.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+  <section class="slide story" id="y8d" data-name="9-2 · 거기까지 하죠">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo small"></div><div class="drmon back"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fairy" style="left:8cqw;top:22%"></div></div>
+    <div class="story-body">
+      <p class="direction">기획안에 다섯째 덩어리가 생긴다.</p>
+      <div class="dbox dr"><span class="who">Dr.딱거기까지</span>
+        <p>“…다섯째 덩어리가 생겼네요. 그럼 거기까지 하죠.”</p><span class="cue">▼</span></div>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“<span style="color:var(--glow)">‘추정’이라고 적게 한 줄</span>이 핵심이에요. 그거 없이 기대효과를 쓰라고 하면 — 그럴듯이 돌아와요.<br>&#160;그리고 묻게 만든 줄 — 내 목표를 모르는 시종은 기획안을 못 써요. 요약을 다시 늘어놓을 뿐이죠.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+  <section class="slide" id="y10" data-name="9 · WEEK 05 결산 / WEEK 06 예고">
+    <div class="head">
+      <span class="chapter">WEEK 05 CLEAR</span>
+      <h2>시종 둘이 이어졌다</h2>
+      <span class="sub">시즌 1 · 8주 중 5주차</span>
+    </div>
+    <div class="cols c-32">
+      <div class="panel">
+        <span class="plabel">Player Status · 갱신</span>
+        <dl class="stat">
+          <dt>NAME</dt><dd>오인턴 <em>(용사)</em></dd>
+          <dt>LEVEL</dt><dd><span class="lv">5 → 6 <span class="gained">▲1</span></span></dd>
+          <dt>시종</dt><dd><span class="tag good">정책자료 요약</span><span class="tag good">자기 점검</span><span class="tag good">기획안</span></dd>
+          <dt>산출물</dt><dd><span class="tag good">자료별 표</span><span class="tag good">점검 기록</span><span class="tag good">기획안 다섯 덩어리</span></dd>
+          <dt>STATE</dt><dd><span class="tag good">요약 → 기획안 연결됨</span><span class="tag good">시종을 한 줄 늘려 봄</span><span class="tag bad">발표자료는 아직 내 손</span></dd>
+        </dl>
+        <p style="margin-top:auto">요약 시종은 혼자 돌고, 기획안 시종이 그 위에 선다. 시종이 <span style="color:var(--glow)">짚어 준 자리부터 내가 본다.</span> 그런데 이 기획안을 발표자료로 만드는 건 아직 내 손이다.</p>
+      </div>
+      <div class="panel">
+        <span class="plabel">Road Map · 시즌 1 8주</span>
+        <div class="road">
+          <div><span class="wk">1막 W1–2</span><b>장비를 갖춘다 · 완료</b><em>폴더 연결 · 규칙 파일 · 각인 · 검증</em></div>
+          <div class="now"><span class="wk">2막 W3–5</span><b>시종을 만든다 · 완료</b><em>시종 설계 · 다건 처리 · <b>스스로 고치기</b></em></div>
+          <div><span class="wk">3막 W6–8</span><b>부대를 만든다</b><em>발표 콘티 · 템플릿 · 내 자리로 옮기기</em></div>
+        </div>
+        <p style="margin-top:auto;color:var(--glow)">NEXT · [스토리] 발표 콘티를 짠다<br><span style="color:var(--dim)">이번 주 기획안을 장별로 쪼개 콘티로 만들고<br>내용 없는 빈 템플릿부터 뽑아 본다</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide story" id="y11" data-name="10 · 다음 주에 계속">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo"></div><div class="fairy" style="left:11cqw;top:32%"></div></div>
+    <div class="story-body">
+      <p class="direction">동굴 끝. 얼음 벽 너머로 초록 빛이 새어 들어온다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“요약도, 기획안도 나왔어요. 그런데 <span style="color:var(--glow)">발표자료는 누가 만들죠?</span>”</p><p>“…저 너머예요. <span class="goldglow">수확의 숲</span>에서 발표자료를 만들어요.”</p><p>TO BE CONTINUED · WEEK 06</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <!-- 엔딩 -->
+  <section class="slide" id="y12" data-name="11 · 엔딩">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas></div>
+    <div class="endcard">
+      <div class="tbc">To be continued...</div>
+      <div class="wk">WEEK 06</div>
+      <div class="when">매주 금요일 오전 업로드</div>
+    </div>
+    
+  </section>
+
+
+
+  <!-- 시스템 창 -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="이미지 확대 보기">
+    <button type="button" class="lbclose" id="lbclose" aria-label="닫기">✕</button>
+    <img id="lbimg" src="" alt="">
+    <span class="lbcap" id="lbcap"></span>
+  </div>
+
+  <div class="toast" id="toast"><span class="kbd">Ctrl + A</span><span>로 파일 전체를 잡고,</span><span class="kbd">Ctrl + V</span><span>로 덮어 쓰자.</span></div>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalText">
+      <span class="modal-tag" id="modalTag">SYSTEM</span>
+      <p class="modal-text" id="modalText"></p>
+      <button type="button" class="modal-btn" id="modalBtn">확인</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="hud">
+  <button type="button" id="prev">◀ PREV</button>
+  <button type="button" id="next">NEXT ▶</button>
+  <span class="count"><span id="cur">1</span> / <span id="tot">15</span></span>
+  <span class="pips" id="pips" aria-hidden="true"></span>
+  <span class="now" id="now">1 · WEEK 02 오프닝</span>
+  <span>← → 또는 화면 클릭</span>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  window.Journey = { go: show, step: step, sync: typeof syncHp === "function" ? syncHp : function(){} };
+  var i = 0;
+  var cur = document.getElementById('cur');
+  var tot = document.getElementById('tot');
+  var now = document.getElementById('now');
+  var pips = document.getElementById('pips');
+  var modal = document.getElementById('modal');
+  var modalText = document.getElementById('modalText');
+  var modalTag = document.getElementById('modalTag');
+  var modalBtn = document.getElementById('modalBtn');
+
+  /* ── 체크 = 공격 / 강화 연출 ── */
+  var HP_MAX = 78, HP_MIN = 6;
+  function syncHp(){
+    var bar = document.getElementById('hpbar'), num = document.getElementById('hpnum');
+    if(!bar || !num) return;
+    var sl = document.getElementById('y8c');
+    var boxes = sl ? sl.querySelectorAll('.a-box') : [];
+    var done = 0;
+    Array.prototype.forEach.call(boxes, function(b){
+      if(b.parentNode.classList.contains('done')) done++;
+    });
+    var total = boxes.length || 1;
+    var hp = Math.round(HP_MAX - (HP_MAX - HP_MIN) * (done / total));
+    bar.style.width = hp + '%';
+    num.textContent = hp + '%';
+  }
+  function hitFx(el){
+    var sl = el.closest ? el.closest('.slide') : null;
+    if(!sl) sl = slides[i];
+    if(!sl) return;
+    var type = sl.getAttribute('data-hit');
+    var own = el.getAttribute && el.getAttribute('data-fx');
+    if(!type && !own) return;
+    var fx = document.createElement('div');
+    fx.className = 'hitfx ' + (type === 'dmg' ? 'dmg' : 'skill');
+    if(own){
+      fx.className = 'hitfx fx-' + (el.getAttribute('data-fxk') || 'skill');
+      fx.textContent = own;
+    } else if(type === 'dmg'){
+      var sp = document.createElement('span');
+      sp.className = 'hitmon';
+      fx.appendChild(sp);
+      fx.appendChild(document.createTextNode('\u2694 \u2212 12 HP'));
+    } else {
+      fx.textContent = '\u2694 각인 \uFF0B10';
+    }
+    var r = el.getBoundingClientRect(), pr = sl.getBoundingClientRect();
+    var x = r.left - pr.left + r.width / 2;
+    var pad = 90;
+    if(x < pad) x = pad;
+    if(x > pr.width - pad) x = pr.width - pad;
+    fx.style.left = x + 'px';
+    fx.style.top = (r.top - pr.top - 10) + 'px';
+    sl.appendChild(fx);
+    setTimeout(function(){ fx.remove(); }, 1200);
+  }
+
+  /* ── 몬스터 등장 인트로: 슬라이드 진입 시 재생, 아무 입력으로 건너뜀 ── */
+  var monintro = document.getElementById('monintro');
+  var monTimer = null;
+  function introPlaying(){ return !!(monintro && monintro.classList.contains('play') && !monintro.classList.contains('done')); }
+  function skipIntro(){
+    if(!monintro) return;
+    monintro.classList.remove('play'); monintro.classList.remove('done');
+    if(monTimer){ clearTimeout(monTimer); monTimer = null; }
+  }
+  var introAt = 0;
+  /* 3초 뒤부터: 첫 입력은 기어오기를 끝내고 대사를 띄운다. 대사가 떠 있으면 입력은 다음 장으로 */
+  function trySkip(){ if(Date.now() - introAt < 3000) return; monintro.classList.add('done'); }
+  function playIntro(){
+    if(!monintro) return;
+    introAt = Date.now();
+    monintro.classList.remove('play'); monintro.classList.remove('done');
+    void monintro.offsetWidth;
+    monintro.classList.add('play');
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) monintro.classList.add('done');
+  }
+  if(monintro){
+    monintro.addEventListener('click', function(e){ if(introPlaying()){ e.stopPropagation(); trySkip(); } });
+    var miMsg = monintro.querySelector('.mi-msg');
+    if(miMsg) miMsg.addEventListener('animationend', function(){ monintro.classList.add('done'); });
+  }
+
+  /* 숨김 슬라이드: 버튼으로만 들어가고 순서/카운트에서 빠진다 */
+  function isHidden(s){ return !!(s && s.getAttribute('data-hidden')); }
+  var flow = slides.filter(function(s){ return !isHidden(s); });
+
+  flow.forEach(function(_, n){
+    var p = document.createElement('i');
+    if(n === 0) p.className = 'on';
+    pips.appendChild(p);
+  });
+  var pipEls = Array.prototype.slice.call(pips.children);
+  tot.textContent = String(flow.length);
+
+  var lastFlowIdx = 0;
+  function show(n){
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function(s, k){ s.classList.toggle('on', k === i); });
+    if(!isHidden(slides[i])) lastFlowIdx = flow.indexOf(slides[i]);
+    pipEls.forEach(function(p, k){ p.classList.toggle('on', k <= lastFlowIdx); });
+    cur.textContent = String(lastFlowIdx + 1);
+    now.textContent = slides[i].dataset.name;
+    skipIntro();
+    if(slides[i].id === 'y8a') playIntro();
+  }
+
+  function checklistDone(sl){
+    if(!sl || sl.getAttribute('data-gate') !== 'check') return true;
+    var boxes = sl.querySelectorAll('.a-box');
+    if(!boxes.length) return true;
+    for(var n = 0; n < boxes.length; n++){
+      if(!boxes[n].parentNode.classList.contains('done')) return false;
+    }
+    return true;
+  }
+  function nudgeGate(){
+    var gh = document.getElementById('gh-' + slides[i].id);
+    if(!gh) return;
+    gh.classList.remove('show'); void gh.offsetWidth; gh.classList.add('show');
+  }
+
+  /* 퀘스트 보드: [스토리] 퀘스트를 눌러야만 앞으로 간다 */
+  function questLocked(){
+    var sl = slides[i];
+    return !!(sl && sl.getAttribute('data-gate') === 'quest' && !sl.classList.contains('gate-open'));
+  }
+
+  function step(dir){
+    if(isHidden(slides[i])) return;
+    if(dir > 0 && questLocked()) return;
+    if(dir > 0 && !checklistDone(slides[i])){ nudgeGate(); return; }
+    var n = i + dir;
+    while(n >= 0 && n < slides.length && isHidden(slides[n])) n += dir;
+    if(n < 0 || n >= slides.length) return;
+    show(n);
+  }
+
+  var modalOpen = false;
+  function openModal(msg, btn, tag){
+    modalText.textContent = msg;
+    modalBtn.textContent = btn || '확인';
+    modalTag.textContent = tag || 'SYSTEM';
+    modal.hidden = false; modalOpen = true;
+    modalBtn.focus();
+  }
+  function closeModal(){ modal.hidden = true; modalOpen = false; }
+  modalBtn.addEventListener('click', function(e){ e.stopPropagation(); closeModal(); });
+  modal.addEventListener('click', function(e){ e.stopPropagation(); closeModal(); });
+
+  var CK = 'journey-week05';
+  var ckState = {};
+  try{ ckState = JSON.parse(localStorage.getItem(CK) || '{}') || {}; }catch(err){ ckState = {}; }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-ck]'), function(el){
+    var key = el.dataset.ck;
+    var row = el.classList.contains('step') ? el : el.parentNode;
+    if(ckState[key]) row.classList.add('done');
+    el.setAttribute('aria-pressed', ckState[key] ? 'true' : 'false');
+    el.addEventListener('click', function(e){
+      e.stopPropagation();
+      var on = row.classList.toggle('done');
+      el.setAttribute('aria-pressed', on ? 'true' : 'false');
+      ckState[key] = on;
+      try{ localStorage.setItem(CK, JSON.stringify(ckState)); }catch(err){}
+      if(on) hitFx(el);
+      syncHp();
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.a-head'), function(h){
+    h.addEventListener('click', function(e){
+      e.stopPropagation();
+      var st = h.parentNode;
+      var wasOpen = st.classList.contains('open');
+      Array.prototype.forEach.call(st.parentNode.children, function(sib){
+        sib.classList.remove('open');
+        var hd = sib.querySelector('.a-head');
+        if(hd) hd.setAttribute('aria-expanded', 'false');
+      });
+      if(!wasOpen){ st.classList.add('open'); h.setAttribute('aria-expanded', 'true'); syncFlow(st); }
+    });
+  });
+
+  /* 단계 ↔ 작업 화면 연동 */
+  function syncFlow(st){
+    var sl = st.closest ? st.closest('.slide') : null;
+    if(!sl) return;
+    var n = st.getAttribute('data-step');
+    var groups = sl.querySelectorAll('.flowgroup');
+    Array.prototype.forEach.call(groups, function(g){
+      g.classList.toggle('active', g.getAttribute('data-step') === n);
+    });
+    var slot = sl.querySelector('.imgslot-flow');
+    if(slot) slot.scrollTop = 0;
+    /* 1단계는 설명 칸이라 라벨이 다르다 */
+    var pl = document.getElementById('pl-v11');
+    if(pl && sl.id === 'v11') pl.textContent = (n === '1') ? '왜 이게 마지막 칸인가' : '작업 화면 예시';
+  }
+
+  /* 이미지 확대 */
+  var lb = document.getElementById('lightbox');
+  var lbOpen = false;
+  function openLightbox(src, cap, alt){
+    if(!lb) return;
+    document.getElementById('lbimg').src = src;
+    document.getElementById('lbimg').alt = alt || '';
+    document.getElementById('lbcap').textContent = cap || '';
+    lb.classList.add('on'); lbOpen = true;
+  }
+  function closeLightbox(){ if(lb){ lb.classList.remove('on'); lbOpen = false; } }
+  if(lb){
+    lb.addEventListener('click', function(e){ e.stopPropagation(); closeLightbox(); });
+    var lbc = document.getElementById('lbclose');
+    if(lbc) lbc.addEventListener('click', function(e){ e.stopPropagation(); closeLightbox(); });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.imgslot-flow img'), function(im){
+    im.addEventListener('click', function(e){
+      e.stopPropagation();
+      var fig = im.closest ? im.closest('figure') : null;
+      var cap = fig ? fig.querySelector('figcaption') : null;
+      openLightbox(im.src, cap ? cap.textContent : '', im.alt);
+    });
+  });
+
+  /* 각인 3종 — 선택한 칸만 펼쳐진다 */
+  Array.prototype.forEach.call(document.querySelectorAll('.ritem'), function(r){
+    r.addEventListener('click', function(e){
+      e.stopPropagation();
+      Array.prototype.forEach.call(r.parentNode.children, function(x){ x.classList.remove('open'); });
+      r.classList.add('open');
+    });
+  });
+
+  /* 슬라이드 이동 버튼 */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-goto]'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var id = btn.getAttribute('data-goto');
+      for(var n = 0; n < slides.length; n++){
+        if(slides[n].id === id){ show(n); return; }
+      }
+    });
+  });
+
+  /* 주문서 복사 */
+  (function(){
+    var toast = document.getElementById('toast');
+    var toastTimer = null;
+    var toastDefault = toast ? toast.innerHTML : '';
+    function showToast(html, ms){
+      if(!toast) return;
+      toast.innerHTML = html || toastDefault;
+      toast.classList.add('on');
+      if(toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function(){ toast.classList.remove('on'); }, parseInt(ms,10) || 10000);
+    }
+    function fallback(text){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly','');
+      ta.style.position='fixed'; ta.style.top='-1000px'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, ta.value.length);
+      var ok = false;
+      try{ ok = document.execCommand('copy'); }catch(err){ ok = false; }
+      document.body.removeChild(ta); return ok;
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('.spellcopy'), function(btn){
+      var box = document.querySelector(btn.dataset.copy);
+      if(!box){ btn.style.display='none'; return; }
+      var label = btn.textContent;
+      function flash(msg, ok){
+        btn.textContent = msg;
+        btn.classList.toggle('done', !!ok);
+        setTimeout(function(){ btn.textContent = label; btn.classList.remove('done'); }, 1800);
+        if(ok) showToast(btn.dataset.toast, btn.dataset.toastms);
+      }
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var clone = box.cloneNode(true);
+        Array.prototype.forEach.call(clone.querySelectorAll('.c'), function(n){ n.remove(); });
+        clone.style.position='fixed'; clone.style.left='-9999px';
+        document.body.appendChild(clone);
+        var text = clone.innerText.replace(/\u00a0/g,' ').replace(/[ \t]+$/gm,'');
+        document.body.removeChild(clone);
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text).then(function(){ flash('\u2713 복사됐어', true); })
+            .catch(function(){ var ok=fallback(text); flash(ok?'\u2713 복사됐어':'직접 드래그해서 복사해줘', ok); });
+        } else { var ok=fallback(text); flash(ok?'\u2713 복사됐어':'직접 드래그해서 복사해줘', ok); }
+      });
+    });
+  })();
+
+  Array.prototype.forEach.call(document.querySelectorAll('.quest'), function(q){
+    q.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(q.dataset.go){
+        var host = q.closest('.slide');
+        if(host) host.classList.add('gate-open');
+        step(1);
+        return;
+      }
+      openModal(q.dataset.msg, q.dataset.btn, q.dataset.tag);
+    });
+  });
+
+  document.getElementById('next').addEventListener('click', function(e){ e.stopPropagation(); if(!modalOpen) step(1); });
+  document.getElementById('prev').addEventListener('click', function(e){ e.stopPropagation(); if(!modalOpen) step(-1); });
+  document.getElementById('stage').addEventListener('click', function(){
+    if(modalOpen){ closeModal(); return; }
+    if(lbOpen){ closeLightbox(); return; }
+    if(introPlaying()){ trySkip(); return; }
+    step(1);
+  });
+  document.addEventListener('keydown', function(e){
+    if(lbOpen){ e.preventDefault(); closeLightbox(); return; }
+    if(introPlaying()){ e.preventDefault(); trySkip(); return; }
+    if(modalOpen){
+      if(e.key === 'Escape' || e.key === 'Enter' || e.key === ' '){ e.preventDefault(); closeModal(); }
+      return;
+    }
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); step(1); }
+    else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); step(-1); }
+    else if(e.key === 'Home'){ show(0); }
+    else if(e.key === 'End'){ show(slides.length - 1); }
+  });
+
+  /* ── 장소 입자: 얼음 동굴(눈) · 빛의 숲(포자) — 보이는 슬라이드만 그린다 ── */
+  (function(){
+    var cvs = Array.prototype.slice.call(document.querySelectorAll('canvas.fx'));
+    if(!cvs.length) return;
+    var reduceFx = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sd = 20260921;
+    function r(){ sd = (sd * 1664525 + 1013904223) % 4294967296; return sd / 4294967296; }
+    cvs.forEach(function(cv){
+      var theme = cv.getAttribute('data-theme') || 'ice';
+      var ctx = cv.getContext('2d');
+      var n = theme === 'ice' ? 70 : 54;
+      var ps = [];
+      for(var i = 0; i < n; i++){
+        ps.push({ x: r(), y: r(), r: theme === 'ice' ? (0.5 + r() * 1.6) : (0.7 + r() * 2.2),
+                  s: 0.05 + r() * 0.18, p: r() * 6.28, a: 0.25 + r() * 0.6, k: r() });
+      }
+      function size(){
+        var dpr = Math.min(window.devicePixelRatio || 1, 2), w = cv.clientWidth, h = cv.clientHeight;
+        if(!w || !h) return; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+      }
+      function draw(t){
+        var w = cv.clientWidth, h = cv.clientHeight; if(!w || !h) return;
+        ctx.clearRect(0,0,w,h);
+        var tt = reduceFx ? 0 : t / 1000;
+        ps.forEach(function(P){
+          var x, y, col, al;
+          if(theme === 'ice'){
+            y = (P.y + tt * P.s * 0.05) % 1;
+            x = P.x + Math.sin(tt * 0.35 + P.p) * 0.010;
+            al = P.a * (0.55 + 0.45 * Math.sin(tt * 1.1 + P.p));
+            col = P.k > 0.8 ? '190,235,255' : '225,243,255';
+          } else {
+            y = (P.y - tt * P.s * 0.04) % 1; if(y < 0) y += 1;
+            x = P.x + Math.sin(tt * 0.5 + P.p) * 0.018;
+            al = P.a * (0.45 + 0.55 * Math.sin(tt * 0.9 + P.p));
+            col = P.k > 0.75 ? '242,225,164' : '140,240,190';
+          }
+          ctx.beginPath();
+          ctx.arc(x * w, y * h, P.r * (w / 1200) * 1.4 + 0.5, 0, 6.2832);
+          ctx.fillStyle = 'rgba(' + col + ',' + al.toFixed(3) + ')';
+          ctx.fill();
+          if(theme === 'grove' && P.k > 0.75){
+            ctx.beginPath(); ctx.arc(x * w, y * h, P.r * (w / 1200) * 4, 0, 6.2832);
+            ctx.fillStyle = 'rgba(' + col + ',' + (al * 0.12).toFixed(3) + ')'; ctx.fill();
+          }
+        });
+      }
+      function visible(){ var s = cv.closest('.slide'); return s && s.classList.contains('on'); }
+      function loop(t){ if(visible()) draw(t); requestAnimationFrame(loop); }
+      size(); draw(0);
+      if(!reduceFx) requestAnimationFrame(loop);
+      window.addEventListener('resize', function(){ size(); draw(performance.now()); });
+      if(window.ResizeObserver){ new ResizeObserver(function(){ size(); draw(performance.now()); }).observe(cv); }
+    });
+  })();
+
+  /* ── 프롤로그 캔버스: 신탁의 빛과 알갱이 ── */
+  var cv = document.getElementById('forest');
+  if(!cv){ show(0); return; }
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seed = 20260902;
+  function rnd(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+
+  var motes = [];
+  for(var m = 0; m < 46; m++){
+    motes.push({ x: rnd(), y: rnd(), r: 0.6 + rnd() * 1.9, s: 0.12 + rnd() * 0.4, p: rnd() * 6.28, a: 0.25 + rnd() * 0.55 });
+  }
+
+  function size(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = cv.clientWidth, h = cv.clientHeight;
+    if(!w || !h) return;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function draw(t){
+    var w = cv.clientWidth, h = cv.clientHeight;
+    if(!w || !h) return;
+    ctx.clearRect(0, 0, w, h);
+
+    var pulse = reduce ? 0.82 : 0.72 + Math.sin(t / 1450) * 0.16 + Math.sin(t / 430) * 0.05;
+    var beam = ctx.createRadialGradient(w * 0.47, h * 0.30, 0, w * 0.47, h * 0.30, h * 0.72);
+    beam.addColorStop(0, 'rgba(246,231,178,' + (0.22 * pulse).toFixed(3) + ')');
+    beam.addColorStop(0.35, 'rgba(242,225,164,' + (0.07 * pulse).toFixed(3) + ')');
+    beam.addColorStop(1, 'rgba(242,225,164,0)');
+    ctx.fillStyle = beam; ctx.fillRect(0, 0, w, h);
+
+    var flick = reduce ? 1 : 0.85 + Math.sin(t / 610) * 0.09 + Math.sin(t / 193) * 0.06;
+    var halo = ctx.createRadialGradient(w * 0.415, h * 0.545, 0, w * 0.415, h * 0.545, w * 0.10);
+    halo.addColorStop(0, 'rgba(250,222,150,' + (0.30 * flick).toFixed(3) + ')');
+    halo.addColorStop(1, 'rgba(250,222,150,0)');
+    ctx.fillStyle = halo; ctx.fillRect(w * 0.30, h * 0.36, w * 0.24, h * 0.38);
+
+    motes.forEach(function(M){
+      var y = (M.y - (reduce ? 0 : (t / 1000) * M.s * 0.06)) % 1;
+      if(y < 0) y += 1;
+      var x = M.x + (reduce ? 0 : Math.sin(t / 1800 + M.p) * 0.012);
+      var alpha = M.a * (reduce ? 0.7 : (0.55 + 0.45 * Math.sin(t / 900 + M.p)));
+      ctx.beginPath();
+      ctx.arc(x * w, y * h * 0.92, M.r * (w / 1200) * 1.5 + 0.6, 0, 6.2832);
+      ctx.fillStyle = 'rgba(242,225,164,' + alpha.toFixed(3) + ')';
+      ctx.fill();
+    });
+
+    var fog = ctx.createLinearGradient(0, h * 0.72, 0, h);
+    fog.addColorStop(0, 'rgba(111,192,161,0)');
+    fog.addColorStop(1, 'rgba(111,192,161,0.07)');
+    ctx.fillStyle = fog; ctx.fillRect(0, h * 0.72, w, h * 0.28);
+  }
+
+  function loop(t){ draw(t); requestAnimationFrame(loop); }
+  size(); draw(0);
+  if(!reduce) requestAnimationFrame(loop);
+  window.addEventListener('resize', function(){ size(); draw(performance.now()); });
+  if(window.ResizeObserver){ new ResizeObserver(function(){ size(); draw(performance.now()); }).observe(cv); }
+
+  syncHp();
+  show(0);
+})();
+</script>
+
+<script>(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('.vpick .pk button'), function(b){
+    b.addEventListener('click', function(e){
+      e.stopPropagation();
+      var v = b.closest('.vpick'); v.classList.remove('ok','no'); v.classList.add(b.dataset.pick);
+      var m = v.querySelector('.m'); if(m) m.textContent = b.dataset.pick === 'ok' ? '○' : '✕';
+      if(b.dataset.pick === 'no'){ var i = v.querySelector('input'); if(i) setTimeout(function(){ i.focus(); }, 50); }
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.vpick input'), function(i){
+    ['keydown','keyup','keypress','click'].forEach(function(ev){ i.addEventListener(ev, function(e){ e.stopPropagation(); }); });
+  });
+})();</script>
+<script>(function(){
+  function stop(e){ e.stopPropagation(); }
+  document.querySelectorAll('.quiz').forEach(function(qz){
+    var cards=Array.prototype.slice.call(qz.querySelectorAll('.qz-card')), dots=qz.querySelectorAll('.qz-dots i');
+    var box=qz.closest('.astep').querySelector('.a-box');
+    function showCard(i){
+      cards.forEach(function(c,k){ c.classList.toggle('on', k===i); });
+      dots.forEach(function(d,k){ d.classList.toggle('on', k===i); });
+    }
+    cards.forEach(function(card,i){
+      var btns=card.querySelectorAll('.qz-a button'), fb=card.querySelector('.qz-fb'), nav=card.querySelector('.qz-nav');
+      btns.forEach(function(b){ b.addEventListener('click', function(e){ stop(e);
+        var ok=b.hasAttribute('data-ok');
+        btns.forEach(function(x){x.classList.remove('on')}); b.classList.add('on');
+        card.classList.remove('ok','no'); card.classList.add('answered', ok?'ok':'no');
+        fb.textContent=b.dataset.fb; setTimeout(function(){ nav.scrollIntoView({block:'nearest',behavior:'smooth'}); },30);
+        var last = i===cards.length-1;
+        nav.innerHTML='<button type="button">'+(ok ? (last?'판정 끝 ▶':'다음 ▶') : '고치고 다시 ▶')+'</button>';
+        nav.querySelector('button').addEventListener('click', function(e2){ stop(e2);
+          if(ok){ dots[i].classList.add('ok');
+            if(last){ qz.classList.add('done'); if(!box.parentNode.classList.contains('done')) box.click(); }
+            else { showCard(i+1); cards[i+1].scrollIntoView({block:'nearest',behavior:'smooth'}); }
+          } else { card.classList.remove('answered','ok','no'); btns.forEach(function(x){x.classList.remove('on')}); fb.textContent=''; nav.innerHTML=''; }
+        });
+      }); });
+    });
+    showCard(0);
+  });
+})();</script>
+<script>
+(function(){
+  function upd(el){ var more = el.scrollTop + el.clientHeight < el.scrollHeight - 2; el.classList.toggle('more', more); }
+  var els = document.querySelectorAll('.slide.spell-long .codebox, .slide.spell-long .panel');
+  Array.prototype.forEach.call(els, function(el){ el.addEventListener('scroll', function(){ upd(el); }); });
+  function all(){ Array.prototype.forEach.call(els, upd); }
+  window.addEventListener('resize', all);
+  document.addEventListener('click', function(){ setTimeout(all, 50); });
+  document.addEventListener('keydown', function(){ setTimeout(all, 50); });
+  setTimeout(all, 300); setTimeout(all, 1500);
+})();
+</script>
+
+<script>
+/* 대사 따옴표 들여쓰기: “로 시작하는 대사가 저절로 줄바뀜될 때 둘째 줄부터 여는 따옴표 폭만큼 들인다 */
+(function(){
+  var cv = document.createElement('canvas').getContext('2d');
+  function hang(){
+    Array.prototype.forEach.call(document.querySelectorAll('.dbox p'), function(p){
+      if(p.querySelector('br')) return;
+      if(p.textContent.replace(/^\s+/, '').charAt(0) !== '\u201C') return;
+      var cs = getComputedStyle(p);
+      cv.font = cs.fontStyle + ' ' + cs.fontWeight + ' 100px ' + cs.fontFamily;
+      var w = cv.measureText('\u201C').width / 100;
+      if(!(w > 0)) return;
+      p.classList.add('qhang');
+      p.style.setProperty('--qw', w.toFixed(3) + 'em');
+    });
+  }
+  hang();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(hang);
+})();
+</script>
+<link href="./reader.css" rel="stylesheet"><aside aria-label="주차 목차" hidden id="lesson-toc"><div class="toc-head"><span>이번 여정의 기록</span><button id="toc-close" aria-label="목차 닫기">×</button></div><p>WEEK 05 · 20개 장면</p><ol><li><button data-scene="0">1 · 타이틀</button></li><li><button data-scene="1">2 · WEEK 05 오프닝</button></li><li><button data-scene="2">3 · 규칙과 점검은 다르다</button></li><li><button data-scene="3">4 · 진행해야 하는 퀘스트</button></li><li><button data-scene="4">5 · 오늘 할 일</button></li><li><button data-scene="5">6 · 실습 ① 내놓기 전에 점검하기</button></li><li><button data-scene="7">7 · 스스로 되돌아갔다</button></li><li><button data-scene="8">8 · 실습 ② 둘째 시종 기획안.md</button></li><li><button data-scene="10">8-1 · 돌발 — Dr.딱거기까지</button></li><li><button data-scene="11">8-2 · 적힌 것만 하는 시종</button></li><li><button data-scene="12">8-3 · Dr.딱거기까지 조우</button></li><li><button data-scene="13">8-4 · 그럴듯의 삼촌</button></li><li><button data-scene="14">8-5 · 집안 내력</button></li><li><button data-scene="15">8-6 · 다스리는 법은 똑같다</button></li><li><button data-scene="16">9 · 실습 ③ 한 줄 늘리기</button></li><li><button data-scene="18">9-1 · 적힌 만큼은 정직하다</button></li><li><button data-scene="19">9-2 · 거기까지 하죠</button></li><li><button data-scene="20">9 · WEEK 05 결산 / WEEK 06 예고</button></li><li><button data-scene="21">10 · 다음 주에 계속</button></li><li><button data-scene="22">11 · 엔딩</button></li></ol></aside><div class="reader-tail"><span>← → 키로 이동 · 실습 화면은 클릭하여 확대</span><a href="./week-6.html">다음 주차 살펴보기 ↗</a></div><script src="./reader.js"></script></body></html>

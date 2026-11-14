@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="552" height="785" viewBox="0 0 552 785" role="img"><title>Ctrl+A — 지난주 내용을 전부 고른다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H552" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="540" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · Ctrl+A — 지난주 내용을 전부 고른다</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="522.7" y="57.9" font-size="12.3" textLength="17.4" lengthAdjust="spacingAndGlyphs">X</text>
+<text x="15.1" y="70.7" font-size="19.5" textLength="97.0" lengthAdjust="spacingAndGlyphs">플 그래프.md</text>
+<text x="202.1" y="69.5" font-size="14.5" textLength="46.7" lengthAdjust="spacingAndGlyphs">규칙.md</text>
+<text x="309.7" y="69.5" font-size="14.5" textLength="15.2" lengthAdjust="spacingAndGlyphs">×</text>
+<text x="354.2" y="72.3" font-size="17.9" textLength="17.4" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="12.0" y="103.0" font-size="15.8" textLength="140.2" lengthAdjust="spacingAndGlyphs">파일 편집 보기</text>
+<text x="365.1" y="107.5" font-size="22.4" textLength="72.8" lengthAdjust="spacingAndGlyphs">8 8~</text>
+<text x="13.0" y="145.2" font-size="16.9" textLength="100.0" lengthAdjust="spacingAndGlyphs"># 이 폴더 규칙</text>
+<text x="14.1" y="165.1" font-size="16.1" textLength="88.1" lengthAdjust="spacingAndGlyphs">## 이 폴더는</text>
+<text x="15.2" y="186.3" font-size="17.9" textLength="280.3" lengthAdjust="spacingAndGlyphs">정책자료를 읽고 기획안을 만드는 폴더다.</text>
+<text x="13.0" y="224.6" font-size="15.8" textLength="104.3" lengthAdjust="spacingAndGlyphs">## 결과물 위치</text>
+<text x="15.2" y="246.0" font-size="17.9" textLength="439.0" lengthAdjust="spacingAndGlyphs">새로 만든 파일은 이 폴더 안 ‘결과’ 폴더에 넣는다. 없으면 만든다.</text>
+<text x="15.2" y="265.8" font-size="16.8" textLength="165.2" lengthAdjust="spacingAndGlyphs">원본은 건드리지 않는다.</text>
+<text x="15.2" y="286.3" font-size="18.0" textLength="269.5" lengthAdjust="spacingAndGlyphs">결과 폴더 밖에 있는 .md는 읽지 않는다.</text>
+<text x="14.1" y="308.5" font-size="21.3" textLength="392.5" lengthAdjust="spacingAndGlyphs">같은 이름의 파일이 이미 있으면 뒤에 _2를 붙여 저장한다.</text>
+<text x="13.0" y="345.2" font-size="17.2" textLength="94.6" lengthAdjust="spacingAndGlyphs">## 하지 말 것</text>
+<text x="13.0" y="365.7" font-size="16.9" textLength="263.0" lengthAdjust="spacingAndGlyphs">- 자료에 없는 내용을 지어내지 않는다.</text>
+<text x="13.0" y="387.0" font-size="19.2" textLength="236.9" lengthAdjust="spacingAndGlyphs">- 원본 파일 이름을 바꾸지 않는다.</text>
+<text x="13.0" y="404.9" font-size="15.8" textLength="412.9" lengthAdjust="spacingAndGlyphs">- (사람이 지킨다) 비공개·대외비·개인정보 표시가 있는 파일은</text>
+<text x="25.0" y="426.3" font-size="17.9" textLength="312.9" lengthAdjust="spacingAndGlyphs">이 폴더에 넣지 않는다. 넣기 전에 내가 거른다.</text>
+<text x="13.0" y="464.6" font-size="15.7" textLength="54.3" lengthAdjust="spacingAndGlyphs">## 검증</text>
+<text x="13.0" y="486.1" font-size="16.9" textLength="278.2" lengthAdjust="spacingAndGlyphs">- 숫자와 날짜는 원문에서 그대로 옮긴다.</text>
+<text x="25.0" y="505.7" font-size="16.8" textLength="265.1" lengthAdjust="spacingAndGlyphs">계산이 필요하면 계산식을 같이 적는다.</text>
+<text x="12.0" y="527.1" font-size="19.0" textLength="304.3" lengthAdjust="spacingAndGlyphs">- 원문에 없는 값은 비워두고 ‘미확인’ 목록에</text>
+<text x="25.0" y="545.8" font-size="18.2" textLength="253.2" lengthAdjust="spacingAndGlyphs">따로 적는다. 추측해서 채우지 않는다.</text>
+<text x="13.0" y="565.4" font-size="16.9" textLength="261.9" lengthAdjust="spacingAndGlyphs">- 각 항목이 어느 파일 어디에서 왔는지</text>
+<text x="25.0" y="586.0" font-size="16.9" textLength="135.8" lengthAdjust="spacingAndGlyphs">결과에 같이 적는다.</text>
+<text x="13.0" y="607.4" font-size="19.0" textLength="320.6" lengthAdjust="spacingAndGlyphs">- 읽지 못한 파일은 건너뛰지 말고, 결과 맨 아래</text>
+<text x="21.7" y="627.9" font-size="20.1" textLength="268.2" lengthAdjust="spacingAndGlyphs">‘못 읽은 파일’ 목록에 파일명을 적는다.</text>
+<text x="22.8" y="775.3" font-size="14.5" textLength="253.2" lengthAdjust="spacingAndGlyphs">풀 25, 열 26 484/484자 Ml Markdo...</text>
+<text x="305.3" y="773.2" font-size="14.8" textLength="32.6" lengthAdjust="spacingAndGlyphs">100%</text>
+<text x="366.9" y="774.9" font-size="16.5" textLength="82.1" lengthAdjust="spacingAndGlyphs">Windows (CRI</text>
+<text x="459.6" y="773.5" font-size="12.4" textLength="39.1" lengthAdjust="spacingAndGlyphs">UTF-8</text></g><rect x=".5" y=".5" width="551" height="784" rx="6" fill="none" stroke="#d8cfc0"/></svg>

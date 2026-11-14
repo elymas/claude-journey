@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="510" height="604" viewBox="0 0 510 604" role="img"><title>Ctrl + A로 전체를 잡는다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H510" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="498" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · Ctrl + A로 전체를 잡는다</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="19.6" y="72.5" font-size="18.0" textLength="84.2" lengthAdjust="spacingAndGlyphs">= 시종.md</text>
+<text x="257.5" y="71.7" font-size="16.9" textLength="16.5" lengthAdjust="spacingAndGlyphs">×</text>
+<text x="300.2" y="74.7" font-size="19.5" textLength="18.9" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="14.8" y="105.8" font-size="15.4" textLength="139.0" lengthAdjust="spacingAndGlyphs">파일 편집 보기</text>
+<text x="15.6" y="147.6" font-size="16.2" textLength="110.2" lengthAdjust="spacingAndGlyphs"># 정책자료 요약</text>
+<text x="18.1" y="168.7" font-size="17.9" textLength="264.0" lengthAdjust="spacingAndGlyphs">이 폴더의 규칙.md를 먼저 읽고 따른다.</text>
+<text x="14.6" y="207.5" font-size="17.0" textLength="60.4" lengthAdjust="spacingAndGlyphs">## 할 일</text>
+<text x="16.5" y="228.2" font-size="17.2" textLength="358.6" lengthAdjust="spacingAndGlyphs">1. 폴더 안 정책자료가 몇 건인지 먼저 세어 알려준다.</text>
+<text x="32.9" y="247.8" font-size="17.2" textLength="389.1" lengthAdjust="spacingAndGlyphs">그 다음 이 폴더의 정책자료 파일을 하나씩 끝까지 읽는다.</text>
+<text x="30.4" y="268.3" font-size="17.0" textLength="207.3" lengthAdjust="spacingAndGlyphs">(결과 폴더와 .md 파일은 제외)</text>
+<text x="16.5" y="290.2" font-size="19.6" textLength="306.0" lengthAdjust="spacingAndGlyphs">2. 파일마다 핵심요약 3줄, 쟁점 2줄을 뽑는다.</text>
+<text x="16.5" y="308.5" font-size="17.8" textLength="426.9" lengthAdjust="spacingAndGlyphs">3. 자료명 / 핵심요약 / 쟁점 / 출처(파일명·쪽) 네 열 표로 만들어</text>
+<text x="28.8" y="330.4" font-size="20.3" textLength="357.8" lengthAdjust="spacingAndGlyphs">결과 폴더에 YYYY-MM-DD_자료요약.md로 저장한다.</text>
+<text x="16.5" y="348.1" font-size="17.9" textLength="283.8" lengthAdjust="spacingAndGlyphs">4. 표 아래에 ‘자료 간 차이’ 목록을 만든다.</text>
+<text x="32.1" y="369.3" font-size="18.6" textLength="404.7" lengthAdjust="spacingAndGlyphs">같은 주제를 두고 자료끼리 숫자나 입장이 다른 지점을 찾아,</text>
+<text x="32.9" y="388.4" font-size="17.9" textLength="385.0" lengthAdjust="spacingAndGlyphs">어느 자료가 무엇이라 하는지 출처와 함께 나란히 적는다.</text>
+<text x="32.8" y="408.6" font-size="20.1" textLength="286.5" lengthAdjust="spacingAndGlyphs">어긋나는 곳이 없으면 ‘없음’이라고 적는다.</text>
+<text x="17.3" y="428.7" font-size="17.9" textLength="287.9" lengthAdjust="spacingAndGlyphs">기획안은 쓰지 않는다. 의견도 달지 않는다.</text>
+<text x="15.6" y="466.9" font-size="15.3" textLength="124.2" lengthAdjust="spacingAndGlyphs">## 다 됐다는 기준</text>
+<text x="15.6" y="488.7" font-size="17.9" textLength="252.5" lengthAdjust="spacingAndGlyphs">- 결과 폴더에 자료요약.md가 생겼다.</text>
+<text x="15.6" y="508.4" font-size="17.9" textLength="204.0" lengthAdjust="spacingAndGlyphs">- 표의 모든 줄에 출처가 있다.</text>
+<text x="15.6" y="528.3" font-size="16.9" textLength="247.6" lengthAdjust="spacingAndGlyphs">- 하나라도 안 되면 멈추고 물어본다.</text></g><rect x=".5" y=".5" width="509" height="603" rx="6" fill="none" stroke="#d8cfc0"/></svg>

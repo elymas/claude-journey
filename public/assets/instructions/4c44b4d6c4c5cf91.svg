@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800" role="img"><title>가상 예시 ① 먼저 보여 달라 — 줄마다 번호, 지금 → 바꿀 안. 아직 안 고친다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H1400" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="1388" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · 가상 예시 ① 먼저 보여 달라 — 줄마다 번호, 지금 → 바꿀 안. </text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="20.3" y="76.7" font-size="27.2" textLength="134.3" lengthAdjust="spacingAndGlyphs">• 시종 옮기기</text>
+<text x="1058.1" y="73.9" font-size="18.8" textLength="75.3" lengthAdjust="spacingAndGlyphs">가상 예시</text>
+<text x="1192.4" y="79.0" font-size="25.1" textLength="185.2" lengthAdjust="spacingAndGlyphs">그 회의록_2026 연결됨</text>
+<text x="535.2" y="163.8" font-size="29.4" textLength="819.2" lengthAdjust="spacingAndGlyphs">결과 폴더 안은 빼고, 이 폴더의 md 파일을 전부 읽어줘. 먼저 읽은 파일 이름 목록부터 보여줘.</text>
+<text x="530.8" y="196.6" font-size="30.1" textLength="688.3" lengthAdjust="spacingAndGlyphs">이 폴더 자료는 (회의록)이야. 아래에 해당하는 줄을 빠짐없이 찾아서 보여줘. ··</text>
+<text x="535.1" y="227.7" font-size="25.9" textLength="136.5" lengthAdjust="spacingAndGlyphs">아직 고치지 마.</text>
+<text x="30.5" y="289.3" font-size="19.0" textLength="61.1" lengthAdjust="spacingAndGlyphs">Claude</text>
+<text x="32.6" y="326.6" font-size="27.4" textLength="592.2" lengthAdjust="spacingAndGlyphs">읽은 파일 (6): 규칙.md 시종.md • 기획안.md 콘티.md 템플릿</text>
+<text x="618.6" y="326.6" font-size="27.4" textLength="266.6" lengthAdjust="spacingAndGlyphs">1_시안만들기.md • 그래프.md</text>
+<text x="48.8" y="375.8" font-size="25.2" textLength="38.7" lengthAdjust="spacingAndGlyphs">번호</text>
+<text x="132.3" y="375.8" font-size="25.2" textLength="46.8" lengthAdjust="spacingAndGlyphs">파일</text>
+<text x="311.3" y="376.1" font-size="23.2" textLength="38.7" lengthAdjust="spacingAndGlyphs">지금</text>
+<text x="46.8" y="426.8" font-size="23.0" textLength="14.2" lengthAdjust="spacingAndGlyphs">1</text>
+<text x="140.3" y="426.8" font-size="25.9" textLength="75.5" lengthAdjust="spacingAndGlyphs">규칙.md</text>
+<text x="311.3" y="428.6" font-size="25.1" textLength="335.8" lengthAdjust="spacingAndGlyphs">정책자료를 읽고 기획안을 만드는 폴더다.</text>
+<text x="46.8" y="475.9" font-size="20.9" textLength="14.2" lengthAdjust="spacingAndGlyphs">2</text>
+<text x="140.4" y="477.4" font-size="25.3" textLength="75.3" lengthAdjust="spacingAndGlyphs">시종.md</text>
+<text x="311.3" y="477.3" font-size="25.2" textLength="132.3" lengthAdjust="spacingAndGlyphs"># 정책자료 요약</text>
+<text x="44.8" y="526.7" font-size="20.9" textLength="16.3" lengthAdjust="spacingAndGlyphs">3</text>
+<text x="140.4" y="528.3" font-size="25.3" textLength="77.3" lengthAdjust="spacingAndGlyphs">시종.md</text>
+<text x="44.8" y="581.3" font-size="23.0" textLength="18.3" lengthAdjust="spacingAndGlyphs">4</text>
+<text x="140.4" y="579.5" font-size="20.9" textLength="73.3" lengthAdjust="spacingAndGlyphs">시종.md</text>
+<text x="311.3" y="531.7" font-size="29.5" textLength="191.3" lengthAdjust="spacingAndGlyphs">핵심 요약 3줄, 쟁점 2줄</text>
+<text x="309.2" y="580.6" font-size="30.4" textLength="239.5" lengthAdjust="spacingAndGlyphs">YYYY-MM-DD_자료요약.md로</text>
+<text x="46.8" y="630.3" font-size="20.9" textLength="14.2" lengthAdjust="spacingAndGlyphs">5</text>
+<text x="140.4" y="631.5" font-size="27.3" textLength="93.6" lengthAdjust="spacingAndGlyphs">기획안.md</text>
+<text x="311.3" y="629.8" font-size="25.2" textLength="252.3" lengthAdjust="spacingAndGlyphs">결과 폴더의 자료요약을 읽는다</text>
+<text x="29.2" y="678.4" font-size="35.9" textLength="525.0" lengthAdjust="spacingAndGlyphs">아직 아무 파일도 고치지 않았어요. 고칠 번호를 알려 주세요.</text>
+<text x="54.9" y="752.1" font-size="23.2" textLength="193.3" lengthAdjust="spacingAndGlyphs">메시지를 입력하세요•··</text>
+<text x="832.3" y="376.4" font-size="21.1" textLength="57.0" lengthAdjust="spacingAndGlyphs">바꿀 안</text>
+<text x="832.3" y="426.8" font-size="23.0" textLength="315.4" lengthAdjust="spacingAndGlyphs">회의록을 읽고 기획안을 만드는 폴더다.</text>
+<text x="828.3" y="475.7" font-size="30.0" textLength="122.5" lengthAdjust="spacingAndGlyphs"># 회의록 정리</text>
+<text x="832.3" y="530.0" font-size="27.4" textLength="254.4" lengthAdjust="spacingAndGlyphs">결정사항 3줄, 할 일(담당·기한)</text>
+<text x="828.3" y="580.6" font-size="30.4" textLength="256.7" lengthAdjust="spacingAndGlyphs">YYYYMM-DD_회의록정리.md</text>
+<text x="832.3" y="630.1" font-size="23.2" textLength="266.6" lengthAdjust="spacingAndGlyphs">결과 폴더의 회의록정리를 읽는다</text></g><rect x=".5" y=".5" width="1399" height="799" rx="6" fill="none" stroke="#d8cfc0"/></svg>

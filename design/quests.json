@@ -1,0 +1,122 @@
+{
+  "source": "https://claude.ai/artifact/VvATMCBaL7kZjrnw3rQ7cj",
+  "title": "클로드 정복 퀘스트",
+  "season": 1,
+  "unlockedWeeks": 8,
+  "totalWeeks": 8,
+  "dialogue": {
+    "speaker": "페어리",
+    "text": "“지난 퀘스트는 전부 여기 있어요. 다시 하고 싶은 주를 골라서 들어가세요.”"
+  },
+  "acts": [
+    {
+      "id": "I",
+      "title": "장비를 갖춘다",
+      "range": "W1–2",
+      "weeks": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "II",
+      "title": "시종을 만든다",
+      "range": "W3–5",
+      "weeks": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "III",
+      "title": "부대를 만든다",
+      "range": "W6–8",
+      "weeks": [
+        6,
+        7,
+        8
+      ]
+    }
+  ],
+  "quests": [
+    {
+      "week": 1,
+      "title": "클로드 정복 퀘스트",
+      "location": "숲 속 오두막",
+      "href": "/lessons/week-1.html",
+      "theme": "cabin",
+      "locked": false,
+      "sourceHref": "https://claude.ai/artifact/P4yzRpjoGbf8vuXAMjTL3F"
+    },
+    {
+      "week": 2,
+      "title": "이제는 설명하기 귀찮다고",
+      "location": "숲 속 오두막",
+      "href": "/lessons/week-2.html",
+      "theme": "cabin",
+      "locked": false,
+      "sourceHref": "https://claude.ai/artifact/FD7ydyjFRoagh9f59dDEzc"
+    },
+    {
+      "week": 3,
+      "title": "나만의 시종 만들기",
+      "location": "영혼의 얼음 동굴",
+      "href": "/lessons/week-3.html",
+      "theme": "ice",
+      "locked": false,
+      "sourceHref": "https://claude.ai/artifact/8NgkjJrwPejZDgt3yiDaKL"
+    },
+    {
+      "week": 4,
+      "title": "자료 더미를 한 번에",
+      "location": "영혼의 얼음 동굴 · 안쪽",
+      "href": "/lessons/week-4.html",
+      "theme": "ice",
+      "locked": false,
+      "sourceHref": "https://claude.ai/artifact/4cWMN4RyEJNKCeBpZitifp"
+    },
+    {
+      "week": 5,
+      "title": "스스로 고치는 시종",
+      "location": "영혼의 얼음 동굴 · 끝",
+      "href": "/lessons/week-5.html",
+      "theme": "ice",
+      "locked": false,
+      "sourceHref": "https://claude.ai/artifact/HvSxTGaK6XoAQQZFjS4W4Z"
+    },
+    {
+      "week": 6,
+      "title": "콘티 먼저, 모양은 따로",
+      "location": "수확의 숲",
+      "href": "/lessons/week-6.html",
+      "theme": "grove",
+      "locked": false,
+      "sourceHref": "https://claude.ai/artifact/Qu2ca6K3LMk2LCrSijQSxZ"
+    },
+    {
+      "week": 7,
+      "title": "질문지로 완내스 템플릿 만들기",
+      "location": "수확의 숲 · 한가운데",
+      "href": "/lessons/week-7.html",
+      "theme": "grove",
+      "locked": false,
+      "sourceHref": "https://claude.ai/artifact/X6AS9mvWufvkMBbFkQjty7"
+    },
+    {
+      "week": 8,
+      "title": "‘알아서 잘’은 없다",
+      "location": "수확의 숲 · 끝",
+      "href": "/lessons/week-8.html",
+      "theme": "grove",
+      "locked": false,
+      "sourceHref": "https://claude.ai/artifact/Mp3gHgefduNwJgYVkJgyiB"
+    }
+  ],
+  "finalQuest": {
+    "title": "[메인] 클로드로 AI Agent 구축해서 현실로 돌아가기",
+    "subtitle": "최종 목표 · LV 부족",
+    "locked": true,
+    "href": null
+  }
+}

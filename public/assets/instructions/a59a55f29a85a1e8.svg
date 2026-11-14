@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="928" height="784" viewBox="0 0 928 784" role="img"><title>ctrl + s → ‘Markdown 파일로…’를 고르고, 정책자료 폴더에 기획안.md로 저장한다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H928" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="916" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · ctrl + s → ‘Markdown 파일로…’를 고르고, 정책자료 </text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="7.9" y="79.2" font-size="22.4" textLength="179.8" lengthAdjust="spacingAndGlyphs">트 2026-10-08. 자료요약.md</text>
+<text x="8.1" y="108.7" font-size="15.5" textLength="138.9" lengthAdjust="spacingAndGlyphs">파일 편집 보기</text>
+<text x="288.7" y="74.7" font-size="16.7" textLength="91.7" lengthAdjust="spacingAndGlyphs"># 정책자료 기획안</text>
+<text x="492.3" y="73.7" font-size="13.9" textLength="12.1" lengthAdjust="spacingAndGlyphs">.</text>
+<text x="530.1" y="80.0" font-size="26.4" textLength="22.9" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="8.1" y="148.9" font-size="16.8" textLength="126.8" lengthAdjust="spacingAndGlyphs"># 정책자료 기획안</text>
+<text x="10.8" y="170.6" font-size="16.8" textLength="264.4" lengthAdjust="spacingAndGlyphs">이 폴더의 규칙.md를 먼저 읽고 따른다.</text>
+<text x="8.0" y="209.5" font-size="18.4" textLength="60.8" lengthAdjust="spacingAndGlyphs">## 할 일</text>
+<text x="8.1" y="230.8" font-size="19.6" textLength="369.6" lengthAdjust="spacingAndGlyphs">1. 부를 때 받은 결과 폴더의 요약 파일 한 개만 읽는다.</text>
+<text x="25.6" y="251.1" font-size="19.6" textLength="201.0" lengthAdjust="spacingAndGlyphs">정책자료 원본은 읽지 않는다.</text>
+<text x="8.1" y="270.1" font-size="18.1" textLength="286.0" lengthAdjust="spacingAndGlyphs">2. 요약 맨 아래의 ‘점검 기록’을 먼저 본다.</text>
+<text x="25.6" y="290.3" font-size="18.4" textLength="275.3" lengthAdjust="spacingAndGlyphs">고친 항목이 있으면 고친 후의 값을 쓴다.</text>
+<text x="9.4" y="310.9" font-size="16.8" textLength="202.3" lengthAdjust="spacingAndGlyphs">3. 기획안은 네 덩어리로 쓴다.</text>
+<text x="27.0" y="330.8" font-size="18.1" textLength="195.6" lengthAdjust="spacingAndGlyphs">덩어리마다 첫 줄은 결론 한 문</text>
+<text x="20.2" y="349.8" font-size="26.4" textLength="584.0" lengthAdjust="spacingAndGlyphs">- 배경: 왜 지금 이 얘기를 하는 서식을 유지하려면 Markdown으로 저장</text>
+<text x="22.9" y="370.0" font-size="18.2" textLength="201.0" lengthAdjust="spacingAndGlyphs">- 쟁점: 무엇이 문제인가 (숫지</text>
+<text x="245.5" y="380.5" font-size="19.6" textLength="497.7" lengthAdjust="spacingAndGlyphs">텍스트 파일입니다. 굵게 및 제목 등의 현재 서식을 유지하려면 Markdown 파일</text>
+<text x="22.9" y="391.3" font-size="19.5" textLength="196.9" lengthAdjust="spacingAndGlyphs">- 제안: 그래서 무엇을 하자는</text>
+<text x="241.4" y="399.7" font-size="18.2" textLength="134.6" lengthAdjust="spacingAndGlyphs">(md)로 저장합니다.</text>
+<text x="22.9" y="410.4" font-size="18.2" textLength="199.6" lengthAdjust="spacingAndGlyphs">- 다음 단계: 누가 언제까지 무엇을</text>
+<text x="245.5" y="418.3" font-size="19.5" textLength="344.0" lengthAdjust="spacingAndGlyphs">일반 텍스트 파일로 저장하면 모든 서식이 손실됩니다.</text>
+<text x="8.1" y="429.4" font-size="18.2" textLength="215.8" lengthAdjust="spacingAndGlyphs">4. 숫자•날짜마다 괄호 안에 요익</text>
+<text x="18.9" y="449.5" font-size="18.1" textLength="203.7" lengthAdjust="spacingAndGlyphs">요약에 없는 숫자는 쓰지 않는다.</text>
+<text x="9.4" y="469.7" font-size="18.1" textLength="210.4" lengthAdjust="spacingAndGlyphs">5. 맨 아래에 ‘점검 기록’을 만든다.</text>
+<text x="25.6" y="490.0" font-size="18.2" textLength="195.6" lengthAdjust="spacingAndGlyphs">기획안의 숫자마다 요약의 숫</text>
+<text x="261.7" y="491.5" font-size="16.8" textLength="128.1" lengthAdjust="spacingAndGlyphs">Markdown 파일로</text>
+<text x="434.3" y="490.2" font-size="16.8" textLength="121.4" lengthAdjust="spacingAndGlyphs">텍스트 파일로 저장</text>
+<text x="648.8" y="491.4" font-size="18.2" textLength="29.7" lengthAdjust="spacingAndGlyphs">취소</text>
+<text x="9.4" y="512.6" font-size="21.0" textLength="213.1" lengthAdjust="spacingAndGlyphs">6. 결과 폴더에 YYYY-MM-DD_7</text>
+<text x="8.1" y="549.3" font-size="18.2" textLength="125.4" lengthAdjust="spacingAndGlyphs">## 다 됐다는 기준</text>
+<text x="6.7" y="571.9" font-size="20.9" textLength="408.7" lengthAdjust="spacingAndGlyphs">- 네 덩어리가 모두 있고, 덩어리마다 첫 줄이 결론 문장이다.</text>
+<text x="6.7" y="591.0" font-size="19.5" textLength="236.0" lengthAdjust="spacingAndGlyphs">- 요약에 없는 숫자가 하나도 없다.</text>
+<text x="8.1" y="612.3" font-size="21.0" textLength="334.5" lengthAdjust="spacingAndGlyphs">- 점검 기록에 기획안의 숫자가 전부 올라가 있다.</text>
+<text x="8.1" y="631.3" font-size="20.9" textLength="460.0" lengthAdjust="spacingAndGlyphs">- 요약에 없는 내용을 써야 할 것 같으면 쓰지 말고 멈춰서 물어본다.</text>
+<text x="18.9" y="773.5" font-size="16.8" textLength="76.9" lengthAdjust="spacingAndGlyphs">줄 10, 열 39</text>
+<text x="99.8" y="770.2" font-size="12.7" textLength="35.1" lengthAdjust="spacingAndGlyphs">606자</text>
+<text x="307.5" y="771.3" font-size="14.1" textLength="107.9" lengthAdjust="spacingAndGlyphs">Ml Markdown 구문</text>
+<text x="623.2" y="771.3" font-size="14.1" textLength="33.7" lengthAdjust="spacingAndGlyphs">100%</text>
+<text x="692.0" y="771.3" font-size="14.1" textLength="90.4" lengthAdjust="spacingAndGlyphs">Windows (CRLF)</text>
+<text x="860.6" y="770.4" font-size="11.3" textLength="33.7" lengthAdjust="spacingAndGlyphs">UTF-8</text></g><rect x=".5" y=".5" width="927" height="783" rx="6" fill="none" stroke="#d8cfc0"/></svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1046" height="634" viewBox="0 0 1046 634" role="img"><title>덱에서 '주문서 복사'를 누른다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H1046" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="1034" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · 덱에서 '주문서 복사'를 누른다</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="77.5" y="116.1" font-size="17.4" textLength="56.3" lengthAdjust="spacingAndGlyphs">돌아가기</text>
+<text x="57.8" y="180.7" font-size="12.6" textLength="98.8" lengthAdjust="spacingAndGlyphs">TEMPLATE</text>
+<text x="182.4" y="181.3" font-size="39.2" textLength="409.0" lengthAdjust="spacingAndGlyphs">시종.md — 스스로 점검한다</text>
+<text x="772.3" y="181.4" font-size="17.5" textLength="71.5" lengthAdjust="spacingAndGlyphs">✓ 복사됐어</text>
+<text x="845.3" y="212.2" font-size="16.0" textLength="42.6" lengthAdjust="spacingAndGlyphs">황색미</text>
+<text x="883.3" y="181.6" font-size="17.6" textLength="92.8" lengthAdjust="spacingAndGlyphs">주문 제조 완료</text>
+<text x="897.0" y="212.2" font-size="16.0" textLength="106.4" lengthAdjust="spacingAndGlyphs">미번 주 추가분</text>
+<text x="63.9" y="271.2" font-size="17.2" textLength="111.0" lengthAdjust="spacingAndGlyphs"># 정책자료 요약</text>
+<text x="65.4" y="293.7" font-size="19.1" textLength="270.6" lengthAdjust="spacingAndGlyphs">이 폴더의 규칙.md를 먼저 읽고 따른다.</text>
+<text x="63.9" y="335.0" font-size="17.2" textLength="60.8" lengthAdjust="spacingAndGlyphs"># 할 일</text>
+<text x="78.4" y="356.7" font-size="22.7" textLength="357.4" lengthAdjust="spacingAndGlyphs">폴더 안 정책자료가 몇 건인지 먼저 세어 알려준다.</text>
+<text x="89.7" y="378.9" font-size="18.8" textLength="396.8" lengthAdjust="spacingAndGlyphs">그 다음 이 폴더의 정책자료 파일을 하나씩 끝까지 읽는다.</text>
+<text x="89.7" y="400.2" font-size="19.1" textLength="217.2" lengthAdjust="spacingAndGlyphs">(결과 폴더와 .md 파일은 제외)</text>
+<text x="63.9" y="421.4" font-size="18.8" textLength="325.4" lengthAdjust="spacingAndGlyphs">2. 파일마다 핵심요약 3줄, 쟁점 2줄을 뽑는다.</text>
+<text x="61.0" y="439.3" font-size="22.4" textLength="470.7" lengthAdjust="spacingAndGlyphs">3. 자료명 / 핵심요약 / 쟁점 / 출처(파일명·쪽) 네 열 표로 만들어</text>
+<text x="87.2" y="461.2" font-size="22.7" textLength="351.8" lengthAdjust="spacingAndGlyphs">결과 폴더에 YYYY-MM-DD_자료요약.md로 저장한다.</text>
+<text x="63.9" y="483.8" font-size="18.8" textLength="311.7" lengthAdjust="spacingAndGlyphs">4. 표 아래에 ‘자료 간 차이’ 목록을 만든다.</text>
+<text x="89.7" y="505.2" font-size="19.1" textLength="410.5" lengthAdjust="spacingAndGlyphs">같은 주제를 두고 자료끼리 숫자나 입장이 다른 지점을 찾아,</text>
+<text x="89.7" y="526.4" font-size="18.8" textLength="389.2" lengthAdjust="spacingAndGlyphs">어느 자료가 무엇이라 하는지 출처와 함께 나란히 적는다.</text>
+<text x="89.7" y="546.5" font-size="17.5" textLength="142.9" lengthAdjust="spacingAndGlyphs">어긋나는 곳이 없으면</text>
+<text x="65.4" y="567.6" font-size="17.2" textLength="170.3" lengthAdjust="spacingAndGlyphs">기획안은 쓰지 않는다. 의</text>
+<text x="269.1" y="575.5" font-size="15.7" textLength="65.4" lengthAdjust="spacingAndGlyphs">Ctil +</text>
+<text x="340.6" y="574.2" font-size="14.1" textLength="13.7" lengthAdjust="spacingAndGlyphs">A</text>
+<text x="372.5" y="581.4" font-size="28.3" textLength="187.0" lengthAdjust="spacingAndGlyphs">로 파일 전체를 잡고,</text>
+<text x="573.2" y="575.5" font-size="15.7" textLength="47.1" lengthAdjust="spacingAndGlyphs">Ctrl</text>
+<text x="621.8" y="575.5" font-size="15.7" textLength="36.5" lengthAdjust="spacingAndGlyphs">+V</text>
+<text x="623.2" y="278.4" font-size="22.4" textLength="209.2" lengthAdjust="spacingAndGlyphs">잠깐, 주문 내용을 설명해줘.</text>
+<text x="623.2" y="308.8" font-size="22.4" textLength="357.4" lengthAdjust="spacingAndGlyphs">내놓기 전에 - 이 네 글자가 순서를 정한다. 기준 안에 있</text>
+<text x="623.2" y="334.9" font-size="22.4" textLength="126.4" lengthAdjust="spacingAndGlyphs">으니 호출마다 돈다.</text>
+<text x="627.6" y="369.7" font-size="22.7" textLength="360.1" lengthAdjust="spacingAndGlyphs">규칙.md의 검증 세 줄 — 2주차 규칙이 점검의 기준이다.</text>
+<text x="629.4" y="406.0" font-size="20.6" textLength="346.6" lengthAdjust="spacingAndGlyphs">고치기 전- 고친 후/ 근거 -&quot;고쳤다&quot;는 말만 있으</text>
+<text x="627.6" y="430.7" font-size="22.7" textLength="348.7" lengthAdjust="spacingAndGlyphs">면 믿을 수밖에 없다. 전 •후와 쪽수가 있어야 내가 그 하나</text>
+<text x="623.2" y="452.4" font-size="22.4" textLength="174.3" lengthAdjust="spacingAndGlyphs">를 원문에서 다시 확인한다.</text>
+<text x="627.6" y="487.2" font-size="22.7" textLength="344.3" lengthAdjust="spacingAndGlyphs">고친 것이 없어도 - 기록이 항상 남아야 &quot;안 돌았다&quot;와</text>
+<text x="627.7" y="515.0" font-size="24.3" textLength="239.2" lengthAdjust="spacingAndGlyphs">&quot;돌았는데 고칠 게 없었다&quot;를 구분한다.</text>
+<text x="820.9" y="549.5" font-size="17.7" textLength="73.1" lengthAdjust="spacingAndGlyphs">로 덮어쓴다.</text>
+<text x="676.5" y="578.7" font-size="25.3" textLength="120.2" lengthAdjust="spacingAndGlyphs">로 덮어 쓰자.</text></g><rect x=".5" y=".5" width="1045" height="633" rx="6" fill="none" stroke="#d8cfc0"/></svg>

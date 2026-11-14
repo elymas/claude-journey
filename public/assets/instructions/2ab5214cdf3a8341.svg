@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="592" height="681" viewBox="0 0 592 681" role="img"><title>빈 탭에 Ctrl + V로 붙여 넣는다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H592" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="580" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · 빈 탭에 Ctrl + V로 붙여 넣는다</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="16.5" y="73.9" font-size="22.2" textLength="176.4" lengthAdjust="spacingAndGlyphs">1 2026-10-08_자료요약.md</text>
+<text x="294.6" y="69.5" font-size="14.4" textLength="89.8" lengthAdjust="spacingAndGlyphs"># 정책자료 기획안</text>
+<text x="13.1" y="103.2" font-size="14.4" textLength="139.3" lengthAdjust="spacingAndGlyphs">파일 편집 보기</text>
+<text x="12.2" y="145.8" font-size="17.3" textLength="127.2" lengthAdjust="spacingAndGlyphs"># 정책자료 기획안</text>
+<text x="15.9" y="167.7" font-size="20.4" textLength="264.7" lengthAdjust="spacingAndGlyphs">이 폴더의 규칙.md를 먼저 읽고 따른다.</text>
+<text x="13.0" y="205.7" font-size="17.7" textLength="59.9" lengthAdjust="spacingAndGlyphs">## 할 일</text>
+<text x="14.0" y="226.9" font-size="18.3" textLength="368.5" lengthAdjust="spacingAndGlyphs">1. 부를 때 받은 결과 폴더의 요약 파일 한 개만 읽는다.</text>
+<text x="30.9" y="246.6" font-size="18.3" textLength="200.1" lengthAdjust="spacingAndGlyphs">정책자료 원본은 읽지 않는다.</text>
+<text x="14.0" y="266.3" font-size="17.5" textLength="283.4" lengthAdjust="spacingAndGlyphs">2. 요약 맨 아래의 ‘점검 기록’을 먼저 본다.</text>
+<text x="31.8" y="286.0" font-size="17.5" textLength="274.0" lengthAdjust="spacingAndGlyphs">고친 항목이 있으면 고친 후의 값을 쓴다.</text>
+<text x="15.9" y="305.8" font-size="16.5" textLength="208.6" lengthAdjust="spacingAndGlyphs">3. 기획안은 네 덩어리로 쓴다.</text>
+<text x="31.8" y="327.7" font-size="19.3" textLength="392.8" lengthAdjust="spacingAndGlyphs">덩어리마다 첫 줄은 결론 한 문장, 그 아래 근거 세 줄 이하.</text>
+<text x="27.9" y="346.0" font-size="19.2" textLength="221.9" lengthAdjust="spacingAndGlyphs">- 배경: 왜 지금 이 얘기를 하는가</text>
+<text x="28.1" y="366.3" font-size="17.3" textLength="277.8" lengthAdjust="spacingAndGlyphs">- 쟁점: 무엇이 문제인가 (숫자 하나 이상)</text>
+<text x="28.1" y="386.8" font-size="18.5" textLength="246.9" lengthAdjust="spacingAndGlyphs">- 제안: 그래서 무엇을 하자는 것인가</text>
+<text x="28.1" y="405.7" font-size="16.5" textLength="231.9" lengthAdjust="spacingAndGlyphs">- 다음 단계: 누가 언제까지 무엇을</text>
+<text x="14.0" y="426.2" font-size="17.5" textLength="473.8" lengthAdjust="spacingAndGlyphs">4. 숫자·날짜마다 괄호 안에 요약 파일의 어느 항목에서 왔는지 적는다.</text>
+<text x="30.9" y="445.9" font-size="16.4" textLength="219.8" lengthAdjust="spacingAndGlyphs">요약에 없는 숫자는 쓰지 않는다.</text>
+<text x="14.0" y="466.3" font-size="17.3" textLength="229.1" lengthAdjust="spacingAndGlyphs">5. 맨 아래에 ‘점검 기록’을 만든다.</text>
+<text x="30.9" y="486.8" font-size="18.3" textLength="385.3" lengthAdjust="spacingAndGlyphs">기획안의 숫자마다 요약의 숫자와 같은지 한 줄씩 적는다.</text>
+<text x="15.0" y="507.4" font-size="18.5" textLength="357.3" lengthAdjust="spacingAndGlyphs">6. 결과 폴더에 YYYY-MM-DD_기획안.md로 저장한다.</text>
+<text x="12.2" y="545.0" font-size="16.5" textLength="126.3" lengthAdjust="spacingAndGlyphs">## 다 됐다는 기준</text>
+<text x="14.0" y="567.1" font-size="18.3" textLength="406.8" lengthAdjust="spacingAndGlyphs">- 네 덩어리가 모두 있고, 덩어리마다 첫 줄이 결론 문장이다.</text>
+<text x="13.1" y="586.0" font-size="17.3" textLength="234.7" lengthAdjust="spacingAndGlyphs">- 요약에 없는 숫자가 하나도 없다.</text>
+<text x="13.1" y="606.4" font-size="18.3" textLength="333.9" lengthAdjust="spacingAndGlyphs">- 점검 기록에 기획안의 숫자가 전부 올라가 있다.</text>
+<text x="12.1" y="626.3" font-size="23.4" textLength="459.3" lengthAdjust="spacingAndGlyphs">- 요약에 없는 내용을 써야 할 것 같으면 쓰지 말고 멈춰서 물어본다.</text>
+<text x="539.6" y="71.4" font-size="14.4" textLength="15.0" lengthAdjust="spacingAndGlyphs">+</text></g><rect x=".5" y=".5" width="591" height="680" rx="6" fill="none" stroke="#d8cfc0"/></svg>

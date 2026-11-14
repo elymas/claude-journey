@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="582" viewBox="0 0 1400 582" role="img"><title>가상 예시 ② 고른 번호만 고친다 — 같은 이름으로 덮어쓰고, 고르지 않은 줄이 그대로인지 확인</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H1400" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="1388" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · 가상 예시 ② 고른 번호만 고친다 — 같은 이름으로 덮어쓰고, 고르지</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="14.2" y="76.6" font-size="27.4" textLength="140.4" lengthAdjust="spacingAndGlyphs">• 시종 옮기기</text>
+<text x="1058.1" y="73.8" font-size="18.8" textLength="75.3" lengthAdjust="spacingAndGlyphs">가상 예시</text>
+<text x="1212.8" y="79.0" font-size="25.1" textLength="164.8" lengthAdjust="spacingAndGlyphs">회의록_2026 연결됨</text>
+<text x="554.2" y="160.2" font-size="36.1" textLength="793.3" lengthAdjust="spacingAndGlyphs">1~5번만 고쳐줘. 같은 이름으로 덮어쓰고, 다시 열어서 고르지 않은 줄이 그대로인지 보여줘.</text>
+<text x="34.6" y="220.4" font-size="16.9" textLength="57.0" lengthAdjust="spacingAndGlyphs">Claude</text>
+<text x="23.3" y="258.5" font-size="35.8" textLength="577.5" lengthAdjust="spacingAndGlyphs">✓ 규칙.md • 시종.md • 기획안.md를 같은 이름으로 덮어썼어요.</text>
+<text x="32.6" y="324.8" font-size="25.3" textLength="193.3" lengthAdjust="spacingAndGlyphs">다시 열어 확인했어요.</text>
+<text x="28.5" y="361.0" font-size="27.4" textLength="217.7" lengthAdjust="spacingAndGlyphs">- 바뀐 줄: 1~5번, 다섯 줄</text>
+<text x="28.5" y="392.1" font-size="23.3" textLength="545.3" lengthAdjust="spacingAndGlyphs">- 그 밖의 줄: 그대로 (검증 • 멈추고 묻기 • 그래프 규칙 줄 포함)</text>
+<text x="32.6" y="458.9" font-size="23.0" textLength="199.4" lengthAdjust="spacingAndGlyphs">새로 더한 줄은 없어요.</text>
+<text x="52.9" y="534.4" font-size="21.1" textLength="195.3" lengthAdjust="spacingAndGlyphs">메시지를 입력하세요….</text></g><rect x=".5" y=".5" width="1399" height="581" rx="6" fill="none" stroke="#d8cfc0"/></svg>

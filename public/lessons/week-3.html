@@ -1,0 +1,1872 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>WEEK 03 · 나만의 시종 만들기</title></head><body data-check-storage="journey-week03" data-week="3"><header class="lesson-bar"><a class="reader-home" href="../" aria-label="전체 지도">↖ <span>전체 지도</span></a><span class="reader-brand">CLAUDE / FIELD NOTES</span><button type="button" id="toc-open" aria-expanded="false" aria-controls="lesson-toc">목차 <span>☰</span></button></header><div data-chapter="03" class="reader-meta"><span class="reader-week">CHAPTER</span><h1>나만의 시종 만들기</h1><span>영혼의 얼음 동굴</span></div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* ── 단일 테마: 이 덱은 '밤의 숲' 게임 화면이므로 다크 하나로 확정한다 ── */
+:root{
+  --night:#f4eee3;
+  --bark:#fffdf8;
+  --moss:#eae4d7;
+  --panel:#fffdf8;
+  --fog:#293d36;
+  --dim:#686b5d;
+  --faint:#7b796b;
+  --glow:#ad553a;
+  --ember:#a64f33;
+  --sigil:#496550;
+  --danger:#b44938;
+  --line:rgba(41,61,54,.16);
+  --line-strong:rgba(41,61,54,.32);
+  --boss:url("../assets/boss.webp");
+  --cabin:url("../assets/cave.webp");
+  --fairy:url("../assets/fairy.webp");
+  --h-calm:url("../assets/hero.webp");
+  --h-hurt:url("../assets/hero.webp");
+  --h-aura:url("../assets/hero.webp");
+  --h-aura-solo:url("../assets/hero.webp");
+  --h-aura-hurt:url("../assets/hero.webp");
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(120% 90% at 50% 0%, #f4eee3 0%, var(--night) 62%, #ede5d7 100%);
+  color:var(--fog);
+  font-family:"Noto Sans KR","Noto Serif KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;
+  min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:16px 12px 12px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── 무대 ── */
+.stage{
+  position:relative;
+  width:min(97vw, calc((100dvh - 104px) * 16 / 9));
+  aspect-ratio:16/9;
+  container-type:inline-size;
+  border:1px solid var(--line-strong);
+  border-radius:3px;
+  overflow:hidden;
+  background:var(--night);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6), 0 26px 70px -30px rgba(0,0,0,.95);
+  cursor:pointer;
+}
+.stage:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+
+.slide{position:absolute;inset:0;display:none;padding:4.6cqw 5cqw 4cqw;flex-direction:column}
+.slide.on{display:flex;animation:fadein .38s ease both}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+.slide::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(70% 120% at 12% -10%, rgba(73,101,80,.09), transparent 60%),
+    radial-gradient(80% 100% at 100% 110%, rgba(226,145,78,.10), transparent 58%),
+    linear-gradient(180deg,#f8f3e9 0%, #f4eee3 100%);
+}
+.slide > *{position:relative;z-index:1}
+#s1{padding:0}
+#s1::before{display:none}
+
+/* ── 머리표 ── */
+.head{display:flex;align-items:baseline;gap:1.2cqw;margin-bottom:2.6cqw}
+.chapter{
+  font-family:"DM Mono",serif;font-weight:700;
+  font-size:max(12px,1.15cqw);letter-spacing:.34em;color:var(--sigil);
+  border:1px solid rgba(73,101,80,.4);padding:.5cqw .9cqw;border-radius:2px;white-space:nowrap;
+}
+.head h2{margin:0;font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,3.3cqw);letter-spacing:-.01em;color:var(--fog);text-wrap:balance}
+.head .sub{margin-left:auto;font-size:max(12px,1.2cqw);color:var(--faint);letter-spacing:.08em;font-family:"DM Mono",monospace;white-space:nowrap}
+
+/* ── 대사창 ── */
+/* 제작자 표기 */
+/* 엔딩 카드 */
+.endcard{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;gap:0;position:relative;z-index:12}
+.endcard .tbc{font-family:"DM Mono",serif;font-size:max(12px,6.6cqw);font-weight:700;letter-spacing:.06em;
+  color:var(--glow);text-shadow:0 0 4cqw rgba(173,85,58,.42);line-height:1.1;text-align:center}
+.endcard .wk{margin-top:1.1cqw;font-family:"DM Mono",serif;font-size:max(12px,2cqw);letter-spacing:.34em;color:var(--sigil)}
+.endcard .when{margin-top:3.4cqw;padding-top:2.2cqw;border-top:1px solid var(--line);
+  font-size:max(12px,2.05cqw);color:var(--fog);letter-spacing:.02em;text-align:center}
+.endsign{position:absolute;left:50%;bottom:3.1cqw;transform:translateX(-50%);z-index:14;text-align:center;
+  font-family:"DM Mono",monospace;color:var(--faint);line-height:1.7}
+.endsign b{display:block;font-weight:400;font-size:max(12px,1.2cqw);letter-spacing:.16em}
+.endsign span{display:block;font-size:max(12px,1.05cqw);letter-spacing:.1em;opacity:.82}
+/* ══ 장소 테마: 얼음 동굴(ice) · 빛의 숲(grove) ══ */
+.scene .room.ice{
+  background:
+    radial-gradient(62% 46% at 50% -4%, rgba(196,236,255,.30), rgba(196,236,255,0) 72%),
+    linear-gradient(112deg, rgba(160,214,244,.11) 0 7%, transparent 7% 21%, rgba(160,214,244,.07) 21% 30%, transparent 30% 51%, rgba(160,214,244,.10) 51% 57%, transparent 57% 79%, rgba(160,214,244,.06) 79% 85%, transparent 85%),
+    linear-gradient(246deg, rgba(120,190,232,.09) 0 11%, transparent 11% 39%, rgba(120,190,232,.06) 39% 46%, transparent 46%),
+    radial-gradient(42% 30% at 18% 88%, rgba(96,168,220,.26), transparent 70%),
+    radial-gradient(46% 34% at 82% 82%, rgba(96,168,220,.20), transparent 70%),
+    linear-gradient(180deg,#0B1D2B 0%,#071523 55%,#040B12 100%);
+  filter:none;
+}
+.scene .room.ice::before{content:"";position:absolute;left:0;right:0;top:0;height:30%;
+  background:linear-gradient(180deg,#040A10,#061019 70%,transparent);
+  clip-path:polygon(0 0,100% 0,100% 34%,94% 60%,90% 38%,84% 72%,79% 44%,73% 80%,68% 40%,62% 66%,57% 42%,50% 88%,45% 46%,39% 70%,33% 40%,27% 76%,21% 44%,15% 62%,9% 38%,4% 58%,0 40%);
+  opacity:.92}
+.scene .room.ice::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;
+  background:linear-gradient(0deg,rgba(150,210,245,.16),transparent);opacity:.8}
+.scene .room.grove{
+  background:
+    radial-gradient(48% 40% at 28% 32%, rgba(110,232,172,.24), transparent 70%),
+    radial-gradient(40% 34% at 76% 58%, rgba(120,240,190,.18), transparent 70%),
+    radial-gradient(28% 22% at 56% 86%, rgba(173,85,58,.12), transparent 70%),
+    radial-gradient(70% 40% at 50% 0%, rgba(2,10,6,.9), transparent 80%),
+    linear-gradient(180deg,#07241B 0%,#041C13 50%,#03120C 100%);
+  filter:none;
+}
+.scene .room.grove::before,.scene .room.grove::after{content:"";position:absolute;top:-4%;bottom:-4%;width:7%;
+  background:linear-gradient(90deg,transparent,rgba(1,8,5,.95) 30%,rgba(1,8,5,.95) 70%,transparent);opacity:.9}
+.scene .room.grove::before{left:9%;transform:skewX(-3deg)}
+.scene .room.grove::after{right:14%;width:5%;transform:skewX(4deg)}
+.scene .fx{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:1}
+/* 타이틀 카드 */
+.slide.titlecard{padding:0}
+.slide.titlecard::before{display:none}
+.tcard{position:absolute;inset:0;z-index:12;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 6cqw 4cqw;pointer-events:none}
+.tcard small{display:block;font-family:"DM Mono",serif;font-size:max(12px,1.35cqw);letter-spacing:.46em;color:var(--sigil);margin-bottom:2cqw;opacity:.92}
+.tcard h1{margin:0;font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,6.2cqw);line-height:1.25;letter-spacing:-.01em;color:var(--glow);
+  text-shadow:0 0 1.4cqw rgba(173,85,58,.5),0 0 4cqw rgba(173,85,58,.22);animation:breathe 5.5s ease-in-out infinite;word-break:keep-all}
+.tcard .place{display:block;margin-top:2.4cqw;font-family:"DM Mono",monospace;font-size:max(12px,1.25cqw);letter-spacing:.3em;color:var(--dim)}
+.titlecard.ice .tcard h1{color:#253c36;text-shadow:0 0 1.4cqw rgba(190,235,255,.55),0 0 4cqw rgba(190,235,255,.25)}
+.titlecard.ice .tcard small{color:#3c727a}
+.titlecard.grove .tcard h1{color:#253c36;text-shadow:0 0 1.4cqw rgba(78,114,84,.55),0 0 4cqw rgba(78,114,84,.25)}
+.titlecard.grove .tcard small{color:#4e7254}
+
+/* ── W3 전용: 나란히 비교 · 설계서 4칸 ── */
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;flex:1 1 auto;min-height:0}
+.lane{border:1px solid var(--line);border-radius:2px;padding:1.7cqw 1.8cqw;display:flex;flex-direction:column;gap:1cqw;min-height:0;overflow:hidden;text-align:left}
+.lane.chat{border-color:rgba(212,104,94,.35);background:rgba(212,104,94,.05)}
+.lane.agent{border-color:rgba(73,101,80,.45);background:rgba(73,101,80,.06)}
+.lane .tag2{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);letter-spacing:.2em}
+.lane.chat .tag2{color:var(--danger)} .lane.agent .tag2{color:var(--sigil)}
+.lane h3{margin:0;font-family:"Noto Serif KR",serif;font-size:max(12px,2cqw);font-weight:700;color:var(--fog)}
+.lane ol{margin:0;padding-left:1.6cqw;display:flex;flex-direction:column;gap:.55cqw}
+.lane li{font-size:max(12px,1.4cqw);line-height:1.62;color:var(--dim)} .lane li b{color:var(--fog);font-weight:500}
+.lane .out{margin-top:auto;padding-top:1cqw;border-top:1px solid var(--line);font-size:max(12px,1.35cqw);line-height:1.65}
+.lane.chat .out{color:var(--danger)} .lane.agent .out{color:var(--sigil)}
+.lane .out em{font-style:normal;display:block;color:var(--dim);margin-top:.3cqw;font-size:max(12px,1.28cqw)}
+.diffs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw;margin-top:1.6cqw}
+.diffs div{border-top:1px solid var(--line-strong);padding-top:.9cqw;text-align:left}
+.diffs b{display:block;font-size:max(12px,1.45cqw);color:var(--glow);font-weight:500;margin-bottom:.3cqw;font-family:"Noto Serif KR",serif}
+.diffs span{font-size:max(12px,1.28cqw);color:var(--dim);line-height:1.6} .diffs i{font-style:normal;color:var(--danger)} .diffs u{text-decoration:none;color:var(--sigil)}
+.form4{display:grid;grid-template-columns:1fr 1fr;gap:1.3cqw;flex:1 1 auto;min-height:0}
+.f4{border:1px solid var(--line);border-left:2px solid var(--sigil);background:rgba(255,253,248,.45);padding:1.4cqw 1.5cqw;display:flex;flex-direction:column;gap:.55cqw;text-align:left;min-height:0}
+.f4 .n{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);letter-spacing:.2em;color:var(--faint)}
+.f4 b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.85cqw);color:var(--fog);font-weight:700}
+.f4 span{font-size:max(12px,1.32cqw);color:var(--dim);line-height:1.65}
+.f4 .map{margin-top:auto;padding-top:.8cqw;border-top:1px solid var(--line);font-family:"DM Mono",monospace;font-size:max(12px,.98cqw);color:var(--sigil);letter-spacing:.02em;line-height:1.5}
+.verify{display:flex;flex-direction:column;gap:1cqw;text-align:left}
+.threetier{display:grid;grid-template-columns:1fr 1fr;gap:1.5cqw}
+#w4 .goals{flex:0 0 auto;min-height:0}
+#w4 .goal{min-height:33.5cqw;padding:2.4cqw 2.6cqw;gap:1cqw}
+#w4 .goal .t{margin-top:auto}
+#w4 .goal b{font-size:max(12px,2.5cqw)}
+#w4 .goal span{font-size:max(12px,1.65cqw);line-height:1.7}
+#w4 .dbox{margin-top:auto;margin-bottom:.6cqw}
+
+/* ── W3 슬라이드 6: 허공에 뜨는 네 칸 (서리 유리) ── */
+.bubbles{position:absolute;right:6cqw;top:7%;width:52cqw;height:50%;z-index:3}
+.bub{position:absolute;display:flex;align-items:center;gap:1.1cqw;padding:1.25cqw 2.1cqw 1.25cqw 1.3cqw;
+  border-radius:1.4cqw 3cqw 3cqw 3cqw;border:1px solid rgba(214,244,255,.62);
+  background:
+    linear-gradient(160deg,rgba(236,250,255,.50) 0%,rgba(170,222,248,.30) 30%,rgba(60,120,165,.42) 58%,rgba(22,52,80,.72) 100%);
+  box-shadow:0 0 2.6cqw rgba(150,215,255,.30),0 .5cqw 1.8cqw rgba(0,0,0,.35),
+    inset 0 .12cqw 0 rgba(255,255,255,.55),inset 0 -.1cqw 0 rgba(120,190,230,.25);
+  backdrop-filter:blur(3px);animation:bubfloat 5.4s ease-in-out infinite;white-space:nowrap;overflow:visible}
+.bub::before{content:"";position:absolute;left:1.2cqw;top:.5cqw;width:38%;height:34%;border-radius:2cqw;
+  background:linear-gradient(90deg,rgba(255,255,255,.28),rgba(255,255,255,0));pointer-events:none}
+.bub .bn{font-family:"Gaegu",sans-serif;font-size:max(12px,1.7cqw);font-weight:700;color:#0b1a24;width:2.5cqw;height:2.5cqw;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex:none;font-weight:500;
+  background:linear-gradient(180deg,#F1FBFF,#B8E4F8);box-shadow:0 0 .9cqw rgba(190,235,255,.7)}
+.bub b{font-family:"Gaegu","Jua",sans-serif;font-size:max(12px,2.7cqw);color:#F3FBFF;font-weight:700;letter-spacing:.01em;
+  text-shadow:0 0 1.2cqw rgba(170,225,255,.45)}
+.bub.b1{left:6cqw;top:4%;animation-delay:0s}
+.bub.b2{left:14cqw;top:30%;animation-delay:-1.4s}
+.bub.b3{left:2cqw;top:58%;animation-delay:-2.7s}
+.bub.b4{left:19cqw;top:80%;animation-delay:-4.1s}
+.bubbles3 .bub{white-space:normal;align-items:flex-start;padding:1.2cqw 2cqw 1.2cqw 1.3cqw;animation:none}
+.bubbles3 .bub .bn{margin-top:.25cqw}
+.bub .bt{display:flex;flex-direction:column;gap:.15cqw}
+.bub .bt small{font-family:"Gaegu",sans-serif;font-size:max(12px,1.7cqw);font-weight:400;color:#DCEFF9;line-height:1.35;white-space:nowrap}
+.bubbles3 .b1{left:4cqw;top:6%}
+.bubbles3 .b2{left:12cqw;top:38%}
+.bubbles3 .b3{left:6cqw;top:70%}
+.bub.dim{opacity:.55;filter:saturate(.5)}
+.bub.now{box-shadow:0 0 3.4cqw rgba(190,235,255,.55),0 .5cqw 1.8cqw rgba(0,0,0,.35),inset 0 .12cqw 0 rgba(255,255,255,.6)}
+.bub .cr{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.85;mix-blend-mode:screen;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 44'><g fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round'><path d='M60 2 L47 9 L41 17' stroke-width='1.1' opacity='.9'/><path d='M47 9 L38 6' stroke-width='.8' opacity='.7'/><path d='M41 17 L33 20' stroke-width='.7' opacity='.6'/><path d='M58 0 L52 14 L54 23' stroke-width='.9' opacity='.75'/><path d='M52 14 L45 15' stroke-width='.6' opacity='.5'/><path d='M60 8 L55 6' stroke-width='.6' opacity='.5'/></g></svg>") top .3cqw right .6cqw/5.2cqw 3.8cqw no-repeat,url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 44'><g fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round'><path d='M0 42 L12 36 L19 27' stroke-width='1.1' opacity='.9'/><path d='M12 36 L20 39' stroke-width='.8' opacity='.7'/><path d='M19 27 L27 25' stroke-width='.7' opacity='.6'/><path d='M2 44 L8 31 L6 22' stroke-width='.9' opacity='.75'/><path d='M8 31 L15 29' stroke-width='.6' opacity='.5'/><path d='M0 36 L5 38' stroke-width='.6' opacity='.5'/></g></svg>") bottom .3cqw left .6cqw/5.2cqw 3.8cqw no-repeat}
+@keyframes bubfloat{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-1.6cqw) rotate(.6deg)}}
+.byline{
+  position:absolute;left:50%;bottom:2cqw;transform:translateX(-50%);z-index:14;text-align:center;
+  font-family:"DM Mono",monospace;color:var(--faint);white-space:nowrap;pointer-events:none;line-height:1.7;
+}
+.byline b{display:block;font-weight:400;font-size:max(12px,1.1cqw);letter-spacing:.16em}
+.byline span{display:block;font-size:max(12px,.95cqw);letter-spacing:.1em;opacity:.82}
+.dbox{
+  margin-top:2.4cqw;flex:0 0 auto;
+  border:1px solid var(--line-strong);border-radius:2px;
+  background:linear-gradient(180deg, rgba(255,253,248,.94), rgba(244,238,227,.94));
+  padding:1.9cqw 2.2cqw 1.7cqw;position:relative;
+  box-shadow:inset 0 0 0 1px rgba(173,85,58,.07);
+}
+.dbox .who{
+  position:absolute;top:-1.05cqw;left:1.8cqw;background:var(--night);padding:0 .7cqw;
+  font-size:max(12px,1.15cqw);letter-spacing:.22em;color:var(--glow);font-family:"DM Mono",monospace;
+}
+.dbox p{margin:0;font-family:"Noto Serif KR",serif;font-size:max(12px,1.95cqw);line-height:1.62;color:var(--fog)}
+.dbox p + p{margin-top:.6cqw;color:var(--dim);font-size:max(12px,1.7cqw)}
+.cue{position:absolute;right:1.5cqw;bottom:1.1cqw;color:var(--glow);font-size:max(12px,1.3cqw);animation:blink 1.15s steps(2,end) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.12}}
+
+/* ── 프롤로그 ── */
+#s1 .scene-img{
+  position:absolute;inset:0;display:block;
+  background:var(--cabin) center/cover no-repeat;
+  filter:brightness(.50) saturate(.68) contrast(1.08);
+}
+#s1 .grade{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(52% 48% at 47% 30%, rgba(173,85,58,.26), rgba(173,85,58,0) 66%),
+    linear-gradient(180deg, rgba(6,18,15,.62) 0%, rgba(244,238,227,.10) 34%, rgba(4,9,7,.82) 78%, rgba(4,9,7,.94) 100%),
+    linear-gradient(90deg, rgba(4,9,7,.62), rgba(4,9,7,0) 26%, rgba(4,9,7,0) 74%, rgba(4,9,7,.62)),
+    radial-gradient(70% 70% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,.62) 100%);
+}
+#s1 .tint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg, rgba(28,72,60,.30), rgba(10,26,22,.18));mix-blend-mode:color}
+#s1 canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.prologue{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:4.6cqw 5cqw 4cqw}
+.prologue .dbox{margin-top:auto}
+.oracle{
+  text-align:center;margin-bottom:auto;margin-top:11cqw;
+  font-family:"Noto Serif KR",serif;font-weight:700;
+  font-size:max(12px,3.9cqw);line-height:1.5;letter-spacing:.02em;color:var(--glow);
+  text-shadow:0 0 18px rgba(173,85,58,.5), 0 0 54px rgba(173,85,58,.22);
+  animation:breathe 5.5s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.86}50%{opacity:1}}
+.oracle small{display:block;font-size:max(12px,1.3cqw);letter-spacing:.5em;color:var(--sigil);margin-bottom:1.6cqw;font-family:"DM Mono",serif;text-shadow:none;opacity:.9}
+
+/* ══ 스토리 슬라이드 ══ */
+.story{padding:0}
+.story::before{display:none}
+.scene{position:absolute;inset:0;isolation:isolate;overflow:hidden;background:#f4eee3}
+.scene .room{position:absolute;inset:-4%;background:var(--cabin) 62% 42%/cover no-repeat;filter:brightness(.30) saturate(.42) contrast(1.1) blur(3px)}
+.scene .room.field{background-position:24% 62%;filter:brightness(.26) saturate(.5) contrast(1.12) blur(4px)}
+.scene .veil{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(60% 60% at 30% 40%, rgba(173,85,58,.10), transparent 70%),
+    linear-gradient(180deg, rgba(4,10,8,.55), rgba(4,10,8,.20) 40%, rgba(3,7,6,.92));
+}
+.hero{
+  position:absolute;right:5cqw;top:1%;height:98%;width:52cqw;
+  background:var(--h-calm) center/contain no-repeat;
+  filter:drop-shadow(0 1.4cqw 2.4cqw rgba(0,0,0,.55));
+  animation:idle 4.6s ease-in-out infinite;
+}
+.hero.hurt{background-image:var(--h-hurt)}
+.hero.aura{background-image:var(--h-aura)}
+.hero.aura.solo{background-image:var(--h-aura-solo)}
+.hero.aura-hurt{background-image:var(--h-aura-hurt)}
+@keyframes idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.4%)}}
+.hero.small{height:74%;top:8%;width:40cqw;right:3cqw}
+.hero.mid{height:86%;top:4%;width:46cqw}
+
+.fairy{
+  position:absolute;width:15cqw;height:15cqw;
+  background:var(--fairy) center/contain no-repeat;
+  filter:drop-shadow(0 0 2.4cqw rgba(92,132,134,.8));
+  animation:flit 5.2s ease-in-out infinite;
+}
+@keyframes flit{
+  0%,100%{transform:translate(0,0) rotate(-3deg)}
+  33%{transform:translate(2.5cqw,-2cqw) rotate(4deg)}
+  66%{transform:translate(-1.5cqw,1.4cqw) rotate(-2deg)}
+}
+.story-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:4.6cqw 5cqw 4cqw;z-index:3}
+.direction{
+  margin:0 0 2.4cqw;align-self:flex-start;
+  font-family:"DM Mono",monospace;font-size:max(12px,1.35cqw);letter-spacing:.04em;color:var(--dim);
+  border-left:2px solid var(--faint);padding-left:1cqw;line-height:1.6;
+}
+.story .dbox{margin-top:0}
+.story .dbox .who{background:#fffdf8;border:1px solid var(--line);border-radius:2px;padding:.18cqw .8cqw;left:1.6cqw}
+
+/* ── 1-3 지진과 추락 ── */
+#s1c .scene{background:#120806}
+#s1c .room{filter:brightness(.22) saturate(.3) contrast(1.2) blur(7px)}
+#s1c .veil{background:
+  radial-gradient(55% 55% at 50% 42%, rgba(255,214,120,.28), transparent 72%),
+  linear-gradient(180deg, rgba(30,8,4,.65), rgba(6,3,2,.9));}
+.streaks{
+  position:absolute;inset:-40% -4%;
+  background:repeating-linear-gradient(90deg,
+    rgba(255,238,196,0) 0 46px, rgba(255,238,196,.55) 46px 48px, rgba(255,238,196,0) 48px 128px);
+  -webkit-mask-image:repeating-linear-gradient(180deg, transparent 0 40px, #000 96px 190px, transparent 250px 290px);
+  mask-image:repeating-linear-gradient(180deg, transparent 0 40px, #000 96px 190px, transparent 250px 290px);
+  filter:blur(.6px);animation:rush .42s linear infinite;opacity:.75;
+}
+@keyframes rush{from{transform:translateY(0)}to{transform:translateY(-290px)}}
+.quaker{position:absolute;inset:0;animation:quake .9s cubic-bezier(.36,.07,.19,.97) 1 both}
+@keyframes quake{
+  0%{transform:translate(0,0) rotate(0)}
+  8%{transform:translate(-2.4%,1.6%) rotate(-1.4deg)}
+  18%{transform:translate(2.2%,-1.4%) rotate(1.2deg)}
+  30%{transform:translate(-1.8%,1.2%) rotate(-1deg)}
+  44%{transform:translate(1.4%,-1%) rotate(.8deg)}
+  60%{transform:translate(-1%,.7%) rotate(-.5deg)}
+  78%{transform:translate(.6%,-.4%) rotate(.3deg)}
+  100%{transform:translate(0,0) rotate(0)}
+}
+.hero.falling{
+  right:auto;left:50%;height:56%;top:30%;width:36cqw;margin-left:-18cqw;
+  animation:tumble 1.5s cubic-bezier(.2,.6,.4,1) both;
+}
+@keyframes tumble{
+  0%{transform:translateY(-52%) rotate(-26deg) scale(.86);filter:blur(2px)}
+  55%{transform:translateY(6%) rotate(12deg) scale(1.02);filter:blur(0)}
+  100%{transform:translateY(0) rotate(6deg) scale(1);filter:blur(0)}
+}
+.shout{
+  position:absolute;left:0;right:0;top:9%;text-align:center;z-index:4;
+  font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,8.4cqw);line-height:1;letter-spacing:-.01em;
+  color:#FFF0BE;
+  text-shadow:0 0 3cqw rgba(255,200,90,.85), 0 0 8cqw rgba(255,150,50,.55), 0 .4cqw 0 rgba(90,30,10,.7);
+  animation:slam .62s cubic-bezier(.2,1.4,.35,1) both;
+}
+@keyframes slam{
+  0%{transform:scale(2.6);opacity:0;filter:blur(1.4cqw)}
+  60%{transform:scale(.94);opacity:1;filter:blur(0)}
+  100%{transform:scale(1);opacity:1}
+}
+#s1d .scene{background:#080D0B}
+#s1d .room{filter:brightness(.24) saturate(.35) contrast(1.15) blur(5px)}
+.hero.knocked{transform:rotate(-9deg);animation:none;top:4%;height:92%}
+.dust{position:absolute;inset:0;
+  background:
+    radial-gradient(2px 2px at 22% 62%, rgba(214,200,168,.5), transparent 60%),
+    radial-gradient(2px 2px at 41% 38%, rgba(214,200,168,.38), transparent 60%),
+    radial-gradient(3px 3px at 66% 74%, rgba(214,200,168,.32), transparent 60%),
+    radial-gradient(2px 2px at 78% 30%, rgba(214,200,168,.42), transparent 60%),
+    radial-gradient(2px 2px at 12% 26%, rgba(214,200,168,.3), transparent 60%);
+  animation:settle 7s linear infinite;}
+@keyframes settle{from{transform:translateY(-2%)}to{transform:translateY(4%)}}
+#s1e .veil{background:
+  radial-gradient(46% 46% at 26% 40%, rgba(92,132,134,.22), transparent 70%),
+  linear-gradient(180deg, rgba(4,10,8,.5), rgba(3,7,6,.92));}
+#s7a .veil{background:
+  radial-gradient(52% 52% at 62% 44%, rgba(173,85,58,.20), transparent 70%),
+  linear-gradient(180deg, rgba(4,10,8,.5), rgba(3,7,6,.9));}
+
+/* ── 패널 공통 ── */
+.cols{display:grid;gap:2cqw;flex:1 1 auto;min-height:0;overflow:hidden}
+.c-2{grid-template-columns:1fr 1fr}
+.c-32{grid-template-columns:1.35fr 1fr}
+.c-4{grid-template-columns:repeat(4,1fr)}
+.panel{
+  border:1px solid var(--line);border-radius:2px;background:rgba(255,253,248,.55);
+  padding:1.9cqw 2cqw;display:flex;flex-direction:column;gap:1.1cqw;min-height:0;overflow:hidden;
+}
+.panel.bare{background:none;border:none;padding:0}
+.plabel{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);letter-spacing:.22em;color:var(--faint);text-transform:uppercase}
+.panel h3{margin:0;font-family:"Noto Serif KR",serif;font-size:max(12px,2.1cqw);font-weight:700;color:var(--fog)}
+.panel p{margin:0;font-size:max(12px,1.55cqw);line-height:1.72;color:var(--dim)}
+#s5 .cols{flex:0 1 auto}
+#s5 .strip{margin-top:auto}
+
+/* ── 스탯창 ── */
+.stat{display:grid;grid-template-columns:auto 1fr;gap:.7cqw 1.6cqw;align-items:baseline}
+.stat dt{font-family:"DM Mono",monospace;font-size:max(12px,1.2cqw);letter-spacing:.14em;color:var(--faint);white-space:nowrap}
+.stat dd{margin:0;font-size:max(12px,1.6cqw);color:var(--fog);font-variant-numeric:tabular-nums}
+.stat dd em{font-style:normal;color:var(--dim);font-size:max(12px,1.35cqw)}
+.lv{color:var(--glow);font-family:"DM Mono",monospace;font-weight:500}
+.bar{display:inline-flex;gap:.3cqw;vertical-align:middle;margin-right:.7cqw}
+.bar i{width:1.5cqw;height:.85cqw;background:var(--faint);border-radius:1px;display:block}
+.bar i.f{background:var(--sigil)}
+.bar i.e{background:var(--ember)}
+.tag{display:inline-block;border:1px solid var(--line-strong);border-radius:999px;padding:.28cqw .95cqw;font-size:max(12px,1.25cqw);color:var(--dim);margin:.2cqw .3cqw .2cqw 0}
+.tag.bad{border-color:rgba(212,104,94,.45);color:var(--danger)}
+.tag.good{border-color:rgba(73,101,80,.45);color:var(--sigil)}
+
+/* ── 퀘스트 보드 ── */
+.quests{display:flex;flex-direction:column;gap:1.1cqw;flex:1;min-height:0}
+.quest{
+  font:inherit;color:inherit;text-align:left;width:100%;
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.4cqw;align-items:center;
+  border:1px solid transparent;border-left:2px solid var(--ember);
+  background:rgba(255,253,248,.5);padding:1.25cqw 1.6cqw;cursor:pointer;
+  transition:background .15s, border-color .15s, transform .12s;
+}
+.quest:hover{background:rgba(234,228,215,.8);border-color:var(--line-strong);border-left-color:var(--ember);transform:translateX(.4cqw)}
+.quest:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.quest.story{border-left-color:var(--glow);background:rgba(173,85,58,.08)}
+.quest.story:hover{border-left-color:var(--glow);background:rgba(173,85,58,.14)}
+.quest.locked{border-left-color:var(--faint);opacity:.72}
+.quest.locked:hover{border-left-color:var(--faint)}
+.q-no{font-family:"DM Mono",serif;font-size:max(12px,1.5cqw);color:var(--ember);letter-spacing:.1em}
+.quest.story .q-no{color:var(--glow)}
+.quest.locked .q-no{color:var(--faint)}
+.q-body strong{display:block;font-family:"Noto Serif KR",serif;font-size:max(12px,1.85cqw);font-weight:700;color:var(--fog);margin-bottom:.25cqw}
+.q-body span{font-size:max(12px,1.4cqw);color:var(--dim)}
+.q-diff{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.15em;color:var(--faint);white-space:nowrap;text-align:right}
+.quest.story .q-diff{color:var(--glow)}
+
+/* ── 시스템 창 ── */
+.modal[hidden]{display:none}
+.modal{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  background:rgba(3,7,6,.72);backdrop-filter:blur(2px);animation:fadein .18s ease both}
+.modal-box{
+  width:min(52cqw, 86%);border:1px solid var(--glow);border-radius:2px;
+  background:linear-gradient(180deg,#141F19,#0A120E);
+  box-shadow:0 0 0 1px rgba(0,0,0,.7), 0 2cqw 6cqw -1cqw rgba(0,0,0,.9), inset 0 0 0 1px rgba(173,85,58,.12);
+  padding:3cqw 3cqw 2.4cqw;text-align:left;animation:pop .22s cubic-bezier(.2,1.3,.4,1) both;
+}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-tag{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);letter-spacing:.3em;color:var(--sigil);display:block;margin-bottom:1.4cqw}
+.modal-text{margin:0 0 2.4cqw;font-family:"Noto Serif KR",serif;font-size:max(12px,2.1cqw);line-height:1.62;color:var(--fog);text-align:left;white-space:pre-line}
+.modal-btn{
+  display:block;margin-left:auto;
+  font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.5cqw);letter-spacing:.1em;
+  color:var(--night);background:var(--glow);border:none;border-radius:2px;
+  padding:.9cqw 2.6cqw;cursor:pointer;transition:filter .15s;
+}
+.modal-btn:hover{filter:brightness(1.12)}
+.modal-btn:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+
+/* ── 하네스 4요소 ── */
+.parts{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqw;flex:1 1 auto;min-height:0}
+.part{border:1px solid var(--line);border-radius:2px;padding:1.6cqw 1.5cqw;display:flex;flex-direction:column;gap:.9cqw;background:rgba(255,253,248,.45)}
+.part .n{font-family:"DM Mono",serif;font-size:max(12px,1.25cqw);letter-spacing:.2em;color:var(--sigil)}
+.part b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.95cqw);color:var(--fog);font-weight:700;line-height:1.3;word-break:keep-all}
+.part i{font-style:normal;font-size:max(12px,1.2cqw);color:var(--faint);font-family:"DM Mono",monospace;letter-spacing:.04em}
+.part span{font-size:max(12px,1.4cqw);color:var(--dim);line-height:1.65}
+.part b .rt{display:block;text-align:right;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit}
+.part .lack{margin-top:auto;padding-top:1cqw;border-top:1px solid var(--line);font-size:max(12px,1.25cqw);color:var(--danger);line-height:1.5}
+
+/* ── 주문 비교 ── */
+.spell{border:1px solid var(--line);border-radius:2px;padding:1.7cqw 1.8cqw;display:flex;flex-direction:column;gap:1cqw;min-height:0}
+.spell.fail{border-color:rgba(212,104,94,.4);background:rgba(212,104,94,.05)}
+.spell.pass{border-color:rgba(73,101,80,.45);background:rgba(73,101,80,.06)}
+.spell .mark{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.2em}
+.spell.fail .mark{color:var(--danger)}
+.spell.pass .mark{color:var(--sigil)}
+.spell q{display:block;font-family:"Noto Serif KR",serif;font-size:max(12px,1.75cqw);line-height:1.68;color:var(--fog);quotes:"「" "」"}
+.spell .why{font-size:max(12px,1.35cqw);color:var(--dim);line-height:1.6;margin-top:auto}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw;margin-top:1.6cqw}
+.strip div{border-top:1px solid var(--line-strong);padding-top:.9cqw}
+.strip b{display:block;font-size:max(12px,1.5cqw);color:var(--glow);font-weight:500;margin-bottom:.3cqw;font-family:"Noto Serif KR",serif}
+.strip span{font-size:max(12px,1.28cqw);color:var(--dim);line-height:1.55}
+
+/* ── 인벤토리 / 흐름 ── */
+.inv{display:grid;grid-template-columns:repeat(4,1fr);gap:.9cqw}
+.inv div{border:1px solid var(--line);border-radius:2px;padding:.9cqw .8cqw;text-align:left;font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);color:var(--dim)}
+.inv div b{display:block;color:var(--fog);font-size:max(12px,1.35cqw);font-weight:500;margin-bottom:.2cqw}
+.flow{display:flex;align-items:stretch;gap:.8cqw}
+.flow div{flex:1;border:1px solid var(--line);padding:1.1cqw .9cqw;text-align:left;font-size:max(12px,1.35cqw);color:var(--fog);display:flex;flex-direction:column;justify-content:center;gap:.25cqw}
+.flow div small{color:var(--faint);font-family:"DM Mono",monospace;font-size:max(12px,1cqw);letter-spacing:.14em}
+.flow span{align-self:center;color:var(--ember);font-size:max(12px,1.4cqw)}
+
+/* ── 각인 ── */
+.runes{display:flex;flex-direction:column;gap:1.15cqw}
+.rune{display:grid;grid-template-columns:auto 1fr;gap:1.3cqw;align-items:start;border-bottom:1px solid var(--line);padding-bottom:1.05cqw}
+.rune:last-child{border-bottom:none;padding-bottom:0}
+.rune .sig{font-family:"DM Mono",serif;font-size:max(12px,1.7cqw);color:var(--sigil);line-height:1.2}
+.rune b{display:block;font-size:max(12px,1.65cqw);color:var(--fog);font-family:"Noto Serif KR",serif;margin-bottom:.2cqw}
+.rune span{font-size:max(12px,1.35cqw);color:var(--dim);line-height:1.6}
+
+/* ── 몬스터 ── */
+.boss-hp{display:flex;align-items:center;gap:1cqw;margin-bottom:.4cqw}
+.boss-hp .track{flex:1;height:1.1cqw;border:1px solid rgba(212,104,94,.5);border-radius:1px;overflow:hidden;background:rgba(0,0,0,.4)}
+.boss-hp .track i{display:block;height:100%;width:78%;background:linear-gradient(90deg,#8E3A33,var(--danger))}
+.boss-hp .n{font-family:"DM Mono",monospace;font-size:max(12px,1.2cqw);color:var(--danger);font-variant-numeric:tabular-nums}
+ul.weak{margin:0;padding:0;display:flex;flex-direction:column;gap:.95cqw}
+.weak li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:1cqw;align-items:baseline}
+.weak .k{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);color:var(--sigil);letter-spacing:.14em}
+.weak b{font-size:max(12px,1.55cqw);color:var(--fog);font-weight:500;font-family:"Noto Serif KR",serif}
+.weak em{font-style:normal;display:block;font-size:max(12px,1.3cqw);color:var(--dim);margin-top:.15cqw;line-height:1.55}
+.creed{border-left:2px solid var(--glow);padding:.9cqw 0 .9cqw 1.5cqw;font-family:"Noto Serif KR",serif;font-size:max(12px,1.9cqw);line-height:1.6;color:var(--glow)}
+.creed small{display:block;font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.2cqw);color:var(--faint);margin-top:.5cqw;letter-spacing:.05em}
+
+/* ── 로드맵 ── */
+.gained{color:var(--sigil);font-family:"DM Mono",monospace;font-size:max(12px,1.25cqw);margin-left:.6cqw}
+.road{display:flex;flex-direction:column;gap:.55cqw}
+.road div{display:grid;grid-template-columns:auto 1fr;gap:.4cqw 1.1cqw;align-items:baseline;padding-bottom:.55cqw;border-bottom:1px solid var(--line)}
+.road div:last-child{border-bottom:none}
+.road .wk{font-family:"DM Mono",monospace;font-size:max(12px,1.05cqw);letter-spacing:.12em;color:var(--faint);white-space:nowrap}
+.road b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.55cqw);color:var(--dim);font-weight:400;justify-self:start}
+.road em{font-style:normal;grid-column:2;font-size:max(12px,1.14cqw);color:var(--faint);line-height:1.5;word-break:keep-all}
+.road .now em{color:var(--dim)}
+.road .now b{color:var(--glow);font-weight:700}
+.road .now .wk{color:var(--glow)}
+
+/* ── 실습 카드 ── */
+.parts .part.now{border-color:rgba(173,85,58,.55);background:rgba(173,85,58,.07)}
+.parts .part.now .n{color:var(--glow)}
+.parts .part.later{opacity:.55}
+.part .wk{margin-top:auto;padding-top:1cqw;border-top:1px solid var(--line);font-size:max(12px,1.2cqw);letter-spacing:.06em;font-family:"DM Mono",monospace}
+.part.now .wk{color:var(--glow)}
+.part.later .wk{color:var(--faint)}
+
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;flex:0 1 auto}
+.goal{border:1px solid var(--line-strong);border-left:2px solid var(--glow);background:rgba(173,85,58,.06);
+  padding:2cqw 2.2cqw;display:flex;flex-direction:column;gap:.9cqw;text-align:left}
+.goal .n{font-family:"DM Mono",serif;font-size:max(12px,1.5cqw);letter-spacing:.2em;color:var(--glow)}
+.goal b{font-family:"Noto Serif KR",serif;font-size:max(12px,2.3cqw);color:var(--fog);font-weight:700;line-height:1.3}
+.goal span{font-size:max(12px,1.45cqw);color:var(--dim);line-height:1.7}
+.goal .t{margin-top:auto;font-family:"DM Mono",monospace;font-size:max(12px,1.2cqw);color:var(--sigil);letter-spacing:.1em}
+
+.steps{display:flex;flex-direction:column;gap:0;text-align:left}
+.step{display:grid;grid-template-columns:auto auto 1fr;gap:1.1cqw;align-items:start;
+  border-bottom:1px solid var(--line);padding:1cqw 0;cursor:pointer;background:none;border-left:0;border-right:0;border-top:0;
+  font:inherit;color:inherit;text-align:left;width:100%}
+.step:last-child{border-bottom:none}
+.step:hover .box{border-color:var(--sigil)}
+.step:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.step .box{width:1.8cqw;height:1.8cqw;border:1px solid var(--line-strong);border-radius:2px;flex:none;margin-top:.35cqw;
+  display:flex;align-items:center;justify-content:center;font-size:max(12px,1.2cqw);line-height:1;color:transparent}
+.step.done .box{border-color:var(--sigil);color:var(--sigil);background:rgba(73,101,80,.14)}
+.step .k{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);color:var(--faint);margin-top:.5cqw}
+.step b{display:block;font-family:"Noto Serif KR",serif;font-size:max(12px,1.68cqw);color:var(--fog);font-weight:700;margin-bottom:.2cqw;line-height:1.4}
+.step em{font-style:normal;display:block;font-size:max(12px,1.32cqw);color:var(--dim);line-height:1.6}
+.step.done b{color:var(--dim)}
+
+.verify{display:flex;flex-direction:column;gap:1cqw;text-align:left}
+.vrow{display:grid;grid-template-columns:auto 1fr;gap:1cqw;align-items:baseline}
+.vrow .m{font-family:"DM Mono",monospace;font-size:max(12px,1.3cqw);line-height:1.4}
+.vrow.ok .m{color:var(--sigil)}
+.vrow.no .m{color:var(--danger)}
+.vrow b{display:block;font-size:max(12px,1.5cqw);color:var(--fog);font-weight:500;font-family:"Noto Serif KR",serif;margin-bottom:.15cqw}
+.vrow em{font-style:normal;display:block;font-size:max(12px,1.3cqw);color:var(--dim);line-height:1.6}
+
+.codebox{
+  font-family:"DM Mono",monospace;font-size:max(12px,1.3cqw);line-height:1.85;color:var(--fog);
+  background:rgba(3,7,6,.55);border:1px solid var(--line);border-left:2px solid var(--sigil);
+  padding:1.5cqw 1.8cqw;margin:0;white-space:pre-wrap;overflow:auto;text-align:left;flex:1 1 auto;min-height:0;
+}
+.codebox .c{color:var(--faint);user-select:none}
+.codebox .h{color:var(--glow)}
+.codebox .u{color:var(--ember)}
+
+/* ── 펼침형 실습 단계 ── */
+.asteps{display:flex;flex-direction:column;text-align:left;overflow-y:auto;min-height:0;flex:1 1 auto}
+.astep{display:grid;grid-template-columns:auto 1fr;gap:.3cqw 1.1cqw;
+  border-bottom:1px solid var(--line);padding:.95cqw 0;align-items:start}
+.astep:last-child{border-bottom:none}
+.a-box{
+  width:1.8cqw;height:1.8cqw;border:1px solid var(--line-strong);border-radius:2px;
+  background:none;padding:0;margin-top:.5cqw;cursor:pointer;flex:none;
+  display:flex;align-items:center;justify-content:center;font-size:max(12px,1.2cqw);line-height:1;color:transparent;
+}
+.a-box:hover{border-color:var(--sigil)}
+.a-box:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.astep.done .a-box{border-color:var(--sigil);color:var(--sigil);background:rgba(73,101,80,.14)}
+.a-head{
+  font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left;
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.1cqw;align-items:baseline;width:100%;
+}
+.a-head:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+.a-head .k{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);color:var(--faint)}
+.a-head b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.68cqw);color:var(--fog);font-weight:700;line-height:1.42}
+.a-head:hover b{color:var(--glow)}
+.astep.done .a-head b{color:var(--dim)}
+.a-head .caret{font-size:max(12px,1.1cqw);color:var(--faint);transition:transform .18s}
+.astep.open .a-head .caret{transform:rotate(180deg);color:var(--sigil)}
+.a-body{grid-column:2;display:none;padding:.85cqw 0 .35cqw;flex-direction:column;gap:.8cqw}
+.astep.open .a-body{display:flex}
+.a-body .d{margin:0;font-size:max(12px,1.32cqw);color:var(--dim);line-height:1.68}
+.a-body .vrow .m{font-size:max(12px,1.2cqw)}
+.a-body .vrow b{font-size:max(12px,1.4cqw)}
+.a-body .vrow em{font-size:max(12px,1.25cqw)}
+
+.imgpanel{gap:1.2cqw}
+.imgslot{
+  flex:1 1 auto;min-height:0;border:1px dashed var(--line-strong);border-radius:2px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  background:repeating-linear-gradient(135deg, rgba(41,61,54,.03) 0 8px, transparent 8px 16px);
+}
+.imgslot span{font-family:"DM Mono",monospace;font-size:max(12px,1.25cqw);letter-spacing:.14em;color:var(--faint);line-height:2}
+.imgslot img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+
+#v7 .codebox,#v12 .codebox{font-size:max(12px,1.13cqw);line-height:1.6;padding:1.3cqw 1.5cqw}
+#v7 .codebox{font-size:max(12px,1.04cqw);line-height:1.52}
+.slide.spell-long .codebox{font-size:max(12px,.88cqw);line-height:1.42;padding:1cqw 1.3cqw}
+.slide.spell-long .panel p{font-size:max(12px,1.36cqw);line-height:1.6}
+#v12 .codebox{font-size:max(12px,1.04cqw);line-height:1.52}
+#v7 .cols,#v12 .cols{grid-template-columns:1.45fr 1fr}
+#v7 .panel p,#v12 .panel p{font-size:max(12px,1.44cqw);line-height:1.66}
+.codebox .c{color:var(--faint)}
+.codebox .e{color:var(--danger);opacity:.85}
+.goal .sublabel{display:block;font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.32cqw);font-weight:400;color:var(--sigil);letter-spacing:.01em;margin-top:.4cqw}
+.bosspanel{gap:.9cqw}
+.bossbody{display:grid;grid-template-columns:auto 1fr;gap:1.6cqw;align-items:start;flex:1 1 auto;min-height:0}
+.bossart{
+  width:13cqw;height:17cqw;flex:none;
+  background:var(--boss) center/contain no-repeat;
+  filter:drop-shadow(0 0 2.2cqw rgba(168,92,222,.55));
+  animation:bossfloat 4.4s ease-in-out infinite;
+}
+@keyframes bossfloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-4%) rotate(1deg)}}
+.bosstext{display:flex;flex-direction:column;gap:.9cqw;min-width:0}
+.bosstext h3{margin:0}
+/* 스토리 장면의 몬스터 */
+.bossfoe{
+  position:absolute;left:5cqw;top:6%;width:31cqw;height:58%;
+  background:var(--boss) center/contain no-repeat;
+  filter:drop-shadow(0 1.2cqw 2.6cqw rgba(0,0,0,.6)) drop-shadow(0 0 3cqw rgba(168,92,222,.5));
+  animation:bossloom 5s ease-in-out infinite;
+  z-index:2;
+}
+@keyframes bossloom{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2.5%) scale(1.03)}}
+.veil.boss{background:
+  radial-gradient(46% 46% at 24% 42%, rgba(168,92,222,.30), transparent 70%),
+  linear-gradient(180deg, rgba(10,4,16,.62), rgba(4,2,7,.94));}
+.bossside{display:flex;align-items:flex-start}
+.bubble{
+  position:relative;align-self:stretch;
+  border:1px solid rgba(190,120,240,.5);border-radius:3px;
+  background:linear-gradient(180deg, rgba(60,26,86,.55), rgba(26,12,38,.6));
+  padding:1.1cqw 1.3cqw;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,1.42cqw);line-height:1.6;color:#754a3c;
+  word-break:keep-all;
+}
+.bubble::before,.bubble::after{
+  content:"";position:absolute;top:2.2cqw;width:0;height:0;
+  border-top:.75cqw solid transparent;border-bottom:.75cqw solid transparent;
+}
+.bubble::before{left:-1.05cqw;border-right:1.05cqw solid rgba(190,120,240,.5)}
+.bubble::after{left:-.9cqw;border-right:.9cqw solid #2A1140}
+.ix{color:var(--glow);font-family:"DM Mono",monospace;font-size:.94em}
+.spellcopy{
+  margin-left:1.1cqw;padding:.55cqw 1.05cqw;white-space:nowrap;align-self:center;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,1.32cqw);font-weight:700;letter-spacing:.04em;
+  color:var(--glow);background:rgba(173,85,58,.10);
+  border:1px solid rgba(173,85,58,.5);border-radius:2px;cursor:pointer;
+  transition:background .18s, color .18s, border-color .18s;
+}
+.spellcopy:hover{background:rgba(173,85,58,.22);color:#FFF3CE;border-color:rgba(173,85,58,.85)}
+.spellcopy:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+.spellcopy.done{color:var(--sigil);border-color:rgba(73,101,80,.8);background:rgba(73,101,80,.16)}
+/* 슬라이드 10 · 1단계는 사진 대신 설명 칸 */
+.imgslot-flow .flowgroup.whygroup{align-items:stretch;justify-content:flex-start;height:100%;text-align:left}
+/* 설명 칸일 때는 빈 슬롯처럼 보이는 점선·빗금을 끈다 */
+#v11 .imgslot:has(.whygroup.active){border-style:none;background:none;padding:0}
+#v11 .imgslot:has(.whygroup.active) span{letter-spacing:normal}
+.whybox{display:flex;flex-direction:column;gap:1.5cqw;width:100%;height:100%;text-align:left}
+.whybox p{margin:0;font-size:max(12px,1.55cqw);line-height:1.72;color:var(--dim);word-break:keep-all;text-align:left}
+.whybox p.last{margin-top:auto;color:var(--faint)}
+/* 공격 내용 패널 — 붉은 계열 */
+.panel.weakpanel{
+  border-color:rgba(212,104,94,.45);
+  background:linear-gradient(180deg,rgba(212,104,94,.13),rgba(212,104,94,.05) 46%,rgba(255,253,248,.45));
+}
+.panel.weakpanel .plabel{color:var(--danger)}
+.panel.weakpanel .weak .k{color:var(--danger)}
+.panel.weakpanel .creed{border-color:rgba(212,104,94,.4);background:rgba(212,104,94,.08)}
+/* 주문서 복사 안내 토스트 */
+.toast{
+  position:absolute;left:50%;bottom:4cqw;transform:translateX(-50%);z-index:30;
+  display:none;align-items:center;gap:1cqw;
+  padding:1.3cqw 2.2cqw;border:1px solid var(--glow);border-radius:2px;
+  background:linear-gradient(180deg,#1A2A20,#0A120E);
+  box-shadow:0 1.4cqw 4cqw -.8cqw rgba(0,0,0,.85), inset 0 0 0 1px rgba(173,85,58,.14);
+  font-family:"Noto Serif KR",serif;font-size:max(12px,2cqw);font-weight:700;color:var(--glow);
+  white-space:nowrap;
+}
+.toast.on{display:flex;animation:toastin .25s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes toastin{from{opacity:0;transform:translateX(-50%) translateY(1.2cqw)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.toast .kbd{
+  font-family:"DM Mono",monospace;font-size:max(12px,1.5cqw);letter-spacing:.06em;
+  color:var(--night);background:var(--glow);border-radius:2px;padding:.3cqw .8cqw;
+}
+.head .sub .hl{color:var(--ember);font-weight:500}
+.ix{color:var(--glow);font-family:"DM Mono",monospace;font-size:.94em}
+.panel p .u{color:var(--ember);font-family:"DM Mono",monospace}
+.creedline{
+  display:block;margin-top:.35cqw;white-space:nowrap;
+  font-family:"Noto Sans KR",sans-serif;font-size:max(12px,1.2cqw);font-weight:400;
+  letter-spacing:.01em;color:var(--faint);
+}
+.spellback.done{margin-left:.8cqw}
+#s7b .head{align-items:flex-start;gap:1cqw}
+#s7b .head h2{white-space:nowrap;flex:0 0 auto}
+#s7b .head .sub{align-self:flex-start;margin-top:.9cqw}
+#s7b .spellcopy,#s7b .spellback.done{align-self:flex-start;margin-top:.5cqw;flex:0 0 auto}
+#s7b .head .sub{flex:1 1 auto;min-width:0}
+#s7b .spellback.done{margin-right:.2cqw}
+/* 마법 주문 배우기 — 아코디언 안의 이동 링크 */
+.spelllink{
+  align-self:flex-start;margin-top:.7cqw;padding:.5cqw .95cqw;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,1.42cqw);font-weight:700;letter-spacing:.03em;
+  color:var(--glow);background:rgba(173,85,58,.08);
+  border:1px solid rgba(173,85,58,.42);border-radius:2px;
+  cursor:pointer;transition:background .18s, color .18s, border-color .18s;
+}
+.spelllink:hover{background:rgba(173,85,58,.18);color:#FFF3CE;border-color:rgba(173,85,58,.75)}
+.spelllink:focus-visible{outline:2px solid var(--sigil);outline-offset:3px}
+
+/* 주문 제조 완료 — 슬라이드 17에서 세팅 ②로 복귀 */
+.spellback{
+  margin-left:1.1cqw;padding:.55cqw 1.05cqw;white-space:nowrap;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,1.32cqw);font-weight:700;letter-spacing:.04em;
+  color:var(--sigil);background:rgba(73,101,80,.10);
+  border:1px solid rgba(73,101,80,.5);border-radius:2px;cursor:pointer;
+  transition:background .18s, color .18s, border-color .18s;
+}
+.spellback:hover{background:rgba(73,101,80,.22);color:#BDEBD8;border-color:rgba(73,101,80,.85)}
+.spellback:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+.head .sub + .spellback{margin-left:1.1cqw}
+
+.backrow{position:relative;z-index:2;margin-bottom:1.2cqw}
+.backrow .spellback{margin-left:0}
+.headside{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:.7cqw;flex:0 0 auto}
+.headbtns{display:flex;gap:.8cqw}
+.headside .sub{margin-left:0;text-align:right;white-space:nowrap}
+#v7 .head,#v12 .head{align-items:flex-start;gap:1cqw}
+#v7 .head h2,#v12 .head h2{white-space:nowrap;flex:0 0 auto}
+#v7 .spellcopy,#v12 .spellcopy,#v7 .spellback,#v12 .spellback{margin-left:0}
+.runestrip{margin-top:1.2cqw;display:flex;flex-direction:column;gap:.6cqw}
+.rlabel{font-family:"DM Mono",monospace;font-size:max(12px,1.05cqw);letter-spacing:.2em;color:var(--faint);text-transform:uppercase}
+.rrow{display:flex;gap:1.1cqw;align-items:stretch}
+.ritem{
+  flex:1 1 0;min-width:0;font:inherit;color:inherit;text-align:left;cursor:pointer;
+  border:1px solid var(--line);border-left:2px solid var(--faint);background:rgba(255,253,248,.45);
+  padding:.95cqw 1.2cqw;display:flex;flex-direction:column;gap:.55cqw;
+  transition:flex-grow .32s cubic-bezier(.2,.8,.3,1), background .2s, border-color .2s;
+}
+.ritem:hover{border-color:var(--line-strong)}
+.ritem:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.ritem.open{flex-grow:2.4}
+/* 노란 강조는 '이번 주에 하는 칸'에만. 나머지는 펼쳐도 색이 안 들어와 참고용임이 드러난다 */
+.ritem.main{border-left-color:var(--glow);background:rgba(173,85,58,.08)}
+.ritem.main .sig{color:var(--glow)}
+.ritem.ref.open{border-left-color:var(--line-strong);background:rgba(255,253,248,.72)}
+.rhead{display:flex;align-items:baseline;gap:.85cqw;white-space:nowrap}
+.ritem .sig{font-family:"DM Mono",serif;font-size:max(12px,1.2cqw);color:var(--faint);letter-spacing:.1em}
+.ritem b{font-family:"Noto Serif KR",serif;font-size:max(12px,1.6cqw);color:var(--dim);font-weight:700}
+.ritem.main b{color:var(--fog)}
+.ritem.open b{color:var(--fog);font-size:max(12px,1.85cqw)}
+.ritem em{font-style:normal;font-size:max(12px,1.22cqw);color:var(--faint)}
+.ritem.open em{color:var(--dim)}
+.rbody{display:none;font-size:max(12px,1.24cqw);line-height:1.58;color:var(--dim);word-break:keep-all}
+.ritem.open .rbody{display:block;animation:rfade .28s ease both}
+@keyframes rfade{from{opacity:0;transform:translateY(.4cqw)}to{opacity:1;transform:translateY(0)}}
+.rbody .rwk{display:block;margin-top:.7cqw;padding-top:.55cqw;border-top:1px solid var(--line);
+  font-family:"DM Mono",monospace;font-size:max(12px,1.02cqw);letter-spacing:.06em;color:var(--faint)}
+.ritem.main .rbody .rwk{color:var(--glow)}
+#v4,.slide.today{padding-top:3.4cqw;padding-bottom:3.4cqw}
+#v4 .head,.slide.today .head{margin-bottom:1.6cqw}
+#v4 .goals,.slide.today .goals{flex:0 0 auto;gap:1.6cqw}
+#v4 .goal,.slide.today .goal{padding:1.5cqw 1.7cqw;gap:.55cqw}
+#v4 .goal b,.slide.today .goal b{font-size:max(12px,2.1cqw)}
+#v4 .goal span,.slide.today .goal span{font-size:max(12px,1.36cqw);line-height:1.6}
+#v4 .dbox,.slide.today .dbox{margin-top:1.4cqw;padding:1.5cqw 2cqw 1.3cqw}
+#v4 .dbox p,.slide.today .dbox p{font-size:max(12px,1.72cqw)}
+.runestrip{margin-top:1.3cqw;display:flex;flex-direction:column;gap:.6cqw;flex:1 1 auto;min-height:0}
+.rrow{display:flex;gap:1.1cqw;align-items:stretch;flex:1 1 auto;min-height:0}
+.ritem{overflow:hidden}
+.rbody{overflow:hidden}
+
+/* ── Mr.그럴듯 등장 인트로 — 동굴 ── */
+.monintro{
+  position:absolute;inset:0;z-index:40;display:none;overflow:hidden;
+  background:#07050B;
+}
+.slide.on .monintro.play{display:block}
+/* 동굴 벽과 입구 */
+.mi-cave{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(42% 52% at 50% 46%, rgba(120,52,180,.30), rgba(52,20,86,.10) 55%, rgba(0,0,0,0) 76%),
+    radial-gradient(78% 88% at 50% 50%, rgba(0,0,0,0) 30%, rgba(3,2,6,.92) 100%),
+    radial-gradient(120% 70% at 50% 108%, rgba(96,44,150,.22), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg,#0A0710 0%, #07050B 60%, #040308 100%);
+}
+/* 종유석 실루엣 */
+.mi-cave::before,.mi-cave::after{
+  content:"";position:absolute;left:0;right:0;height:22%;
+  background:repeating-linear-gradient(90deg,
+    #05040A 0 3.2cqw, rgba(0,0,0,0) 3.2cqw 4.2cqw, #05040A 4.2cqw 6.4cqw, rgba(0,0,0,0) 6.4cqw 8.1cqw);
+  -webkit-mask-image:linear-gradient(180deg,#000 22%,rgba(0,0,0,.35) 62%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 22%,rgba(0,0,0,.35) 62%,transparent 100%);
+}
+.mi-cave::before{top:0;clip-path:polygon(0 0,100% 0,100% 40%,96% 78%,92% 34%,86% 92%,80% 30%,74% 70%,68% 26%,62% 86%,55% 38%,48% 74%,42% 28%,36% 88%,30% 36%,24% 68%,18% 24%,12% 80%,6% 32%,0 62%)}
+.mi-cave::after{bottom:0;transform:scaleY(-1);clip-path:polygon(0 0,100% 0,100% 44%,95% 72%,89% 30%,83% 84%,77% 26%,70% 66%,64% 32%,57% 78%,50% 28%,44% 70%,38% 24%,31% 82%,25% 34%,19% 64%,13% 28%,7% 76%,0 40%)}
+/* 바닥 안개 */
+.mi-fog{
+  position:absolute;left:-10%;right:-10%;bottom:-6%;height:46%;
+  background:radial-gradient(60% 100% at 50% 100%, rgba(140,80,200,.26), rgba(0,0,0,0) 72%);
+  filter:blur(1.4cqw);
+  animation:mifog 9s ease-in-out infinite;
+}
+@keyframes mifog{0%,100%{transform:translateX(-2%) scaleY(1)}50%{transform:translateX(2%) scaleY(1.12)}}
+/* 떨어지는 물방울 */
+.mi-drip{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(1.5px 9px at 18% 0%, rgba(190,150,240,.5), transparent 70%),
+    radial-gradient(1.5px 7px at 43% 0%, rgba(190,150,240,.36), transparent 70%),
+    radial-gradient(1.5px 11px at 71% 0%, rgba(190,150,240,.44), transparent 70%),
+    radial-gradient(1.5px 8px at 88% 0%, rgba(190,150,240,.3), transparent 70%);
+  animation:midrip 3.2s linear infinite;
+}
+@keyframes midrip{from{transform:translateY(-12%)}to{transform:translateY(112%)}}
+
+.mi-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:4cqw;z-index:2}
+.mi-art{
+  width:26cqw;height:34cqw;flex:none;
+  background:var(--boss) center/contain no-repeat;
+  opacity:0;
+  filter:drop-shadow(0 0 3cqw rgba(168,92,222,.75));
+  animation:mirise 2.4s cubic-bezier(.2,.7,.3,1) .2s both, mifloat 3.4s ease-in-out 2.6s infinite;
+}
+@keyframes mirise{
+  0%{opacity:0;transform:translateY(16%) scale(.82);filter:blur(2.4cqw) drop-shadow(0 0 0 rgba(168,92,222,0))}
+  60%{opacity:.9;filter:blur(.5cqw) drop-shadow(0 0 3cqw rgba(168,92,222,.6))}
+  100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0) drop-shadow(0 0 3cqw rgba(168,92,222,.75))}
+}
+@keyframes mifloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5%)}}
+.mi-msg{
+  max-width:42cqw;opacity:0;
+  font-family:"Noto Serif KR",serif;font-size:max(12px,2.5cqw);line-height:1.7;color:#754a3c;
+  text-shadow:0 0 2.4cqw rgba(168,92,222,.6);word-break:keep-all;
+  animation:mitext 1.6s ease-out 1.5s both;
+}
+.mi-msg b{color:#D9A8FF;font-weight:700}
+@keyframes mitext{from{opacity:0;transform:translateY(1.4cqw)}to{opacity:1;transform:translateY(0)}}
+.mi-skip{
+  position:absolute;bottom:4cqw;left:50%;transform:translateX(-50%);z-index:3;
+  font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.18em;color:var(--faint);
+  opacity:0;animation:miblink 2.2s ease-in-out 3s infinite;
+}
+@keyframes miblink{0%,100%{opacity:.25}50%{opacity:.9}}
+
+/* ── Mr.그럴듯 소멸 (슬라이드 12) ── */
+.bossmelt{
+  position:absolute;left:5cqw;top:6%;width:31cqw;height:58%;z-index:2;
+  background:var(--boss) center/contain no-repeat;
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 0 3cqw rgba(168,92,222,.5));
+  animation:bossmelt 3.6s cubic-bezier(.45,.02,.75,.4) .6s both;
+}
+@keyframes bossmelt{
+  0%{opacity:.95;transform:scaleY(1) scaleX(1) translateY(0);filter:blur(0) drop-shadow(0 0 3cqw rgba(168,92,222,.5))}
+  35%{opacity:.8;transform:scaleY(.82) scaleX(1.08) translateY(9%);filter:blur(.3cqw)}
+  70%{opacity:.4;transform:scaleY(.34) scaleX(1.3) translateY(28%);filter:blur(1cqw)}
+  100%{opacity:0;transform:scaleY(.06) scaleX(1.55) translateY(40%);filter:blur(2cqw)}
+}
+.hitfx{
+  position:absolute;z-index:25;pointer-events:none;white-space:nowrap;
+  font-family:"Noto Serif KR",serif;font-weight:700;font-size:max(12px,2.1cqw);letter-spacing:.02em;
+  animation:hitpop 1.15s cubic-bezier(.2,.9,.3,1) both;
+}
+.hitfx.skill{color:var(--sigil);text-shadow:0 0 1.8cqw rgba(73,101,80,.75)}
+.hitfx.fx-def{color:#8CC4FF;text-shadow:0 0 1.8cqw rgba(140,196,255,.7)}
+.hitfx.fx-mag{color:#CFA6FF;text-shadow:0 0 1.8cqw rgba(207,166,255,.7)}
+.hitfx.fx-acc{color:#FFD86B;text-shadow:0 0 1.8cqw rgba(255,216,107,.7)}
+.hitfx.fx-atk{color:#FF9A6B;text-shadow:0 0 1.8cqw rgba(255,154,107,.7)}
+.hitfx.fx-hp{color:#8CE8A8;text-shadow:0 0 1.8cqw rgba(140,232,168,.7)}
+.hitfx.fx-exp{color:#FFE98A;text-shadow:0 0 1.8cqw rgba(255,233,138,.75);font-size:max(12px,2.4cqw)}
+.hitfx.fx-wis{color:#A6EEFF;text-shadow:0 0 1.8cqw rgba(166,238,255,.7)}
+.hitfx.fx-skill{color:var(--sigil);text-shadow:0 0 1.8cqw rgba(73,101,80,.75)}
+.hitfx.dmg{color:#FF7B6B;text-shadow:0 0 1.8cqw rgba(255,123,107,.7);display:flex;align-items:center;gap:.55cqw}
+.hitmon{
+  width:2.6cqw;height:2.6cqw;flex:none;
+  background:var(--boss) center/contain no-repeat;
+  filter:drop-shadow(0 0 .7cqw rgba(178,102,214,.85));
+  animation:hitmonshake .42s ease-in-out 2 both;
+}
+@keyframes hitmonshake{
+  0%,100%{transform:translateX(0) rotate(0)}
+  25%{transform:translateX(-.22cqw) rotate(-7deg)}
+  75%{transform:translateX(.22cqw) rotate(7deg)}
+}
+@keyframes hitpop{
+  0%{opacity:0;transform:translate(-50%,0) scale(.7)}
+  22%{opacity:1;transform:translate(-50%,-1.4cqw) scale(1.12)}
+  55%{opacity:1;transform:translate(-50%,-2.6cqw) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-5cqw) scale(.95)}
+}
+.gatehint{
+  position:absolute;left:50%;bottom:1.1cqw;transform:translateX(-50%);z-index:12;
+  font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.12em;
+  color:var(--danger);opacity:0;pointer-events:none;
+}
+.gatehint.show{animation:ghshake 1.8s ease both}
+@keyframes ghshake{
+  0%{opacity:0} 8%{opacity:1;transform:translateX(-50%) translateX(-.5cqw)}
+  14%{transform:translateX(-50%) translateX(.5cqw)} 20%{transform:translateX(-50%) translateX(0)}
+  80%{opacity:1} 100%{opacity:0}
+}
+.boss-hp .track i{transition:width .5s cubic-bezier(.3,.8,.4,1)}
+.imgslot.filled{background:none;border-style:solid;border-color:var(--line)}
+.imgslot-flow{
+  flex-direction:column;padding:1cqw;position:relative;
+  align-items:stretch;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;
+}
+.imgslot-flow{scrollbar-width:thin;scrollbar-color:rgba(232,240,228,.75) rgba(41,61,54,.10)}
+.imgslot-flow::-webkit-scrollbar{width:9px}
+.imgslot-flow::-webkit-scrollbar-track{background:rgba(41,61,54,.10);border-radius:5px}
+.imgslot-flow::-webkit-scrollbar-thumb{background:rgba(232,240,228,.75);border-radius:5px}
+.imgslot-flow::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.92)}
+.imgslot-flow .flowstep{margin:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:.5cqw;flex:0 0 auto}
+.imgslot-flow .flowstep img{
+  width:100%;height:auto;max-width:100%;display:block;
+  border:1px solid var(--line);border-radius:2px;cursor:zoom-in;
+}
+/* 원본이 작은 이미지는 늘려서 뭉개지 말고, 자연 크기까지만 + 여백 */
+.imgslot-flow .flowstep img.small{width:auto;max-width:min(100%, 62%);margin:.4cqw auto}
+.imgslot-flow .flowstep figcaption{font-family:"DM Mono",monospace;font-size:max(12px,1.1cqw);letter-spacing:.08em;color:var(--dim);text-align:center}
+.imgslot-flow .flowarrow{font-size:max(12px,1.4cqw);color:var(--sigil);text-align:center;flex:0 0 auto}
+.imgslot-flow .flowgroup{display:none;flex-direction:column;align-items:center;gap:.7cqw;width:100%;animation:flowfade .22s ease}
+.imgslot-flow .flowgroup.solo{justify-content:center;height:100%}
+.imgslot-flow .flowgroup.solo .flowstep img{width:100%}
+.imgslot-flow .flowgroup.active{display:flex}
+.imgslot-flow .flowempty{font-family:"DM Mono",monospace;font-size:max(12px,1.15cqw);letter-spacing:.06em;color:var(--faint);text-align:center;line-height:1.9;margin:auto}
+
+/* ── 이미지 확대(라이트박스) ── */
+.lightbox{
+  position:fixed;inset:0;z-index:999;display:none;
+  align-items:center;justify-content:center;padding:4vh 4vw;
+  background:rgba(4,9,7,.92);backdrop-filter:blur(3px);cursor:zoom-out;
+}
+.lightbox.on{display:flex}
+.lightbox img{
+  max-width:80vw;max-height:80vh;width:auto;height:auto;object-fit:contain;
+  border:1px solid var(--line-strong);border-radius:3px;box-shadow:0 24px 80px rgba(0,0,0,.7);
+}
+.lightbox .lbcap{
+  position:absolute;bottom:5vh;left:50%;transform:translateX(-50%);
+  font-family:"DM Mono",monospace;font-size:13px;letter-spacing:.1em;color:var(--dim);
+}
+.lightbox .lbclose{
+  position:absolute;top:3vh;right:3vw;font-size:26px;line-height:1;color:var(--fog);
+  background:none;border:none;cursor:pointer;padding:6px 10px;
+}
+@keyframes flowfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── 조작부 ── */
+
+
+.hud{
+  width:min(97vw, calc((100dvh - 104px) * 16 / 9));
+  display:flex;align-items:center;gap:14px;
+  font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.16em;color:var(--faint);
+}
+.hud .now{color:var(--dim);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud button{font:inherit;letter-spacing:.16em;color:var(--fog);background:transparent;border:1px solid var(--line-strong);border-radius:2px;padding:6px 13px;cursor:pointer;transition:border-color .15s,color .15s}
+.hud button:hover{border-color:var(--sigil);color:var(--sigil)}
+.hud button:focus-visible{outline:2px solid var(--sigil);outline-offset:2px}
+.hud .count{color:var(--glow);font-variant-numeric:tabular-nums}
+.pips{display:flex;gap:3px}
+.pips i{width:11px;height:2px;background:var(--faint);opacity:.45;display:block}
+.pips i.on{background:var(--glow);opacity:1}
+
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:640px){.hud{font-size:10px;gap:9px}.hud button{padding:5px 9px}.pips{display:none}}
+</style>
+
+<style>
+/* ── 6주차 기준 맞춤: 글자 안 끊기게 · 대사 따옴표 들여쓰기 ── */
+.stage{word-break:keep-all;overflow-wrap:break-word}
+.dbox p.qhang{padding-left:var(--qw,.32em);text-indent:calc(-1 * var(--qw,.32em))}
+/* 말풍선 색: 페어리 하늘색 · 오인턴 초록 */
+.dbox.fy{border-color:rgba(92,132,134,.42);background:linear-gradient(180deg, rgba(102,137,139,.30) 0%, rgba(70,135,205,.14) 11%, rgba(255,253,248,0) 20%), linear-gradient(180deg, rgba(255,253,248,.94), rgba(244,238,227,.94));box-shadow:inset 0 1px 0 rgba(181,202,190,.6), inset 0 0 0 1px rgba(92,132,134,.08), 0 -0.4cqw 1.6cqw -0.6cqw rgba(102,137,139,.35)}
+.dbox.fy .who{color:#A8D8FF}
+.dbox.oi{border-color:rgba(73,101,80,.42);background:linear-gradient(180deg, rgba(60,150,105,.30) 0%, rgba(30,95,65,.14) 11%, rgba(255,253,248,0) 20%), linear-gradient(180deg, rgba(255,253,248,.94), rgba(244,238,227,.94));box-shadow:inset 0 1px 0 rgba(160,230,195,.55), inset 0 0 0 1px rgba(73,101,80,.08), 0 -0.4cqw 1.6cqw -0.6cqw rgba(73,101,80,.3)}
+.dbox.oi .who{color:#9FE0C0}
+.story .dbox.fy:has(+ .dbox),.story .dbox.oi:has(+ .dbox){border-bottom-color:transparent}
+</style>
+
+<div class="stage" id="stage" tabindex="0" role="group" aria-label="[WEEK 3] 나만의 시종 만들기 슬라이드">
+
+  <!-- 1 -->
+  
+  <section class="slide on titlecard ice" id="w0" data-name="1 · 타이틀">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas></div>
+    <div class="tcard">
+      <small>WEEK 03 · 2막 시종을 만든다</small>
+      <h1>나만의 시종 만들기</h1>
+      <span class="place">영혼의 얼음 동굴</span>
+    </div>
+    
+  </section>
+
+  <section class="slide story" id="w1" data-name="2 · WEEK 03 오프닝">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura"></div></div>
+    <div class="story-body">
+      <p class="direction">오두막을 나선 지 이틀. 페어리가 이끈 곳은 영혼의 얼음 동굴이다.</p>
+      <div class="dbox oi"><span class="who">오인턴</span>
+        <p>“하네스는 붙였어. 그런데 결국 매번 내가 시켜야 하잖아.”</p><p>“…근데 왜 하필 여기야. 춥잖아.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide story" id="w2" data-name="3 · 시종을 만든다">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo"></div><div class="fairy" style="left:13cqw;top:30%"></div></div>
+    <div class="story-body">
+      <p class="direction">페어리가 빙글 돌더니 오인턴 앞에 멈춘다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“여긴 <span style="color:var(--glow)">시종을 빚는 곳</span>이에요.<br>&#160;영혼의 얼음을 깨서 ‘알아서’ 일하는 에이전트를 만들 수 있거든요.”</p><p>“오늘 하나 깨볼 거예요. 한 번 만들어두면, 다음부턴 부르기만 하면 돼요.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="w3" data-gate="quest" data-name="4 · 진행해야 하는 퀘스트">
+    <div class="head">
+      <span class="chapter">QUEST BOARD</span>
+      <h2>진행해야 하는 퀘스트</h2>
+      <span class="sub">WEEK 03 / 26</span>
+    </div>
+    <div class="quests">
+      <button type="button" class="quest locked" data-msg="아직이야.
+부릴 것부터 하나 만들자." data-btn="확인" data-tag="SYSTEM">
+        <span class="q-no">◆</span>
+        <span class="q-body"><strong>[메인] 클로드로 AI Agent 구축해서 현실로 돌아가기</strong><span>최종 목표. 장비는 갖췄지만 아직 부릴 것이 없다</span></span>
+        <span class="q-diff">잠김 · LV 부족</span>
+      </button>
+      <button type="button" class="quest story" data-go="1">
+        <span class="q-no">✦</span>
+        <span class="q-body"><strong>[스토리] 에이전트 설계하기 (1) — 나만의 시종 만들기</strong><span>할 일을 파일 하나에 적어두고, 그 파일 이름으로 부른다</span></span>
+        <span class="q-diff">진행 가능 ▶</span>
+      </button>
+      <button type="button" class="quest" data-msg="오후 세 시에 커피 없이 버티는 사람이 있나.
+내일부터 진짜 끊는다." data-btn="포기하기" data-tag="WARNING">
+        <span class="q-no">○</span>
+        <span class="q-body"><strong>[서브] 의사선생님 말 듣고 커피 그만 마시기</strong><span>수락 173회 · 실패 173회 · 완료 0회</span></span>
+        <span class="q-diff">난이도 ★★★</span>
+      </button>
+    </div>
+    <div class="dbox fy"><span class="who">페어리</span>
+      <p>“오늘은 하나예요. 시종 한 마리를 만들어요. 대신 끝까지.”</p><span class="cue">▼</span></div>
+  </section>
+
+  <section class="slide today" id="w4" data-name="5 · 오늘 할 일">
+    <div class="head">
+      <span class="chapter">TODAY</span>
+      <h2>오늘 할 일은 하나 · 시종 한 마리</h2>
+      <span class="sub">TOTAL 25 MIN</span>
+    </div>
+    <div class="goals">
+      <div class="goal">
+        <span class="n">STEP 01</span>
+        <b>규칙.md 줄이고, 시종.md 만들기 <span class="sublabel">- 파일 두 개를 손본다</span></b>
+        <span>규칙.md를 3주차 버전으로 덮어쓰고, 시종.md를 새로 만든다. 둘 다 주문서를 복사해 붙이면 된다.</span>
+        <span class="t">약 15분</span>
+      </div>
+      <div class="goal">
+        <span class="n">STEP 02</span>
+        <b>첫 일 시키기 <span class="sublabel">- 「시종.md 읽고, 정책자료 요약해줘」</span></b>
+        <span>결과 폴더에 자료요약.md가 생기면 시종 한 마리 확보. 한 줄만 원문과 맞춰본다.</span>
+        <span class="t">약 10분</span>
+      </div>
+    </div>
+    <div class="dbox"><span class="who">준비물</span>
+      <p>1주차에 썼던 작업 폴더 — <span style="color:var(--glow)">이 대화에 다시 연결한다.</span> 그리고 정책자료 파일 두세 개. 연결은 대화마다 새로 한다.</p><span class="cue">▼</span></div>
+  </section>
+
+  <section class="slide story" id="w8" data-name="6 · 시종 파일 네 칸">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas>
+      <div class="fairy" style="left:15cqw;top:30%"></div>
+      <div class="bubbles">
+        <div class="bub b1"><span class="bn">1</span><b># 이름</b></div>
+        <div class="bub b2"><span class="bn">2</span><b>규칙.md를 먼저 읽고 따른다</b></div>
+        <div class="bub b3"><span class="bn">3</span><b>## 할 일</b></div>
+        <div class="bub b4"><span class="bn">4</span><b>## 다 됐다는 기준</b></div>
+      </div>
+    </div>
+    <div class="story-body">
+      <p class="direction">페어리가 손가락을 튕기자, 허공에 네 칸이 떠오른다. 시종은 이 네 칸이 전부다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“규칙.md는 <b>폴더의 규칙</b>이고, 시종.md는 <b>일꾼 하나의 할 일</b>이에요.<br>&#160;그래서 규칙.md에 있던 절차는 오늘 시종.md로 옮겨요.”</p>
+        <p>“<span style="color:var(--glow)">규칙.md는 짧아지고, 시종.md가 생겨요.</span> 네 칸만 채우면 돼요.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide story" id="w10" data-name="7 · 하나만 만든다">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo"></div><div class="fairy" style="left:15cqw;top:30%"></div></div>
+    <div class="story-body">
+      <p class="direction">페어리가 시종 얘기를 꺼내자, 오인턴이 슬쩍 묻는다.</p>
+      <div class="dbox oi"><span class="who">오인턴</span>
+        <p>“셋 다 오늘 만들면 안 돼?”</p><p>“…그 말 하실 줄 알았어요. 첫 시종은 하나예요.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide story" id="w9b" data-name="8 · 우리가 만들려는 것">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas>
+      <div class="fairy" style="left:15cqw;top:30%"></div>
+      <div class="bubbles bubbles3">
+        <div class="bub b1 now crack"><i class="cr"></i><span class="bn">1</span><span class="bt"><b>시종.md</b><small>정책자료를 읽고 요약표를 만든다 — 오늘 만들 한 마리</small></span></div>
+        <div class="bub b2 dim"><span class="bn">2</span><span class="bt"><b>기획안.md</b><small>요약표를 받아 기획안을 쓴다 — 6주차에 붙인다</small></span></div>
+        <div class="bub b3 dim"><span class="bn">3</span><span class="bt"><b>발표자료.md</b><small>기획안을 장표로 만든다 — 7주차에 붙인다</small></span></div>
+      </div>
+    </div>
+    <div class="story-body">
+      <p class="direction">페어리가 얼음 벽에 파일 세 개를 띄운다. 첫째만 빛나고, 둘은 아직 흐리다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“요약이 틀리면 뒤도 다 틀려요. 그래서 <span style="color:var(--glow)">한 마리씩</span>, 사이사이 용사님이 봐요.”</p>
+<span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="w11" data-gate="check" data-name="9 · 실습 ① 파일 두 개">
+    <div class="head">
+      <span class="chapter">STEP 01</span>
+      <h2>규칙.md를 줄이고, 시종.md를 만든다</h2>
+      <span class="sub">15 MIN · 제목을 누르면 펼쳐짐</span>
+    </div>
+    <div class="cols c-32">
+      <div class="panel">
+        <span class="plabel">Steps · 네모는 체크, 제목은 펼치기</span>
+        <div class="asteps">
+          <div class="astep open" data-step="1">
+            <button type="button" class="a-box" data-ck="x1" data-fxk="def" data-fx="🛡 방어 ＋15" aria-label="1단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="true"><span class="k">01</span><b>규칙.md를 3주차 버전으로 덮어쓴다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">주문서를 복사해, 규칙.md를 열고 <b>ctrl+A → ctrl+V</b>로 통째로 바꾼다. 2주차에 했던 그 동작이다.</p><p class="d">절차와 파일 이름 항목이 빠지고 <span style="color:var(--glow)">결과물 위치가 ‘결과’ 폴더</span>로 바뀐다. 검증 세 줄은 그대로 남는다.</p><button type="button" class="spelllink" data-goto="w11s">✦ 마법 주문 제작 — 규칙.md 3주차 버전</button>
+            </div>
+          </div>
+          <div class="astep" data-step="2">
+            <button type="button" class="a-box" data-ck="x2" data-fxk="mag" data-fx="✦ 마력 ＋20" aria-label="2단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">02</span><b>시종.md를 새 파일로 만든다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">주문서를 복사해 같은 폴더에 <b>시종.md</b>라는 이름으로 저장한다. 메모장이면 된다.</p><p class="d">‘할 일’ 마지막 줄 “기획안은 쓰지 않는다”가 오늘의 핵심이다.</p><p class="d">저장 뒤 둘째 줄 “이 폴더의 규칙.md를 먼저 읽고 따른다.”가 그대로 있는지 본다. 이 줄 덕에 시종.md만 불러도 규칙.md가 같이 읽힌다.</p><button type="button" class="spelllink" data-goto="w12s">✦ 마법 주문 제작 — 시종.md</button>
+            </div>
+          </div>
+          <div class="astep" data-step="3">
+            <button type="button" class="a-box" data-ck="x3" data-fxk="exp" data-fx="★ EXP ＋20" aria-label="3단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">03</span><b>폴더에 파일이 세 종류인지 본다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">정책자료 원본들 · 규칙.md · 시종.md. 결과 폴더는 아직 없어도 된다 — 시종이 첫 일을 하면서 만든다.</p><div class="vrow ok"><span class="m">○</span><span><b>준비 끝</b>
+                <em>규칙.md는 짧아졌고 시종.md가 생겼다. 다음 장에서 첫 일을 시킨다.</em></span></div><div class="vrow no"><span class="m">✕</span><span><b>규칙.md에 절차 항목이 그대로 있다</b>
+                <em>시종.md와 규칙.md가 서로 다른 일을 시킨다. 1번을 다시 한다.</em></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel imgpanel">
+        <span class="plabel">작업 화면 예시</span>
+        <div class="imgslot filled imgslot-flow">
+          <div class="flowgroup active" data-step="1"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/11d67a1e1158efd5.svg" alt="① 주문서 복사를 누른다"><figcaption>① 주문서 복사를 누른다</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/eb6350d3e33fc679.svg" alt="② 폴더에서 규칙.md를 연다"><figcaption>② 폴더에서 규칙.md를 연다</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/65681387aa2953c0.svg" alt="③ ctrl+A — 전체 선택"><figcaption>③ ctrl+A — 전체 선택</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/6461a88b45e362c1.svg" alt="④ ctrl+V — 덮어쓴 결과"><figcaption>④ ctrl+V — 덮어쓴 결과</figcaption></figure></div>
+          <div class="flowgroup" data-step="2"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/2c1a65a83a4b9ce5.svg" alt="① 파일 → 새 Markdown 탭"><figcaption>① 파일 → 새 Markdown 탭</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/3ccb09b568d557df.svg" alt="② 주문서 복사를 누른다"><figcaption>② 주문서 복사를 누른다</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/edd19a0368b6aaae.svg" alt="③ 붙여넣고 'ctrl + s'로 저장하기"><figcaption>③ 붙여넣고 'ctrl + s'로 저장하기</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/a3c0937377a444d5.svg" alt="④ Markdown 파일로 저장"><figcaption>④ Markdown 파일로 저장</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/18c1adb75b859dd3.svg" alt="⑤ 이름은 시종.md — 저장"><figcaption>⑤ 이름은 시종.md — 저장</figcaption></figure></div>
+          <div class="flowgroup solo" data-step="3"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/642f0642029f48b2.svg" alt="정책자료 원본 · 규칙.md · 시종.md"><figcaption>정책자료 원본 · 규칙.md · 시종.md</figcaption></figure></div>
+        </div>
+      </div>
+    </div>
+    <div class="gatehint" id="gh-w11">모든 단계를 체크해야 다음으로 넘어갑니다</div>
+  </section>
+
+  <section class="slide spell-long" id="w11s" data-hidden="1" data-name="규칙.md 3주차 버전">
+    <div class="backrow"><button type="button" class="spellback" data-goto="w11">◀ 돌아가기</button></div>
+    <div class="head">
+      <span class="chapter">TEMPLATE</span>
+      <h2>규칙.md — 폴더의 규칙만 남긴다</h2>
+      <div class="headside">
+        <div class="headbtns">
+          <button type="button" class="spellcopy" data-toastms="5000" data-copy="#w11s .codebox">⧉ 주문서 복사</button>
+          <button type="button" class="spellback done" data-goto="w11">주문 제조 완료 ▶</button>
+        </div>
+        <span class="sub">주황색이 바뀐 줄</span>
+      </div>
+    </div>
+    <div class="cols c-32">
+      <pre class="codebox"><span class="h"># 이 폴더 규칙</span>
+
+<span class="h">## 이 폴더는</span>
+정책자료를 읽고 기획안을 만드는 폴더다.
+
+<span class="h">## 결과물 위치</span>
+<span class="u">새로 만든 파일은 이 폴더 안 ‘결과’ 폴더에 넣는다. 없으면 만든다.</span>
+원본은 건드리지 않는다.
+
+<span class="h">## 하지 말 것</span>
+- 자료에 없는 내용을 지어내지 않는다.
+- 원본 파일 이름을 바꾸지 않는다.
+
+<span class="h">## 검증</span>
+- 숫자와 날짜는 원문에서 그대로 옮긴다.
+  계산이 필요하면 계산식을 같이 적는다.
+- 원문에 없는 값은 비워두고 ‘미확인’ 목록에
+  따로 적는다. 추측해서 채우지 않는다.
+- 각 항목이 어느 파일 어디에서 왔는지
+  결과에 같이 적는다.</pre>
+      <div class="panel">
+        <span class="plabel">잠깐, 주문 내용을 설명해줘.</span>
+        <p><span class="ix">빠진 것</span> — 이름(# 정책자료 기획안), 파일 이름, 절차, 완료 조건. 전부 일꾼의 것이라 시종.md로 간다.</p><p><span class="ix">바뀐 것</span> — 결과물 위치가 ‘결과’ 폴더. 결과가 원본 옆에 쌓이면 다음 달 시종이 지난달 결과까지 자료로 읽는다.</p><p><span class="ix">남은 것</span> — 검증 세 줄. 폴더 안 어느 시종이 일해도 걸리는 규칙이라 여기 둔다.</p><p><span style="color:var(--faint)">규칙.md를 열고 ctrl+A, ctrl+V로 덮어쓴다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide spell-long" id="w12s" data-hidden="1" data-name="시종.md">
+    <div class="backrow"><button type="button" class="spellback" data-goto="w11">◀ 돌아가기</button></div>
+    <div class="head">
+      <span class="chapter">TEMPLATE</span>
+      <h2>정책자료 요약 시종</h2>
+      <div class="headside">
+        <div class="headbtns">
+          <button type="button" class="spellcopy" data-toastms="5000" data-copy="#w12s .codebox">⧉ 주문서 복사</button>
+          <button type="button" class="spellback done" data-goto="w11">주문 제조 완료 ▶</button>
+        </div>
+        <span class="sub">주황색이 핵심 줄</span>
+      </div>
+    </div>
+    <div class="cols c-32">
+      <pre class="codebox"><span class="h"># 정책자료 요약</span>
+이 폴더의 규칙.md를 먼저 읽고 따른다.
+
+<span class="h">## 할 일</span>
+1. 이 폴더의 정책자료 파일을 하나씩 끝까지 읽는다.
+   (결과 폴더와 .md 파일은 제외)
+2. 파일마다 핵심요약 3줄, 쟁점 2줄을 뽑는다.
+3. 자료명 / 핵심요약 / 쟁점 / <span class="u">출처(파일명·쪽)</span> 네 열 표로 만들어
+   결과 폴더에 YYYY-MM-DD_자료요약.md로 저장한다.
+<span class="u">기획안은 쓰지 않는다. 의견도 달지 않는다.</span>
+
+<span class="h">## 다 됐다는 기준</span>
+- 결과 폴더에 자료요약.md가 생겼다.
+- 표의 모든 줄에 출처가 있다.
+- 하나라도 안 되면 멈추고 물어본다.</pre>
+      <div class="panel">
+        <span class="plabel">잠깐, 주문 내용을 설명해줘.</span>
+        <p><span class="ix">둘째 줄</span> — 이 줄이 규칙.md를 끌어온다. 호출은 「시종.md 읽고, ○○해줘」 하나로 충분해진다.</p><p><span class="ix">할 일 · 출처 열</span> — 이 한 열이 있으면 나중에 원문과 맞춰볼 수 있다.</p><p><span class="ix">할 일 · 마지막 줄</span> — “기획안은 쓰지 않는다”가 오늘의 핵심. 여기서 멈춰야 내가 요약을 보고 방향을 정한다.</p><p><span style="color:var(--faint)">같은 폴더에 시종.md로 저장한다.</span><br><span style="color:var(--ember)">원하는 부분은 편하게 수정해도 된다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide story" id="w12b" data-name="10 · 파일 두 개">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura"></div></div>
+    <div class="story-body">
+      <p class="direction">저장을 누르자 얼음 벽에 파일 두 개가 나란히 박힌다.</p>
+      <div class="dbox oi"><span class="who">오인턴</span>
+        <p>“됐어. 규칙.md 하나, 시종.md 하나.”</p><p>“…근데 이게 시종이야? 그냥 메모장 파일인데.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide story" id="w12c" data-name="11 · 부르면 안다">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo"></div><div class="fairy" style="left:13cqw;top:30%"></div></div>
+    <div class="story-body">
+      <p class="direction">페어리가 시종.md 위에 내려앉는다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“불러보면 알아요. <span style="color:var(--glow)">「시종.md 읽고, 정책자료 요약해줘」</span> — 이 한 줄이 열쇠예요.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="w13" data-gate="check" data-name="12 · 실습 ② 첫 일 시키기">
+    <div class="head">
+      <span class="chapter">STEP 02</span>
+      <h2>시종에게 첫 일을 시킨다</h2>
+      <span class="sub">10 MIN · 제목을 누르면 펼쳐짐</span>
+    </div>
+    <div class="cols c-32">
+      <div class="panel">
+        <span class="plabel">Steps · 네모는 체크, 제목은 펼치기</span>
+        <div class="asteps">
+          <div class="astep open" data-step="1">
+            <button type="button" class="a-box" data-ck="y1" data-fxk="atk" data-fx="⚔ 공격 ＋20" aria-label="1단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="true"><span class="k">01</span><b>「시종.md 읽고, 정책자료 요약해줘」라고 친다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">폴더를 연결해둔 대화에서 친다. 앞부분이 파일을 펴게 하고, 뒷부분이 시킬 일이다. 앞부분은 매번 붙인다.</p><p class="d">“파일을 찾지 못했다”고 하면 이 대화에 폴더가 안 붙은 것이다. 다시 연결한다.</p>
+            </div>
+          </div>
+          <div class="astep" data-step="2">
+            <button type="button" class="a-box" data-ck="y2" data-fxk="acc" data-fx="◎ 명중 ＋15" aria-label="2단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">02</span><b>결과 폴더를 열어본다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">폴더 안에 ‘결과’ 폴더가 생기고 그 안에 자료요약.md가 있어야 한다. 원본 옆에 생겼으면 규칙.md 덮어쓰기가 안 된 것이다.</p>
+            </div>
+          </div>
+          <div class="astep" data-step="3">
+            <button type="button" class="a-box" data-ck="y3" data-fxk="acc" data-fx="◎ 명중 ＋20" aria-label="3단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">03</span><b>표에서 한 줄 골라 원문과 맞춰본다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">전부 볼 필요 없다. 출처 열을 보고 한 줄만 원문에서 찾아본다. 맞으면 오늘은 통과. 틀리면 다음 단계.</p>
+            </div>
+          </div>
+          <div class="astep" data-step="4">
+            <button type="button" class="a-box" data-ck="y4" data-fxk="exp" data-fx="★ EXP ＋30" aria-label="4단계 완료 체크">✓</button>
+            <button type="button" class="a-head" aria-expanded="false"><span class="k">04</span><b>틀린 곳이 있으면 시종.md에 한 줄 고친다</b><span class="caret">▾</span></button>
+            <div class="a-body">
+              <p class="d">다시 시키지 말고 파일을 고친다. 시종은 대화가 아니라 파일로 자란다. 이번 달에 한 줄 고치면 다음 달엔 안 틀린다.</p><div class="vrow ok"><span class="m">○</span><span><b>완료 판정</b>
+                <em>결과 폴더에 자료요약.md가 생겼고, 골라 본 한 줄이 원문과 맞는다. 시종 한 마리 확보.</em></span></div><div class="vrow no"><span class="m">✕</span><span><b>요약 대신 기획 의견이 딸려 온다</b>
+                <em>할 일 마지막 줄이 안 먹은 것이다. “의견·제안·방향 제시를 하지 않는다”로 못 박는다.</em></span></div><div class="vrow no"><span class="m">✕</span><span><b>자료에 없는 쟁점이 적혀 있다</b>
+                <em>할 일 2번에 “자료에 문장으로 적힌 것만 쟁점으로 뽑는다”를 덧붙인다.</em></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel imgpanel">
+        <span class="plabel">작업 화면 예시</span>
+        <div class="imgslot filled imgslot-flow">
+          <div class="flowgroup active solo" data-step="1"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/398998d5c435a591.svg" alt="폴더를 연결한 대화에서 이렇게 친다"><figcaption>폴더를 연결한 대화에서 이렇게 친다</figcaption></figure></div>
+          <div class="flowgroup" data-step="2"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/a418e0f486678697.svg" alt="① 폴더 안에 ‘결과’ 폴더가 생겼다"><figcaption>① 폴더 안에 ‘결과’ 폴더가 생겼다</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/d622af4e078a8782.svg" alt="② 그 안에 날짜_자료요약.md"><figcaption>② 그 안에 날짜_자료요약.md</figcaption></figure></div>
+          <div class="flowgroup" data-step="3"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/e11bd5803cb6c2f9.svg" alt="① 표에서 한 줄을 고른다"><figcaption>① 표에서 한 줄을 고른다</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/d6a7a76af2315fd2.svg" alt="② 출처 쪽을 펴서 원문과 맞춰본다"><figcaption>② 출처 쪽을 펴서 원문과 맞춰본다</figcaption></figure></div>
+          <div class="flowgroup" data-step="4"><figure class="flowstep"><img loading="lazy" src="../assets/instructions/5e20ce245108297a.svg" alt="① 시종.md를 연다"><figcaption>① 시종.md를 연다</figcaption></figure><div class="flowarrow">↓</div><figure class="flowstep"><img loading="lazy" src="../assets/instructions/80cdee12c6923f62.svg" alt="② 할 일에 한 줄 더하고 저장"><figcaption>② 할 일에 한 줄 더하고 저장</figcaption></figure></div>
+        </div>
+      </div>
+    </div>
+    <div class="gatehint" id="gh-w13">모든 단계를 체크해야 다음으로 넘어갑니다</div>
+  </section>
+
+  <section class="slide story" id="w14" data-name="13 · 시종 소환">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo"></div><div class="fairy" style="left:12cqw;top:33%"></div></div>
+    <div class="story-body">
+      <p class="direction">설계서가 완성되자, 얼음 벽 안쪽에서 작은 빛 하나가 떨어져 나온다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“시종 한 마리 확보. 이제 「시종.md 읽고, ○○해줘」 한 줄이면 돼요.”</p><p>“…근데 얘, 아직 요약까지밖에 못 해요.”</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="w15" data-name="14 · WEEK 03 결산 / WEEK 04 예고">
+    <div class="head">
+      <span class="chapter">WEEK 03 CLEAR</span>
+      <h2>시종 한 마리 확보</h2>
+      <span class="sub">시즌 1 · 8주 중 3주차</span>
+    </div>
+    <div class="cols c-32">
+      <div class="panel">
+        <span class="plabel">Player Status · 갱신</span>
+        <dl class="stat">
+          <dt>NAME</dt><dd>오인턴 <em>(용사)</em></dd>
+          <dt>LEVEL</dt><dd><span class="lv">3 → 4 <span class="gained">▲1</span></span></dd>
+          <dt>SKILL</dt><dd><span class="tag">도구 연결</span><span class="tag">규칙 고정</span><span class="tag">절차 각인</span><span class="tag">검증</span><span class="tag good">시종 설계</span></dd>
+          <dt>시종</dt><dd><span class="tag good">정책자료 요약 · 한 마리</span></dd>
+          <dt>STATE</dt><dd><span class="tag bad">요약까지만 가능</span><span class="tag bad">기획안·PPT는 아직</span></dd>
+        </dl>
+        <p style="margin-top:auto">오늘 만든 건 3단 중 <span style="color:var(--glow)">1단</span>이다. 기획안과 PPT는 이 한 마리가 제대로 도는 걸 본 다음에 붙인다.</p>
+      </div>
+      <div class="panel">
+        <span class="plabel">Road Map · 시즌 1 8주</span>
+        <div class="road">
+          <div><span class="wk">1막 W1–2</span><b>장비를 갖춘다 · 완료</b><em>폴더 연결 · 규칙 파일 · 각인 · 검증</em></div>
+          <div class="now"><span class="wk">2막 W3–5</span><b>시종을 만든다 · 진행 중</b><em><b>시종 설계</b> · 다건 처리 · 스스로 고치기</em></div>
+          <div><span class="wk">3막 W6–8</span><b>부대를 만든다</b><em>시종 잇기 · 끝까지 돌리기 · 내 자리로 옮기기</em></div>
+        </div>
+        <p style="margin-top:auto;color:var(--glow)">NEXT · [스토리] 자료 더미를 한 번에 먹이기<br><span style="color:var(--dim)">W4 자료 여러 건을 한 번에 읽히고 자료끼리 대조한다<br>W5 내놓기 전에 스스로 점검하게 한다</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide story" id="w16" data-name="15 · 다음 주에 계속">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas><div class="hero aura solo"></div><div class="fairy" style="left:11cqw;top:32%"></div></div>
+    <div class="story-body">
+      <p class="direction">동굴은 안쪽으로 더 이어진다. 시종은 서툴지만 오늘 한 건 해냈다.</p>
+      <div class="dbox fy"><span class="who">페어리</span>
+        <p>“다음 주엔 얘한테 자료를 한아름 안겨볼 거예요. 안쪽에 더 많이 얼어 있거든요.”</p><p>TO BE CONTINUED · WEEK 04</p><span class="cue">▼</span></div>
+    </div>
+  </section>
+
+  <!-- 엔딩 -->
+  <section class="slide" id="w17" data-name="16 · 엔딩">
+    <div class="scene"><div class="room ice"></div><div class="veil"></div><canvas class="fx" data-theme="ice" aria-hidden="true"></canvas></div>
+    <div class="endcard">
+      <div class="tbc">To be continued...</div>
+      <div class="wk">WEEK 04</div>
+      <div class="when">매주 금요일 오전 업로드</div>
+    </div>
+    
+  </section>
+
+
+
+  <!-- 시스템 창 -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="이미지 확대 보기">
+    <button type="button" class="lbclose" id="lbclose" aria-label="닫기">✕</button>
+    <img id="lbimg" src="" alt="">
+    <span class="lbcap" id="lbcap"></span>
+  </div>
+
+  <div class="toast" id="toast"><span class="kbd">Ctrl + A</span><span>로 파일 전체를 잡고,</span><span class="kbd">Ctrl + V</span><span>로 덮어 쓰자.</span></div>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalText">
+      <span class="modal-tag" id="modalTag">SYSTEM</span>
+      <p class="modal-text" id="modalText"></p>
+      <button type="button" class="modal-btn" id="modalBtn">확인</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="hud">
+  <button type="button" id="prev">◀ PREV</button>
+  <button type="button" id="next">NEXT ▶</button>
+  <span class="count"><span id="cur">1</span> / <span id="tot">15</span></span>
+  <span class="pips" id="pips" aria-hidden="true"></span>
+  <span class="now" id="now">1 · WEEK 02 오프닝</span>
+  <span>← → 또는 화면 클릭</span>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  window.Journey = { go: show, step: step, sync: typeof syncHp === "function" ? syncHp : function(){} };
+  var i = 0;
+  var cur = document.getElementById('cur');
+  var tot = document.getElementById('tot');
+  var now = document.getElementById('now');
+  var pips = document.getElementById('pips');
+  var modal = document.getElementById('modal');
+  var modalText = document.getElementById('modalText');
+  var modalTag = document.getElementById('modalTag');
+  var modalBtn = document.getElementById('modalBtn');
+
+  /* ── 체크 = 공격 / 강화 연출 ── */
+  var HP_MAX = 78, HP_MIN = 6;
+  function syncHp(){
+    var bar = document.getElementById('hpbar'), num = document.getElementById('hpnum');
+    if(!bar || !num) return;
+    var sl = document.getElementById('v11');
+    var boxes = sl ? sl.querySelectorAll('.a-box') : [];
+    var done = 0;
+    Array.prototype.forEach.call(boxes, function(b){
+      if(b.parentNode.classList.contains('done')) done++;
+    });
+    var total = boxes.length || 1;
+    var hp = Math.round(HP_MAX - (HP_MAX - HP_MIN) * (done / total));
+    bar.style.width = hp + '%';
+    num.textContent = hp + '%';
+  }
+  function hitFx(el){
+    var sl = el.closest ? el.closest('.slide') : null;
+    if(!sl) sl = slides[i];
+    if(!sl) return;
+    var type = sl.getAttribute('data-hit');
+    var own = el.getAttribute && el.getAttribute('data-fx');
+    if(!type && !own) return;
+    var fx = document.createElement('div');
+    fx.className = 'hitfx ' + (type === 'dmg' ? 'dmg' : 'skill');
+    if(own){
+      fx.className = 'hitfx fx-' + (el.getAttribute('data-fxk') || 'skill');
+      fx.textContent = own;
+    } else if(type === 'dmg'){
+      var sp = document.createElement('span');
+      sp.className = 'hitmon';
+      fx.appendChild(sp);
+      fx.appendChild(document.createTextNode('\u2694 \u2212 12 HP'));
+    } else {
+      fx.textContent = '\u2694 각인 \uFF0B10';
+    }
+    var r = el.getBoundingClientRect(), pr = sl.getBoundingClientRect();
+    var x = r.left - pr.left + r.width / 2;
+    var pad = 90;
+    if(x < pad) x = pad;
+    if(x > pr.width - pad) x = pr.width - pad;
+    fx.style.left = x + 'px';
+    fx.style.top = (r.top - pr.top - 10) + 'px';
+    sl.appendChild(fx);
+    setTimeout(function(){ fx.remove(); }, 1200);
+  }
+
+  /* ── 몬스터 등장 인트로: 슬라이드 진입 시 재생, 아무 입력으로 건너뜀 ── */
+  var monintro = document.getElementById('monintro');
+  var monTimer = null;
+  function introPlaying(){ return !!(monintro && monintro.classList.contains('play')); }
+  function skipIntro(){
+    if(!monintro) return;
+    monintro.classList.remove('play');
+    if(monTimer){ clearTimeout(monTimer); monTimer = null; }
+  }
+  function playIntro(){
+    if(!monintro) return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    monintro.classList.remove('play');
+    void monintro.offsetWidth;
+    monintro.classList.add('play');
+  }
+  if(monintro){
+    monintro.addEventListener('click', function(e){ e.stopPropagation(); skipIntro(); });
+  }
+
+  /* 숨김 슬라이드: 버튼으로만 들어가고 순서/카운트에서 빠진다 */
+  function isHidden(s){ return !!(s && s.getAttribute('data-hidden')); }
+  var flow = slides.filter(function(s){ return !isHidden(s); });
+
+  flow.forEach(function(_, n){
+    var p = document.createElement('i');
+    if(n === 0) p.className = 'on';
+    pips.appendChild(p);
+  });
+  var pipEls = Array.prototype.slice.call(pips.children);
+  tot.textContent = String(flow.length);
+
+  var lastFlowIdx = 0;
+  function show(n){
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function(s, k){ s.classList.toggle('on', k === i); });
+    if(!isHidden(slides[i])) lastFlowIdx = flow.indexOf(slides[i]);
+    pipEls.forEach(function(p, k){ p.classList.toggle('on', k <= lastFlowIdx); });
+    cur.textContent = String(lastFlowIdx + 1);
+    now.textContent = slides[i].dataset.name;
+    skipIntro();
+    if(slides[i].id === 'v9') playIntro();
+  }
+
+  function checklistDone(sl){
+    if(!sl || sl.getAttribute('data-gate') !== 'check') return true;
+    var boxes = sl.querySelectorAll('.a-box');
+    if(!boxes.length) return true;
+    for(var n = 0; n < boxes.length; n++){
+      if(!boxes[n].parentNode.classList.contains('done')) return false;
+    }
+    return true;
+  }
+  function nudgeGate(){
+    var gh = document.getElementById('gh-' + slides[i].id);
+    if(!gh) return;
+    gh.classList.remove('show'); void gh.offsetWidth; gh.classList.add('show');
+  }
+
+  /* 퀘스트 보드: [스토리] 퀘스트를 눌러야만 앞으로 간다 */
+  function questLocked(){
+    var sl = slides[i];
+    return !!(sl && sl.getAttribute('data-gate') === 'quest' && !sl.classList.contains('gate-open'));
+  }
+
+  function step(dir){
+    if(isHidden(slides[i])) return;
+    if(dir > 0 && questLocked()) return;
+    if(dir > 0 && !checklistDone(slides[i])){ nudgeGate(); return; }
+    var n = i + dir;
+    while(n >= 0 && n < slides.length && isHidden(slides[n])) n += dir;
+    if(n < 0 || n >= slides.length) return;
+    show(n);
+  }
+
+  var modalOpen = false;
+  function openModal(msg, btn, tag){
+    modalText.textContent = msg;
+    modalBtn.textContent = btn || '확인';
+    modalTag.textContent = tag || 'SYSTEM';
+    modal.hidden = false; modalOpen = true;
+    modalBtn.focus();
+  }
+  function closeModal(){ modal.hidden = true; modalOpen = false; }
+  modalBtn.addEventListener('click', function(e){ e.stopPropagation(); closeModal(); });
+  modal.addEventListener('click', function(e){ e.stopPropagation(); closeModal(); });
+
+  var CK = 'journey-week03';
+  var ckState = {};
+  try{ ckState = JSON.parse(localStorage.getItem(CK) || '{}') || {}; }catch(err){ ckState = {}; }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-ck]'), function(el){
+    var key = el.dataset.ck;
+    var row = el.classList.contains('step') ? el : el.parentNode;
+    if(ckState[key]) row.classList.add('done');
+    el.setAttribute('aria-pressed', ckState[key] ? 'true' : 'false');
+    el.addEventListener('click', function(e){
+      e.stopPropagation();
+      var on = row.classList.toggle('done');
+      el.setAttribute('aria-pressed', on ? 'true' : 'false');
+      ckState[key] = on;
+      try{ localStorage.setItem(CK, JSON.stringify(ckState)); }catch(err){}
+      if(on) hitFx(el);
+      syncHp();
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.a-head'), function(h){
+    h.addEventListener('click', function(e){
+      e.stopPropagation();
+      var st = h.parentNode;
+      var wasOpen = st.classList.contains('open');
+      Array.prototype.forEach.call(st.parentNode.children, function(sib){
+        sib.classList.remove('open');
+        var hd = sib.querySelector('.a-head');
+        if(hd) hd.setAttribute('aria-expanded', 'false');
+      });
+      if(!wasOpen){ st.classList.add('open'); h.setAttribute('aria-expanded', 'true'); syncFlow(st); }
+    });
+  });
+
+  /* 단계 ↔ 작업 화면 연동 */
+  function syncFlow(st){
+    var sl = st.closest ? st.closest('.slide') : null;
+    if(!sl) return;
+    var n = st.getAttribute('data-step');
+    var groups = sl.querySelectorAll('.flowgroup');
+    Array.prototype.forEach.call(groups, function(g){
+      g.classList.toggle('active', g.getAttribute('data-step') === n);
+    });
+    var slot = sl.querySelector('.imgslot-flow');
+    if(slot) slot.scrollTop = 0;
+    /* 1단계는 설명 칸이라 라벨이 다르다 */
+    var pl = document.getElementById('pl-v11');
+    if(pl && sl.id === 'v11') pl.textContent = (n === '1') ? '왜 이게 마지막 칸인가' : '작업 화면 예시';
+  }
+
+  /* 이미지 확대 */
+  var lb = document.getElementById('lightbox');
+  var lbOpen = false;
+  function openLightbox(src, cap, alt){
+    if(!lb) return;
+    document.getElementById('lbimg').src = src;
+    document.getElementById('lbimg').alt = alt || '';
+    document.getElementById('lbcap').textContent = cap || '';
+    lb.classList.add('on'); lbOpen = true;
+  }
+  function closeLightbox(){ if(lb){ lb.classList.remove('on'); lbOpen = false; } }
+  if(lb){
+    lb.addEventListener('click', function(e){ e.stopPropagation(); closeLightbox(); });
+    var lbc = document.getElementById('lbclose');
+    if(lbc) lbc.addEventListener('click', function(e){ e.stopPropagation(); closeLightbox(); });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.imgslot-flow img'), function(im){
+    im.addEventListener('click', function(e){
+      e.stopPropagation();
+      var fig = im.closest ? im.closest('figure') : null;
+      var cap = fig ? fig.querySelector('figcaption') : null;
+      openLightbox(im.src, cap ? cap.textContent : '', im.alt);
+    });
+  });
+
+  /* 각인 3종 — 선택한 칸만 펼쳐진다 */
+  Array.prototype.forEach.call(document.querySelectorAll('.ritem'), function(r){
+    r.addEventListener('click', function(e){
+      e.stopPropagation();
+      Array.prototype.forEach.call(r.parentNode.children, function(x){ x.classList.remove('open'); });
+      r.classList.add('open');
+    });
+  });
+
+  /* 슬라이드 이동 버튼 */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-goto]'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var id = btn.getAttribute('data-goto');
+      for(var n = 0; n < slides.length; n++){
+        if(slides[n].id === id){ show(n); return; }
+      }
+    });
+  });
+
+  /* 주문서 복사 */
+  (function(){
+    var toast = document.getElementById('toast');
+    var toastTimer = null;
+    var toastDefault = toast ? toast.innerHTML : '';
+    function showToast(html, ms){
+      if(!toast) return;
+      toast.innerHTML = html || toastDefault;
+      toast.classList.add('on');
+      if(toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function(){ toast.classList.remove('on'); }, parseInt(ms,10) || 10000);
+    }
+    function fallback(text){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly','');
+      ta.style.position='fixed'; ta.style.top='-1000px'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, ta.value.length);
+      var ok = false;
+      try{ ok = document.execCommand('copy'); }catch(err){ ok = false; }
+      document.body.removeChild(ta); return ok;
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('.spellcopy'), function(btn){
+      var box = document.querySelector(btn.dataset.copy);
+      if(!box){ btn.style.display='none'; return; }
+      var label = btn.textContent;
+      function flash(msg, ok){
+        btn.textContent = msg;
+        btn.classList.toggle('done', !!ok);
+        setTimeout(function(){ btn.textContent = label; btn.classList.remove('done'); }, 1800);
+        if(ok) showToast(btn.dataset.toast, btn.dataset.toastms);
+      }
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var clone = box.cloneNode(true);
+        Array.prototype.forEach.call(clone.querySelectorAll('.c'), function(n){ n.remove(); });
+        clone.style.position='fixed'; clone.style.left='-9999px';
+        document.body.appendChild(clone);
+        var text = clone.innerText.replace(/\u00a0/g,' ').replace(/[ \t]+$/gm,'');
+        document.body.removeChild(clone);
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text).then(function(){ flash('\u2713 복사됐어', true); })
+            .catch(function(){ var ok=fallback(text); flash(ok?'\u2713 복사됐어':'직접 드래그해서 복사해줘', ok); });
+        } else { var ok=fallback(text); flash(ok?'\u2713 복사됐어':'직접 드래그해서 복사해줘', ok); }
+      });
+    });
+  })();
+
+  Array.prototype.forEach.call(document.querySelectorAll('.quest'), function(q){
+    q.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(q.dataset.go){
+        var host = q.closest('.slide');
+        if(host) host.classList.add('gate-open');
+        step(1);
+        return;
+      }
+      openModal(q.dataset.msg, q.dataset.btn, q.dataset.tag);
+    });
+  });
+
+  document.getElementById('next').addEventListener('click', function(e){ e.stopPropagation(); if(!modalOpen) step(1); });
+  document.getElementById('prev').addEventListener('click', function(e){ e.stopPropagation(); if(!modalOpen) step(-1); });
+  document.getElementById('stage').addEventListener('click', function(){
+    if(modalOpen){ closeModal(); return; }
+    if(lbOpen){ closeLightbox(); return; }
+    if(introPlaying()){ skipIntro(); return; }
+    step(1);
+  });
+  document.addEventListener('keydown', function(e){
+    if(lbOpen){ e.preventDefault(); closeLightbox(); return; }
+    if(introPlaying()){ e.preventDefault(); skipIntro(); return; }
+    if(modalOpen){
+      if(e.key === 'Escape' || e.key === 'Enter' || e.key === ' '){ e.preventDefault(); closeModal(); }
+      return;
+    }
+    if(e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); step(1); }
+    else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); step(-1); }
+    else if(e.key === 'Home'){ show(0); }
+    else if(e.key === 'End'){ show(slides.length - 1); }
+  });
+
+  /* ── 장소 입자: 얼음 동굴(눈) · 빛의 숲(포자) — 보이는 슬라이드만 그린다 ── */
+  (function(){
+    var cvs = Array.prototype.slice.call(document.querySelectorAll('canvas.fx'));
+    if(!cvs.length) return;
+    var reduceFx = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sd = 20260921;
+    function r(){ sd = (sd * 1664525 + 1013904223) % 4294967296; return sd / 4294967296; }
+    cvs.forEach(function(cv){
+      var theme = cv.getAttribute('data-theme') || 'ice';
+      var ctx = cv.getContext('2d');
+      var n = theme === 'ice' ? 70 : 54;
+      var ps = [];
+      for(var i = 0; i < n; i++){
+        ps.push({ x: r(), y: r(), r: theme === 'ice' ? (0.5 + r() * 1.6) : (0.7 + r() * 2.2),
+                  s: 0.05 + r() * 0.18, p: r() * 6.28, a: 0.25 + r() * 0.6, k: r() });
+      }
+      function size(){
+        var dpr = Math.min(window.devicePixelRatio || 1, 2), w = cv.clientWidth, h = cv.clientHeight;
+        if(!w || !h) return; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+      }
+      function draw(t){
+        var w = cv.clientWidth, h = cv.clientHeight; if(!w || !h) return;
+        ctx.clearRect(0,0,w,h);
+        var tt = reduceFx ? 0 : t / 1000;
+        ps.forEach(function(P){
+          var x, y, col, al;
+          if(theme === 'ice'){
+            y = (P.y + tt * P.s * 0.05) % 1;
+            x = P.x + Math.sin(tt * 0.35 + P.p) * 0.010;
+            al = P.a * (0.55 + 0.45 * Math.sin(tt * 1.1 + P.p));
+            col = P.k > 0.8 ? '190,235,255' : '225,243,255';
+          } else {
+            y = (P.y - tt * P.s * 0.04) % 1; if(y < 0) y += 1;
+            x = P.x + Math.sin(tt * 0.5 + P.p) * 0.018;
+            al = P.a * (0.45 + 0.55 * Math.sin(tt * 0.9 + P.p));
+            col = P.k > 0.75 ? '242,225,164' : '140,240,190';
+          }
+          ctx.beginPath();
+          ctx.arc(x * w, y * h, P.r * (w / 1200) * 1.4 + 0.5, 0, 6.2832);
+          ctx.fillStyle = 'rgba(' + col + ',' + al.toFixed(3) + ')';
+          ctx.fill();
+          if(theme === 'grove' && P.k > 0.75){
+            ctx.beginPath(); ctx.arc(x * w, y * h, P.r * (w / 1200) * 4, 0, 6.2832);
+            ctx.fillStyle = 'rgba(' + col + ',' + (al * 0.12).toFixed(3) + ')'; ctx.fill();
+          }
+        });
+      }
+      function visible(){ var s = cv.closest('.slide'); return s && s.classList.contains('on'); }
+      function loop(t){ if(visible()) draw(t); requestAnimationFrame(loop); }
+      size(); draw(0);
+      if(!reduceFx) requestAnimationFrame(loop);
+      window.addEventListener('resize', function(){ size(); draw(performance.now()); });
+      if(window.ResizeObserver){ new ResizeObserver(function(){ size(); draw(performance.now()); }).observe(cv); }
+    });
+  })();
+
+  /* ── 프롤로그 캔버스: 신탁의 빛과 알갱이 ── */
+  var cv = document.getElementById('forest');
+  if(!cv){ show(0); return; }
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seed = 20260902;
+  function rnd(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+
+  var motes = [];
+  for(var m = 0; m < 46; m++){
+    motes.push({ x: rnd(), y: rnd(), r: 0.6 + rnd() * 1.9, s: 0.12 + rnd() * 0.4, p: rnd() * 6.28, a: 0.25 + rnd() * 0.55 });
+  }
+
+  function size(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = cv.clientWidth, h = cv.clientHeight;
+    if(!w || !h) return;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function draw(t){
+    var w = cv.clientWidth, h = cv.clientHeight;
+    if(!w || !h) return;
+    ctx.clearRect(0, 0, w, h);
+
+    var pulse = reduce ? 0.82 : 0.72 + Math.sin(t / 1450) * 0.16 + Math.sin(t / 430) * 0.05;
+    var beam = ctx.createRadialGradient(w * 0.47, h * 0.30, 0, w * 0.47, h * 0.30, h * 0.72);
+    beam.addColorStop(0, 'rgba(246,231,178,' + (0.22 * pulse).toFixed(3) + ')');
+    beam.addColorStop(0.35, 'rgba(242,225,164,' + (0.07 * pulse).toFixed(3) + ')');
+    beam.addColorStop(1, 'rgba(242,225,164,0)');
+    ctx.fillStyle = beam; ctx.fillRect(0, 0, w, h);
+
+    var flick = reduce ? 1 : 0.85 + Math.sin(t / 610) * 0.09 + Math.sin(t / 193) * 0.06;
+    var halo = ctx.createRadialGradient(w * 0.415, h * 0.545, 0, w * 0.415, h * 0.545, w * 0.10);
+    halo.addColorStop(0, 'rgba(250,222,150,' + (0.30 * flick).toFixed(3) + ')');
+    halo.addColorStop(1, 'rgba(250,222,150,0)');
+    ctx.fillStyle = halo; ctx.fillRect(w * 0.30, h * 0.36, w * 0.24, h * 0.38);
+
+    motes.forEach(function(M){
+      var y = (M.y - (reduce ? 0 : (t / 1000) * M.s * 0.06)) % 1;
+      if(y < 0) y += 1;
+      var x = M.x + (reduce ? 0 : Math.sin(t / 1800 + M.p) * 0.012);
+      var alpha = M.a * (reduce ? 0.7 : (0.55 + 0.45 * Math.sin(t / 900 + M.p)));
+      ctx.beginPath();
+      ctx.arc(x * w, y * h * 0.92, M.r * (w / 1200) * 1.5 + 0.6, 0, 6.2832);
+      ctx.fillStyle = 'rgba(242,225,164,' + alpha.toFixed(3) + ')';
+      ctx.fill();
+    });
+
+    var fog = ctx.createLinearGradient(0, h * 0.72, 0, h);
+    fog.addColorStop(0, 'rgba(111,192,161,0)');
+    fog.addColorStop(1, 'rgba(111,192,161,0.07)');
+    ctx.fillStyle = fog; ctx.fillRect(0, h * 0.72, w, h * 0.28);
+  }
+
+  function loop(t){ draw(t); requestAnimationFrame(loop); }
+  size(); draw(0);
+  if(!reduce) requestAnimationFrame(loop);
+  window.addEventListener('resize', function(){ size(); draw(performance.now()); });
+  if(window.ResizeObserver){ new ResizeObserver(function(){ size(); draw(performance.now()); }).observe(cv); }
+
+  syncHp();
+  show(0);
+})();
+</script>
+
+
+<script>
+/* 대사 따옴표 들여쓰기: “로 시작하는 대사가 저절로 줄바뀜될 때 둘째 줄부터 여는 따옴표 폭만큼 들인다 */
+(function(){
+  var cv = document.createElement('canvas').getContext('2d');
+  function hang(){
+    Array.prototype.forEach.call(document.querySelectorAll('.dbox p'), function(p){
+      if(p.querySelector('br')) return;
+      if(p.textContent.replace(/^\s+/, '').charAt(0) !== '\u201C') return;
+      var cs = getComputedStyle(p);
+      cv.font = cs.fontStyle + ' ' + cs.fontWeight + ' 100px ' + cs.fontFamily;
+      var w = cv.measureText('\u201C').width / 100;
+      if(!(w > 0)) return;
+      p.classList.add('qhang');
+      p.style.setProperty('--qw', w.toFixed(3) + 'em');
+    });
+  }
+  hang();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(hang);
+})();
+</script>
+<link href="./reader.css" rel="stylesheet"><aside aria-label="주차 목차" hidden id="lesson-toc"><div class="toc-head"><span>이번 여정의 기록</span><button id="toc-close" aria-label="목차 닫기">×</button></div><p>WEEK 03 · 16개 장면</p><ol><li><button data-scene="0">1 · 타이틀</button></li><li><button data-scene="1">2 · WEEK 03 오프닝</button></li><li><button data-scene="2">3 · 시종을 만든다</button></li><li><button data-scene="3">4 · 진행해야 하는 퀘스트</button></li><li><button data-scene="4">5 · 오늘 할 일</button></li><li><button data-scene="5">6 · 시종 파일 네 칸</button></li><li><button data-scene="6">7 · 하나만 만든다</button></li><li><button data-scene="7">8 · 우리가 만들려는 것</button></li><li><button data-scene="8">9 · 실습 ① 파일 두 개</button></li><li><button data-scene="11">10 · 파일 두 개</button></li><li><button data-scene="12">11 · 부르면 안다</button></li><li><button data-scene="13">12 · 실습 ② 첫 일 시키기</button></li><li><button data-scene="14">13 · 시종 소환</button></li><li><button data-scene="15">14 · WEEK 03 결산 / WEEK 04 예고</button></li><li><button data-scene="16">15 · 다음 주에 계속</button></li><li><button data-scene="17">16 · 엔딩</button></li></ol></aside><div class="reader-tail"><span>← → 키로 이동 · 실습 화면은 클릭하여 확대</span><a href="./week-4.html">다음 주차 살펴보기 ↗</a></div><script src="./reader.js"></script></body></html>

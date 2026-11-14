@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="552" height="781" viewBox="0 0 552 781" role="img"><title>새 텍스트 문서를 열고 그대로 붙여 넣는다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H552" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="540" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · 새 텍스트 문서를 열고 그대로 붙여 넣는다</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="522.8" y="54.4" font-size="13.3" textLength="17.3" lengthAdjust="spacingAndGlyphs">X</text>
+<text x="16.0" y="69.8" font-size="20.5" textLength="141.1" lengthAdjust="spacingAndGlyphs">-새 텍스트 문서.ort</text>
+<text x="239.8" y="65.4" font-size="12.2" textLength="37.8" lengthAdjust="spacingAndGlyphs">X</text>
+<text x="289.5" y="69.0" font-size="16.7" textLength="25.9" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="11.9" y="100.5" font-size="15.6" textLength="139.4" lengthAdjust="spacingAndGlyphs">파일 편집 보기</text>
+<text x="13.0" y="145.3" font-size="20.2" textLength="110.2" lengthAdjust="spacingAndGlyphs"># 템플릿_질문지</text>
+<text x="15.1" y="162.8" font-size="17.8" textLength="264.7" lengthAdjust="spacingAndGlyphs">이 폴더의 규칙.md를 먼저 읽고 따른다.</text>
+<text x="13.0" y="201.9" font-size="16.7" textLength="249.5" lengthAdjust="spacingAndGlyphs">## 칸 채우는 법 — 사람이 읽는 부분</text>
+<text x="11.9" y="223.3" font-size="17.8" textLength="224.7" lengthAdjust="spacingAndGlyphs">- 괄호 ( ) 안을 내 답으로 바꾼다.</text>
+<text x="11.9" y="242.7" font-size="18.0" textLength="239.8" lengthAdjust="spacingAndGlyphs">- 보기( / )는 하나만 남기고 지운다.</text>
+<text x="11.8" y="262.2" font-size="18.5" textLength="188.0" lengthAdjust="spacingAndGlyphs">- 모르면 ‘알아서’라고 쓴다.</text>
+<text x="12.8" y="303.0" font-size="21.9" textLength="61.8" lengthAdjust="spacingAndGlyphs">## 할 일</text>
+<text x="14.0" y="322.7" font-size="17.9" textLength="302.5" lengthAdjust="spacingAndGlyphs">1. 만들기 전에 아래 질문지를 끝까지 읽는다.</text>
+<text x="30.2" y="342.4" font-size="16.8" textLength="355.4" lengthAdjust="spacingAndGlyphs">괄호가 비었거나 보기가 둘 이상 남은 칸은 빈칸이다.</text>
+<text x="27.0" y="363.5" font-size="19.0" textLength="290.6" lengthAdjust="spacingAndGlyphs">‘예:’ 뒤의 값은 예시다. 답으로 쓰지 않는다.</text>
+<text x="31.3" y="383.2" font-size="17.9" textLength="401.8" lengthAdjust="spacingAndGlyphs">빈칸은 만들기 전에 한꺼번에 묻는다. 지어서 채우지 않는다.</text>
+<text x="25.9" y="404.6" font-size="20.2" textLength="467.7" lengthAdjust="spacingAndGlyphs">‘알아서’라고 적힌 칸은 정해서 쓰고, 정한 값을 마지막 보고에 적는다.</text>
+<text x="14.0" y="423.4" font-size="18.6" textLength="102.7" lengthAdjust="spacingAndGlyphs">2. 색을 정한다.</text>
+<text x="28.1" y="442.6" font-size="17.8" textLength="247.4" lengthAdjust="spacingAndGlyphs">- 디자인 폴더의 팔레트 캡처를 연다.</text>
+<text x="40.0" y="463.2" font-size="18.0" textLength="424.5" lengthAdjust="spacingAndGlyphs">캡처에 색상 코드(#)가 글자로 보이면 그 글자를 그대로 옮긴다.</text>
+<text x="40.0" y="484.3" font-size="20.0" textLength="459.1" lengthAdjust="spacingAndGlyphs">코드가 안 보이면 캡처에서 색을 뽑고, ‘캡처에서 뽑음’이라고 적는다.</text>
+<text x="40.0" y="503.0" font-size="17.8" textLength="392.1" lengthAdjust="spacingAndGlyphs">캡처를 열 수 없으면 멈추고 묻는다. 색을 지어내지 않는다.</text>
+<text x="28.1" y="523.4" font-size="19.0" textLength="383.6" lengthAdjust="spacingAndGlyphs">- 회사색이 있으면 그 색은 바꾸지 않고 기본색으로 쓴다.</text>
+<text x="27.0" y="544.0" font-size="19.0" textLength="447.2" lengthAdjust="spacingAndGlyphs">- 만들기 전에 아래 표를 먼저 보여 주고, 내가 좋다고 하면 만든다.</text>
+<text x="40.0" y="562.5" font-size="17.9" textLength="433.2" lengthAdjust="spacingAndGlyphs">색 코드 / 쓰임/ 어디서 왔나(캡처 글자• 캡처에서 뽑음· 회사색)</text>
+<text x="40.0" y="582.9" font-size="18.0" textLength="450.5" lengthAdjust="spacingAndGlyphs">쓰임은 기본색 · 강조색 · 배경색 · 글자색 · 보조색. 강조색은 하나만.</text>
+<text x="40.0" y="602.5" font-size="17.9" textLength="414.8" lengthAdjust="spacingAndGlyphs">글자색과 배경색은 대비가 충분한지 확인해 표에 같이 적는다.</text>
+<text x="14.0" y="622.9" font-size="17.9" textLength="471.0" lengthAdjust="spacingAndGlyphs">3. 아래 ‘장 종류’ 스물한 장을 빠짐없이 한 장씩 만든다. 고르지 않는다.</text>
+<text x="13.0" y="642.6" font-size="16.8" textLength="123.1" lengthAdjust="spacingAndGlyphs">4. 마다 지킬 것:</text>
+<text x="28.1" y="663.8" font-size="19.0" textLength="372.7" lengthAdjust="spacingAndGlyphs">- 글자 자리엔 자리 이름만 둔다. (예: 제목, 본문, 항목 1)</text>
+<text x="40.0" y="683.3" font-size="19.0" textLength="476.4" lengthAdjust="spacingAndGlyphs">예외: 마무리 장엔 ‘감사합니다’를 넣는다. 시안에서 그대로 쓰는 장이다.</text>
+<text x="27.0" y="702.8" font-size="17.9" textLength="367.3" lengthAdjust="spacingAndGlyphs">- 도형과 글상자로 만든다. 그림 파일로 붙이지 않는다.</text>
+<text x="40.0" y="722.3" font-size="17.8" textLength="440.7" lengthAdjust="spacingAndGlyphs">카드·단계·칸은 하나씩 따로 둬서 개수를 늘리고 줄이기 쉽게 한다.</text>
+<text x="27.0" y="741.9" font-size="16.8" textLength="149.1" lengthAdjust="spacingAndGlyphs">- 숫자를 넣지 않는다.</text>
+<text x="18.4" y="771.4" font-size="14.6" textLength="77.8" lengthAdjust="spacingAndGlyphs">풀 9, 열 7</text>
+<text x="94.0" y="769.5" font-size="12.4" textLength="49.7" lengthAdjust="spacingAndGlyphs">2,832자</text>
+<text x="197.7" y="769.5" font-size="12.4" textLength="94.0" lengthAdjust="spacingAndGlyphs">일반 텍스트</text>
+<text x="302.4" y="769.7" font-size="11.3" textLength="32.5" lengthAdjust="spacingAndGlyphs">100%</text>
+<text x="358.6" y="770.6" font-size="12.4" textLength="138.3" lengthAdjust="spacingAndGlyphs">Windows (CRL UTF-8</text></g><rect x=".5" y=".5" width="551" height="780" rx="6" fill="none" stroke="#d8cfc0"/></svg>

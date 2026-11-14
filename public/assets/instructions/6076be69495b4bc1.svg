@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="810" height="926" viewBox="0 0 810 926" role="img"><title>회사색 칸의 괄호에 캡처 파일 이름을 적는다 — ( 회사컬러.png )</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H810" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="798" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · 회사색 칸의 괄호에 캡처 파일 이름을 적는다 — ( 회사컬러.png </text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="746.8" y="61.3" font-size="17.3" textLength="61.9" lengthAdjust="spacingAndGlyphs">X</text>
+<text x="23.2" y="79.5" font-size="25.3" textLength="23.2" lengthAdjust="spacingAndGlyphs">트</text>
+<text x="51.6" y="82.3" font-size="23.9" textLength="179.3" lengthAdjust="spacingAndGlyphs">템플릿_질문지.md</text>
+<text x="448.9" y="81.4" font-size="21.3" textLength="21.9" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="19.3" y="127.9" font-size="21.3" textLength="207.7" lengthAdjust="spacingAndGlyphs">파일 편집 보기</text>
+<text x="56.7" y="162.4" font-size="29.8" textLength="705.1" lengthAdjust="spacingAndGlyphs">확인날 수 없으면 바+시 말고, 모고에 글을 확인 곳 암이다고 식은나.</text>
+<text x="20.6" y="193.4" font-size="32.0" textLength="577.4" lengthAdjust="spacingAndGlyphs">5. ‘템플릿 이름’ 칸의 이름 뒤에 _템플릿을 붙여 저장한다.</text>
+<text x="46.4" y="224.4" font-size="32.0" textLength="466.9" lengthAdjust="spacingAndGlyphs">예: 이름이 청록보고면 → 청록보고_템플릿.pptx</text>
+<text x="46.4" y="249.8" font-size="26.8" textLength="535.3" lengthAdjust="spacingAndGlyphs">이름에 이미 ‘템플릿’이 들어 있으면 또 붙이지 않는다.</text>
+<text x="45.1" y="279.4" font-size="26.8" textLength="584.3" lengthAdjust="spacingAndGlyphs">저장 위치는 결과 폴더가 아니라 이 폴더(정책자료 폴더)다.</text>
+<text x="45.1" y="311.2" font-size="29.4" textLength="740.1" lengthAdjust="spacingAndGlyphs">규칙.md에 ‘새 파일은 결과 폴더에’가 있어도, 이 파일만은 이 폴더에 둔다.</text>
+<text x="46.4" y="339.0" font-size="25.4" textLength="583.0" lengthAdjust="spacingAndGlyphs">템플릿은 결과물이 아니라 다음 시안의 재료이기 때문이다.</text>
+<text x="45.1" y="373.0" font-size="30.7" textLength="525.0" lengthAdjust="spacingAndGlyphs">같은 이름이 있으면 덮어쓰지 말고 뒤에 _2를 붙인다.</text>
+<text x="20.6" y="399.4" font-size="26.8" textLength="328.9" lengthAdjust="spacingAndGlyphs">6. 다 만들면 채팅으로 보여 준다:</text>
+<text x="40.0" y="428.0" font-size="25.4" textLength="367.6" lengthAdjust="spacingAndGlyphs">- 스물한 장 목록 (장 번호 / 장 종류)</text>
+<text x="41.3" y="457.8" font-size="24.0" textLength="433.4" lengthAdjust="spacingAndGlyphs">- 질문지 답마다 어디에 반영했는지 한 줄씩</text>
+<text x="41.3" y="490.9" font-size="28.2" textLength="496.6" lengthAdjust="spacingAndGlyphs">- ‘알아서’로 정한 값, 그리고 못 지킨 답과 그 이유</text>
+<text x="18.1" y="546.9" font-size="23.9" textLength="156.1" lengthAdjust="spacingAndGlyphs">## 템플릿 이름</text>
+<text x="19.3" y="577.9" font-size="24.1" textLength="479.8" lengthAdjust="spacingAndGlyphs">- 이름: ( 정책기획보고템플릿 ) 예: 청록보고</text>
+<text x="18.1" y="638.4" font-size="25.3" textLength="89.0" lengthAdjust="spacingAndGlyphs">##① 색</text>
+<text x="18.1" y="670.3" font-size="27.9" textLength="681.0" lengthAdjust="spacingAndGlyphs">- 팔레트 캡처: 디자인 폴더의 ( 컬러팔레트.png ) 예: 팔레트.png</text>
+<text x="18.1" y="699.9" font-size="27.9" textLength="780.3" lengthAdjust="spacingAndGlyphs">- 회사색: ( 회사컬러.png ) &lt; 색상 코드나 디자인 폴더의 로고 캡처 파일 이</text>
+<text x="21.9" y="728.7" font-size="27.1" textLength="152.3" lengthAdjust="spacingAndGlyphs">름. 없으면 없음</text>
+<text x="16.8" y="788.1" font-size="25.3" textLength="112.2" lengthAdjust="spacingAndGlyphs">## ② 모양</text>
+<text x="16.8" y="817.8" font-size="25.3" textLength="365.0" lengthAdjust="spacingAndGlyphs">- 모서리: (둥글게 / 각지게 / 알아서)</text>
+<text x="19.3" y="846.5" font-size="24.1" textLength="322.5" lengthAdjust="spacingAndGlyphs">- 제목 글꼴: ( ) 본문 글꼴: ( )</text>
+<text x="18.1" y="879.5" font-size="26.6" textLength="478.5" lengthAdjust="spacingAndGlyphs">- 글자 크기: 제목 ( )pt · 본문 ( )pt · 캡션 ( )pt</text>
+<text x="15.5" y="907.2" font-size="24.1" textLength="159.9" lengthAdjust="spacingAndGlyphs">- 여백.정렬: ( )</text></g><rect x=".5" y=".5" width="809" height="925" rx="6" fill="none" stroke="#d8cfc0"/></svg>

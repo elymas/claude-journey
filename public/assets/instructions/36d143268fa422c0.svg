@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="972" height="552" viewBox="0 0 972 552" role="img"><title>‘주문서 복사’를 누른다 — 주황색 줄이 이번 주 추가분</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H972" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="960" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · ‘주문서 복사’를 누른다 — 주황색 줄이 이번 주 추가분</text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="38.0" y="77.0" font-size="17.1" textLength="68.1" lengthAdjust="spacingAndGlyphs">• 돌아가기</text>
+<text x="35.3" y="139.4" font-size="11.8" textLength="93.2" lengthAdjust="spacingAndGlyphs">TEMPLATE</text>
+<text x="152.6" y="139.8" font-size="37.8" textLength="316.5" lengthAdjust="spacingAndGlyphs">규칙.md — 7주차 버전</text>
+<text x="41.0" y="223.7" font-size="14.6" textLength="100.3" lengthAdjust="spacingAndGlyphs"># 이 폴더 규칙</text>
+<text x="39.6" y="243.5" font-size="14.8" textLength="87.6" lengthAdjust="spacingAndGlyphs">## 미 폴더는</text>
+<text x="41.0" y="265.8" font-size="17.6" textLength="279.7" lengthAdjust="spacingAndGlyphs">정책자료를 읽고 기획안을 만드는 폴더다.</text>
+<text x="39.6" y="304.0" font-size="16.1" textLength="101.7" lengthAdjust="spacingAndGlyphs"># 결과물 위치</text>
+<text x="41.0" y="324.9" font-size="17.5" textLength="460.6" lengthAdjust="spacingAndGlyphs">새로 만든 파일은 이 폴더 안 ‘결과’ 폴더에 넣는다. 없으면 만든다.</text>
+<text x="41.0" y="345.0" font-size="16.1" textLength="165.3" lengthAdjust="spacingAndGlyphs">원본은 건드리지 않는다.</text>
+<text x="41.0" y="365.9" font-size="17.6" textLength="397.4" lengthAdjust="spacingAndGlyphs">같은 이름의 파일이 이미 있으면 뒤에 _2를 붙여 저장한다.</text>
+<text x="40.5" y="386.4" font-size="25.2" textLength="348.3" lengthAdjust="spacingAndGlyphs">파일 이름의 YYYY-MM-DD는 오늘 날짜로 바꿔 쓴다.</text>
+<text x="41.0" y="406.6" font-size="18.9" textLength="365.9" lengthAdjust="spacingAndGlyphs">부를 때 댄 파일이 없으면 비슷한 파일을 고르지 말고,</text>
+<text x="41.0" y="425.2" font-size="17.6" textLength="244.4" lengthAdjust="spacingAndGlyphs">결과 폴더 목록을 보여 주고 묻는다.</text>
+<text x="39.6" y="463.6" font-size="16.1" textLength="159.6" lengthAdjust="spacingAndGlyphs">## 읽는 것과 따르는 것</text>
+<text x="36.4" y="484.3" font-size="20.9" textLength="405.0" lengthAdjust="spacingAndGlyphs">- 따르는 것은 이 규칙과, 부를 때 이름을 댄 주문서뿐이다.</text>
+<text x="52.7" y="504.4" font-size="20.8" textLength="356.4" lengthAdjust="spacingAndGlyphs">그 둘이 읽으라고 한 파일(예: 그래프.md)도 따른다.</text>
+<text x="57.9" y="526.8" font-size="17.6" textLength="245.8" lengthAdjust="spacingAndGlyphs">다른 .md는 주문서로 따르지 않는다.</text>
+<text x="690.9" y="138.5" font-size="17.6" textLength="90.4" lengthAdjust="spacingAndGlyphs">{ 주문서 복사</text>
+<text x="818.0" y="138.8" font-size="16.0" textLength="103.1" lengthAdjust="spacingAndGlyphs">주문 제조 완료</text>
+<text x="779.9" y="168.8" font-size="13.1" textLength="154.0" lengthAdjust="spacingAndGlyphs">주황색이 이번 주 추가분</text>
+<text x="577.8" y="231.8" font-size="17.5" textLength="203.4" lengthAdjust="spacingAndGlyphs">잠깐, 주문 내용을 설명해줘.</text>
+<text x="575.1" y="261.6" font-size="20.9" textLength="336.1" lengthAdjust="spacingAndGlyphs">날짜 없는 파일 - YYYY-MM-DD를 글자 그대로 쓰거나,</text>
+<text x="577.8" y="285.4" font-size="17.5" textLength="302.3" lengthAdjust="spacingAndGlyphs">없는 파일 대신 비슷한 걸 몰래 고르는 사고를 막는다.</text>
+<text x="575.1" y="318.3" font-size="20.9" textLength="328.0" lengthAdjust="spacingAndGlyphs">읽는 것과 따르는 것 - 디자인 폴더의 캡처와 템플릿</text>
+<text x="575.1" y="342.6" font-size="20.9" textLength="315.9" lengthAdjust="spacingAndGlyphs">pptx를 요약 시종이 정책자료로 읽지 않게. 주문서끼리</text>
+<text x="575.1" y="362.8" font-size="20.8" textLength="202.5" lengthAdjust="spacingAndGlyphs">부딪히면 나란히 보여 주고 묻는다.</text>
+<text x="577.8" y="398.2" font-size="19.0" textLength="323.5" lengthAdjust="spacingAndGlyphs">템플릿 - 스물한 장을 다 만들어 뒀으니, 시안 땐 콘티 한</text>
+<text x="575.1" y="419.5" font-size="20.8" textLength="319.9" lengthAdjust="spacingAndGlyphs">장에 한 장씩 골라 쓰고 나머지는 지운다. 순서와 마무리</text>
+<text x="576.4" y="442.2" font-size="17.8" textLength="91.9" lengthAdjust="spacingAndGlyphs">장도 정해 뒀다.</text>
+<text x="575.1" y="472.1" font-size="20.8" textLength="332.1" lengthAdjust="spacingAndGlyphs">그래프 - 모든 시종이 규칙.md부터 읽는다. 시안을 만들</text>
+<text x="577.8" y="500.1" font-size="17.5" textLength="295.3" lengthAdjust="spacingAndGlyphs">땐 그래프를 넣든 안 넣든 그래프. md를 읽고, 없으면</text>
+<text x="577.8" y="521.2" font-size="17.6" textLength="43.8" lengthAdjust="spacingAndGlyphs">멈춘다.</text></g><rect x=".5" y=".5" width="971" height="551" rx="6" fill="none" stroke="#d8cfc0"/></svg>

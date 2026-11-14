@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="607" height="774" viewBox="0 0 607 774" role="img"><title>Ctrl + V로 덮어쓴다. 네 줄이 들어온 것을 확인하고 Ctrl + S로 저장한다</title><rect width="100%" height="100%" rx="6" fill="#fffdf8"/><path d="M0 38H607" stroke="#d8cfc0"/><circle cx="13" cy="19" r="3" fill="#ae583f"/><circle cx="24" cy="19" r="3" fill="#b7a079"/><circle cx="35" cy="19" r="3" fill="#87937b"/><text x="595" y="23" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7d7569">FIELD NOTES · Ctrl + V로 덮어쓴다. 네 줄이 들어온 것을 확인하고 Ctrl </text><g fill="#293d36" font-family="'Noto Sans KR','Apple SD Gothic Neo',sans-serif"><text x="0.0" y="69.8" font-size="16.5" textLength="38.5" lengthAdjust="spacingAndGlyphs">트</text>
+<text x="39.5" y="69.2" font-size="13.2" textLength="62.0" lengthAdjust="spacingAndGlyphs">규칙.md</text>
+<text x="299.2" y="71.8" font-size="17.6" textLength="17.1" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="12.8" y="102.1" font-size="15.5" textLength="140.0" lengthAdjust="spacingAndGlyphs">파일 편집 보기</text>
+<text x="13.9" y="143.6" font-size="16.5" textLength="99.4" lengthAdjust="spacingAndGlyphs"># 이 폴더 규칙</text>
+<text x="13.8" y="164.3" font-size="17.6" textLength="90.0" lengthAdjust="spacingAndGlyphs">## 이 폴더는</text>
+<text x="16.0" y="185.2" font-size="17.6" textLength="280.0" lengthAdjust="spacingAndGlyphs">정책자료를 읽고 기획안을 만드는 폴더다.</text>
+<text x="12.8" y="223.9" font-size="16.6" textLength="104.7" lengthAdjust="spacingAndGlyphs">## 결과물 위치</text>
+<text x="16.0" y="244.9" font-size="18.9" textLength="439.2" lengthAdjust="spacingAndGlyphs">새로 만든 파일은 이 폴더 안 ‘결과’ 폴더에 넣는다. 없으면 만든다.</text>
+<text x="16.0" y="265.4" font-size="17.6" textLength="165.6" lengthAdjust="spacingAndGlyphs">원본은 건드리지 않는다.</text>
+<text x="16.0" y="285.6" font-size="18.9" textLength="270.4" lengthAdjust="spacingAndGlyphs">결과 폴더 밖에 있는 .md는 읽지 않는다.</text>
+<text x="16.0" y="306.7" font-size="21.0" textLength="393.7" lengthAdjust="spacingAndGlyphs">같은 이름의 파일이 이미 있으면 뒤에 _2를 붙여 저장한다.</text>
+<text x="13.9" y="343.8" font-size="15.5" textLength="94.0" lengthAdjust="spacingAndGlyphs">## 하지 말 것</text>
+<text x="13.9" y="364.9" font-size="17.7" textLength="262.9" lengthAdjust="spacingAndGlyphs">- 자료에 없는 내용을 지어내지 않는다.</text>
+<text x="13.9" y="384.3" font-size="16.6" textLength="235.1" lengthAdjust="spacingAndGlyphs">- 원본 파일 이름을 바꾸지 않는다.</text>
+<text x="13.9" y="404.5" font-size="17.6" textLength="413.6" lengthAdjust="spacingAndGlyphs">- (사람이 지킨다) 비공개·대외비·개인정보 표시가 있는 파일은</text>
+<text x="26.7" y="424.8" font-size="17.6" textLength="312.0" lengthAdjust="spacingAndGlyphs">이 폴더에 넣지 않는다. 넣기 전에 내가 거른다.</text>
+<text x="13.9" y="463.7" font-size="15.5" textLength="54.5" lengthAdjust="spacingAndGlyphs">## 검증</text>
+<text x="12.8" y="484.8" font-size="17.7" textLength="278.9" lengthAdjust="spacingAndGlyphs">- 숫자와 날짜는 원문에서 그대로 옮긴다.</text>
+<text x="25.6" y="505.1" font-size="17.7" textLength="265.0" lengthAdjust="spacingAndGlyphs">계산이 필요하면 계산식을 같이 적는다.</text>
+<text x="13.9" y="523.4" font-size="16.6" textLength="299.2" lengthAdjust="spacingAndGlyphs">- 원문에 없는 값은 비워두고 ‘미확인’ 목록에</text>
+<text x="25.6" y="544.7" font-size="17.9" textLength="253.3" lengthAdjust="spacingAndGlyphs">따로 적는다. 추측해서 채우지 않는다.</text>
+<text x="13.9" y="564.0" font-size="16.6" textLength="261.8" lengthAdjust="spacingAndGlyphs">- 각 항목이 어느 파일 어디에서 왔는지</text>
+<text x="25.6" y="584.4" font-size="16.6" textLength="135.7" lengthAdjust="spacingAndGlyphs">결과에 같이 적는다.</text>
+<text x="13.9" y="606.4" font-size="19.9" textLength="319.5" lengthAdjust="spacingAndGlyphs">- 읽지 못한 파일은 건너뛰지 말고, 결과 맨 아래</text>
+<text x="22.4" y="625.8" font-size="20.0" textLength="268.0" lengthAdjust="spacingAndGlyphs">‘못 읽은 파일’ 목록에 파일명을 적는다.</text>
+<text x="557.8" y="56.6" font-size="12.1" textLength="34.2" lengthAdjust="spacingAndGlyphs">X</text>
+<text x="573.9" y="101.8" font-size="17.6" textLength="21.4" lengthAdjust="spacingAndGlyphs">$</text>
+<text x="18.2" y="766.6" font-size="14.4" textLength="120.8" lengthAdjust="spacingAndGlyphs">풀 25, 열 26 484자</text>
+<text x="214.8" y="765.7" font-size="13.4" textLength="81.2" lengthAdjust="spacingAndGlyphs">Ml Markdow...</text>
+<text x="328.1" y="764.0" font-size="10.1" textLength="31.0" lengthAdjust="spacingAndGlyphs">100%</text>
+<text x="395.4" y="764.9" font-size="12.4" textLength="91.9" lengthAdjust="spacingAndGlyphs">Windows (CRLF)</text>
+<text x="500.1" y="764.0" font-size="10.1" textLength="38.5" lengthAdjust="spacingAndGlyphs">UTF-8</text></g><rect x=".5" y=".5" width="606" height="773" rx="6" fill="none" stroke="#d8cfc0"/></svg>
