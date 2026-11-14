@@ -99,7 +99,7 @@ for (const q of quests.quests) {
   const result='<!doctype html>\n'+document.documentElement.outerHTML;
   if (/data:image\/[a-z]+;base64/.test(result)) throw new Error(`Original raster remains week ${week}`);
   if (/KIST|rhdms21109|오고은/.test(result)) throw new Error(`Credit remains week ${week}`);
-  write(`public/lessons/week-${week}.html`, result);
+  write(`public/lessons/week-${week}.html`, result.replace(/[ \t]+$/gm,'')+'\n');
 }
 write('research/content-baseline.json',JSON.stringify(baseline,null,2));
 write('public/lessons/manifest.json',JSON.stringify(baseline.map(({hashes,...rest})=>rest),null,2));

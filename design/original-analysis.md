@@ -2,7 +2,7 @@
 
 > 변경 전 원본 조사 기록입니다. 현재의 새 디자인과 8개 주차 구현 범위는 [최신 설계서](../CLONE_DESIGN.md)를 따릅니다.
 
-원본: https://claude.ai/artifact/VvATMCBaL7kZjrnw3rQ7cj  
+원본: https://claude.ai/artifact/VvATMCBaL7kZjrnw3rQ7cj
 확인일: 2026-11-15 · Aside에서 콘텐츠 구조와 390px 모바일 화면 확인. 데스크톱 화면과 공개된 Artifact HTML/CSS도 함께 분석했다.
 
 ## 1. 목표와 범위
