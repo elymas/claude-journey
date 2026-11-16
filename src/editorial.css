@@ -78,3 +78,12 @@
  .final-quest{margin-left:0;margin-top:0;padding:20px 16px;gap:13px}.final-quest h3{font-size:13px}.final-symbol{width:30px;height:30px}
 }
 @media(max-width:360px){.cover-shell .hero-section{padding-left:16px;padding-right:16px}.cover-shell .hero-copy h1{font-size:42px}.hero-actions{gap:15px}.cover-shell .hero-stats{gap:18px}.cover-shell .hero-stats span{font-size:8px}.quest-info h4{font-size:16px}.quest-card,.quest-card:hover{gap:10px 12px;padding:15px 12px}.quest-meta{font-size:8px}}
+
+.site-footer{flex-wrap:wrap;gap:16px}
+.source-credit{flex-basis:100%;font:12px/1.9 'Noto Sans KR',sans-serif;letter-spacing:0;color:#686454;overflow-wrap:anywhere}
+.source-credit p{margin:0}
+.source-credit strong{font-weight:500;color:#474d40}
+.source-credit a{display:inline-block;color:#6d4933;text-decoration:underline;text-underline-offset:3px;margin-left:8px}
+.source-credit a:hover{color:#403a2d}
+.source-credit a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+@media(max-width:760px){.source-credit a{display:block;width:fit-content;margin-left:0;margin-top:4px}}

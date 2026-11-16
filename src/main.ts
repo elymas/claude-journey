@@ -60,7 +60,13 @@ function render(){
     </div>
    </main>
    <div class="page-wrap">
-   <footer class="site-footer"><span>CLAUDE / FIELD NOTES</span><span>SEASON 01 · THE COMPLETE JOURNEY</span><a href="#journey" aria-label="맨 위로">BACK TO TOP ↑</a></footer>
+   <footer class="site-footer">
+    <span>CLAUDE / FIELD NOTES</span><span>SEASON 01 · THE COMPLETE JOURNEY</span><a href="#journey" aria-label="맨 위로">BACK TO TOP ↑</a>
+    <div class="source-credit">
+     <p>원본 제작자 · <strong>KIST AIX전략실 인턴 오고은</strong></p>
+     <p>본 자료는 원본을 바탕으로 재구성하였습니다. <a href="${esc(source.source)}" target="_blank" rel="noopener noreferrer">원본 ‘클로드 정복 퀘스트’ 보기 <span aria-label="새 탭에서 열기">↗</span></a></p>
+    </div>
+   </footer>
   </div>`;
  for(const button of app.querySelectorAll<HTMLButtonElement>('[data-view]'))button.addEventListener('click',()=>{view=button.dataset.view as typeof view;render();document.getElementById('quests')?.scrollIntoView({behavior:'smooth'})});
 }
